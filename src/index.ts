@@ -1,5 +1,4 @@
-export class Hello {
-  public sayHello() {
-    return 'hello, world!';
-  }
-}
+export * from './release';
+export * from './python';
+export * from './typescript-base';
+export * from './PythonComponentOptions';

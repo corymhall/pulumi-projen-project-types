@@ -1,16 +1,96 @@
-import { cdk } from 'projen';
+import { PrimitiveType } from '@jsii/spec';
+import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
+import { cdk, JsonPatch } from 'projen';
+import {
+  NodePackageManager,
+  Transform,
+  UpgradeDependenciesSchedule,
+} from 'projen/lib/javascript';
 const project = new cdk.JsiiProject({
   author: 'corymhall',
   authorAddress: '43035978+corymhall@users.noreply.github.com',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.7.0',
-  name: 'pulumi-component-projen',
+  name: 'pulumi-projen-project-types',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/corymhall/pulumi-component-projen.git',
+  repositoryUrl: 'https://github.com/corymhall/pulumi-projen-project-types.git',
+  deps: ['projen', 'constructs'],
+  packageManager: NodePackageManager.NPM,
+  devDeps: ['@mrgrain/jsii-struct-builder'],
+  peerDeps: ['constructs', 'projen'],
+  prettier: true,
+  githubOptions: {
+    mergify: false,
+    workflows: true,
+  },
+  prettierOptions: {
+    settings: {
+      singleQuote: true,
+    },
+  },
+  eslintOptions: {
+    dirs: [],
+    prettier: true,
+  },
+  depsUpgradeOptions: {
+    workflowOptions: {
+      labels: ['auto-approve'],
+      schedule: UpgradeDependenciesSchedule.WEEKLY,
+    },
+  },
+  autoApproveOptions: {
+    label: 'auto-approve',
+    allowedUsernames: ['corymhall'],
+  },
+  jestOptions: {
+    configFilePath: 'jest.config.json',
+  },
+  publishToPypi: {
+    distName: 'pulumi-projen-project-types',
+    module: 'pulumi_projen_project_types',
+  },
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
+
+new ProjenStruct(project, { name: 'PythonComponentOptions' })
+  .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
+  .omit(
+    'pip',
+    'poetry',
+    'venv',
+    'venvOptions',
+    'github',
+    'poetryOptions',
+    'setupConfig',
+    'setupTools',
+  )
+  .add({
+    name: 'componentName',
+    type: {
+      primitive: PrimitiveType.String,
+    },
+    optional: true,
+    docs: {
+      default: 'the `moduleName`',
+      summary: 'The name of the pulumi component',
+    },
+  });
+
+const eslint = project.tryFindObjectFile('.eslintrc.json');
+// I don't want to show linting errors for things that get auto fixed
+eslint?.addOverride('extends', ['plugin:import/typescript']);
+
+const jestConfig = project.tryFindObjectFile('jest.config.json');
+jestConfig?.patch(JsonPatch.remove('/preset'));
+jestConfig?.patch(JsonPatch.remove('/globals'));
+jestConfig?.patch(
+  JsonPatch.add('/transform', {
+    '^.+\\.(t|j)sx?$': new Transform('@swc/jest'),
+  }),
+);
 project.synth();
+
