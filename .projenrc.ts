@@ -3,6 +3,7 @@ import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { cdk, JsonPatch } from 'projen';
 import {
   NodePackageManager,
+  NpmAccess,
   Transform,
   UpgradeDependenciesSchedule,
 } from 'projen/lib/javascript';
@@ -45,6 +46,7 @@ const project = new cdk.JsiiProject({
   jestOptions: {
     configFilePath: 'jest.config.json',
   },
+  npmAccess: NpmAccess.PUBLIC,
   publishToPypi: {
     distName: 'hallcor.pulumi-projen-project-types',
     module: 'hallcor.pulumi_projen_project_types',
