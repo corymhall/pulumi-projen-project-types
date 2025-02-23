@@ -11,12 +11,12 @@ const project = new cdk.JsiiProject({
   authorAddress: '43035978+corymhall@users.noreply.github.com',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.7.0',
-  name: 'pulumi-projen-project-types',
+  name: '@hallcor/pulumi-projen-project-types',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/corymhall/pulumi-projen-project-types.git',
   deps: ['projen', 'constructs'],
   packageManager: NodePackageManager.NPM,
-  devDeps: ['@mrgrain/jsii-struct-builder'],
+  devDeps: ['@mrgrain/jsii-struct-builder', '@swc/jest', '@swc/core'],
   peerDeps: ['constructs', 'projen'],
   prettier: true,
   githubOptions: {
@@ -46,8 +46,8 @@ const project = new cdk.JsiiProject({
     configFilePath: 'jest.config.json',
   },
   publishToPypi: {
-    distName: 'pulumi-projen-project-types',
-    module: 'pulumi_projen_project_types',
+    distName: 'hallcor.pulumi-projen-project-types',
+    module: 'hallcor.pulumi_projen_project_types',
   },
 
   // deps: [],                /* Runtime dependencies of this module. */

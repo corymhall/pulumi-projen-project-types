@@ -1,5 +1,5 @@
 {
-  "name": "pulumi-projen-project-types",
+  "name": "@hallcor/pulumi-projen-project-types",
   "repository": {
     "type": "git",
     "url": "https://github.com/corymhall/pulumi-projen-project-types.git"
@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@mrgrain/jsii-struct-builder": "^0.7.44",
+    "@swc/core": "^1.10.18",
+    "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.4",
     "@typescript-eslint/eslint-plugin": "^8",
@@ -70,9 +72,6 @@
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "publishConfig": {
-    "access": "public"
-  },
   "version": "0.0.0",
   "types": "lib/index.d.ts",
   "stability": "stable",
@@ -80,8 +79,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "pulumi-projen-project-types",
-        "module": "pulumi_projen_project_types"
+        "distName": "hallcor.pulumi-projen-project-types",
+        "module": "hallcor.pulumi_projen_project_types"
       }
     },
     "tsc": {
