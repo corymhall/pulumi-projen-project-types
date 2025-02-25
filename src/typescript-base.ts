@@ -1,14 +1,17 @@
 import { JsonPatch } from 'projen';
-import { NodePackageManager, Transform, UpgradeDependenciesSchedule } from 'projen/lib/javascript';
-import { TypeScriptProject as ProjenTypeScriptProject, TypeScriptProjectOptions } from 'projen/lib/typescript';
+import {
+  NodePackageManager,
+  Transform,
+  UpgradeDependenciesSchedule,
+} from 'projen/lib/javascript';
+import {
+  TypeScriptProject as ProjenTypeScriptProject,
+  TypeScriptProjectOptions,
+} from 'projen/lib/typescript';
 
 export class TypeScriptProject extends ProjenTypeScriptProject {
   constructor(options: TypeScriptProjectOptions) {
     super({
-      githubOptions: {
-        mergify: false,
-        workflows: true,
-      },
       prettier: true,
       prettierOptions: {
         settings: {

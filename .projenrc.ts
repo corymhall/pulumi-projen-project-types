@@ -21,7 +21,7 @@ const project = new cdk.JsiiProject({
   peerDeps: ['constructs', 'projen'],
   prettier: true,
   githubOptions: {
-    mergify: false,
+    mergify: true,
     workflows: true,
   },
   prettierOptions: {
