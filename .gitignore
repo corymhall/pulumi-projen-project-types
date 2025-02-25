@@ -53,4 +53,5 @@ junit.xml
 tsconfig.json
 !/API.md
 !/.projenrc.ts
+!/src/TagReleaseOptions.ts
 !/src/PythonComponentOptions.ts

@@ -1064,13 +1064,13 @@ The tree node.
 ```typescript
 import { TagRelease } from '@hallcor/pulumi-projen-project-types'
 
-new TagRelease(scope: Construct, props: ReleaseOptions)
+new TagRelease(scope: Construct, props: TagReleaseOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.Initializer.parameter.props">props</a></code> | <code>projen.release.ReleaseOptions</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.Initializer.parameter.props">props</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions">TagReleaseOptions</a></code> | *No description.* |
 
 ---
 
@@ -1082,7 +1082,7 @@ new TagRelease(scope: Construct, props: ReleaseOptions)
 
 ##### `props`<sup>Required</sup> <a name="props" id="@hallcor/pulumi-projen-project-types.TagRelease.Initializer.parameter.props"></a>
 
-- *Type:* projen.release.ReleaseOptions
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions">TagReleaseOptions</a>
 
 ---
 
@@ -1260,6 +1260,7 @@ Returns the `Release` component of a project or `undefined` if the project does 
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | Location of build artifacts. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.branches">branches</a></code> | <code>string[]</code> | Retrieve all release branch names. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.publisher">publisher</a></code> | <code>projen.release.Publisher</code> | Package publisher. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.publishTask">publishTask</a></code> | <code>projen.Task</code> | *No description.* |
 
 ---
 
@@ -1318,6 +1319,16 @@ public readonly publisher: Publisher;
 - *Type:* projen.release.Publisher
 
 Package publisher.
+
+---
+
+##### `publishTask`<sup>Required</sup> <a name="publishTask" id="@hallcor/pulumi-projen-project-types.TagRelease.property.publishTask"></a>
+
+```typescript
+public readonly publishTask: Task;
+```
+
+- *Type:* projen.Task
 
 ---
 
@@ -2906,6 +2917,7 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pytestOptions">pytestOptions</a></code> | <code>projen.python.PytestOptions</code> | pytest options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pythonExec">pythonExec</a></code> | <code>string</code> | Path to the python executable to use. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.readme">readme</a></code> | <code>projen.SampleReadmeProps</code> | The README setup. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.sample">sample</a></code> | <code>boolean</code> | Include sample code and test if the relevant directories don't exist. |
@@ -3519,6 +3531,19 @@ The README setup.
 
 ---
 
+##### `releaseTrigger`<sup>Optional</sup> <a name="releaseTrigger" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.releaseTrigger"></a>
+
+```typescript
+public readonly releaseTrigger: ReleaseTrigger;
+```
+
+- *Type:* projen.release.ReleaseTrigger
+- *Default:* Continuous releases (`ReleaseTrigger.continuous()`)
+
+The release trigger to use.
+
+---
+
 ##### `renovatebot`<sup>Optional</sup> <a name="renovatebot" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.renovatebot"></a>
 
 ```typescript
@@ -3628,6 +3653,537 @@ public readonly vscode: boolean;
 Enable VSCode integration.
 
 Enabled by default for root projects. Disabled for non-root projects.
+
+---
+
+### TagReleaseOptions <a name="TagReleaseOptions" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions"></a>
+
+TagReleaseOptions.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.Initializer"></a>
+
+```typescript
+import { TagReleaseOptions } from '@hallcor/pulumi-projen-project-types'
+
+const tagReleaseOptions: TagReleaseOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.branch">branch</a></code> | <code>string</code> | The default branch name to release from. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.task">task</a></code> | <code>projen.Task</code> | The task to execute in order to create the release artifacts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionFile">versionFile</a></code> | <code>string</code> | A name of a .json file to set the `version` field in after a bump. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpFile">bumpFile</a></code> | <code>string</code> | The file to bump the version in. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.githubRelease">githubRelease</a></code> | <code>boolean</code> | Create a GitHub release for each release. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.nextVersionCommand">nextVersionCommand</a></code> | <code>string</code> | A shell command to control the next version to release. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.postBuildSteps">postBuildSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Steps to execute after build as part of the release workflow. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.publishDryRun">publishDryRun</a></code> | <code>boolean</code> | Instead of actually publishing to package managers, just print the publishing command. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.publishTasks">publishTasks</a></code> | <code>boolean</code> | Define publishing tasks that can be executed manually as well as workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseEveryCommit">releaseEveryCommit</a></code> | <code>boolean</code> | Automatically release new versions every commit to one of branches in `releaseBranches`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseFailureIssue">releaseFailureIssue</a></code> | <code>boolean</code> | Create a github issue on every failed publishing task. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseFailureIssueLabel">releaseFailureIssueLabel</a></code> | <code>string</code> | The label to apply to issues indicating publish failures. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseSchedule">releaseSchedule</a></code> | <code>string</code> | CRON schedule to trigger new releases. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | Node version to setup in GitHub workflows if any node-based CLI utilities are needed. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowPermissions">workflowPermissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | Permissions granted to the release workflow job. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
+
+---
+
+##### `artifactsDirectory`<sup>Required</sup> <a name="artifactsDirectory" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.artifactsDirectory"></a>
+
+```typescript
+public readonly artifactsDirectory: string;
+```
+
+- *Type:* string
+- *Default:* "dist"
+
+A directory which will contain build artifacts.
+
+---
+
+##### `branch`<sup>Required</sup> <a name="branch" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.branch"></a>
+
+```typescript
+public readonly branch: string;
+```
+
+- *Type:* string
+
+The default branch name to release from.
+
+Use `majorVersion` to restrict this branch to only publish releases with a
+specific major version.
+
+You can add additional branches using `addBranch()`.
+
+---
+
+##### `task`<sup>Required</sup> <a name="task" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.task"></a>
+
+```typescript
+public readonly task: Task;
+```
+
+- *Type:* projen.Task
+
+The task to execute in order to create the release artifacts.
+
+Artifacts are
+expected to reside under `artifactsDirectory` (defaults to `dist/`) once
+build is complete.
+
+---
+
+##### `versionFile`<sup>Required</sup> <a name="versionFile" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionFile"></a>
+
+```typescript
+public readonly versionFile: string;
+```
+
+- *Type:* string
+
+A name of a .json file to set the `version` field in after a bump.
+
+---
+
+##### `bumpFile`<sup>Optional</sup> <a name="bumpFile" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpFile"></a>
+
+```typescript
+public readonly bumpFile: string;
+```
+
+- *Type:* string
+- *Default:* package.json
+
+The file to bump the version in.
+
+Must be a commit-and-tag-version compatible bump file
+
+---
+
+##### `bumpPackage`<sup>Optional</sup> <a name="bumpPackage" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpPackage"></a>
+
+```typescript
+public readonly bumpPackage: string;
+```
+
+- *Type:* string
+- *Default:* A recent version of "commit-and-tag-version"
+
+The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string.
+
+This can be any compatible package version, including the deprecated `standard-version@9`.
+
+---
+
+##### `githubRelease`<sup>Optional</sup> <a name="githubRelease" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.githubRelease"></a>
+
+```typescript
+public readonly githubRelease: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Create a GitHub release for each release.
+
+---
+
+##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="jsiiReleaseVersion" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.jsiiReleaseVersion"></a>
+
+```typescript
+public readonly jsiiReleaseVersion: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+Version requirement of `publib` which is used to publish modules to npm.
+
+---
+
+##### `majorVersion`<sup>Optional</sup> <a name="majorVersion" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.majorVersion"></a>
+
+```typescript
+public readonly majorVersion: number;
+```
+
+- *Type:* number
+- *Default:* Major version is not enforced.
+
+Major version to release from the default branch.
+
+If this is specified, we bump the latest version of this major version line.
+If not specified, we bump the global latest version.
+
+---
+
+##### `minMajorVersion`<sup>Optional</sup> <a name="minMajorVersion" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.minMajorVersion"></a>
+
+```typescript
+public readonly minMajorVersion: number;
+```
+
+- *Type:* number
+- *Default:* No minimum version is being enforced
+
+Minimal Major version to release.
+
+This can be useful to set to 1, as breaking changes before the 1.x major
+release are not incrementing the major version number.
+
+Can not be set together with `majorVersion`.
+
+---
+
+##### `nextVersionCommand`<sup>Optional</sup> <a name="nextVersionCommand" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.nextVersionCommand"></a>
+
+```typescript
+public readonly nextVersionCommand: string;
+```
+
+- *Type:* string
+- *Default:* The next version will be determined based on the commit history and project settings.
+
+A shell command to control the next version to release.
+
+If present, this shell command will be run before the bump is executed, and
+it determines what version to release. It will be executed in the following
+environment:
+
+- Working directory: the project directory.
+- `$VERSION`: the current version. Looks like `1.2.3`.
+- `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+
+The command should print one of the following to `stdout`:
+
+- Nothing: the next version number will be determined based on commit history.
+- `x.y.z`: the next version number will be `x.y.z`.
+- `major|minor|patch`: the next version number will be the current version number
+  with the indicated component bumped.
+
+This setting cannot be specified together with `minMajorVersion`; the invoked
+script can be used to achieve the effects of `minMajorVersion`.
+
+---
+
+##### `npmDistTag`<sup>Optional</sup> <a name="npmDistTag" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.npmDistTag"></a>
+
+```typescript
+public readonly npmDistTag: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+The npmDistTag to use when publishing from the default branch.
+
+To set the npm dist-tag for release branches, set the `npmDistTag` property
+for each branch.
+
+---
+
+##### `postBuildSteps`<sup>Optional</sup> <a name="postBuildSteps" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.postBuildSteps"></a>
+
+```typescript
+public readonly postBuildSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+- *Default:* []
+
+Steps to execute after build as part of the release workflow.
+
+---
+
+##### `prerelease`<sup>Optional</sup> <a name="prerelease" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.prerelease"></a>
+
+```typescript
+public readonly prerelease: string;
+```
+
+- *Type:* string
+- *Default:* normal semantic versions
+
+Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `publishDryRun`<sup>Optional</sup> <a name="publishDryRun" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.publishDryRun"></a>
+
+```typescript
+public readonly publishDryRun: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Instead of actually publishing to package managers, just print the publishing command.
+
+---
+
+##### `publishTasks`<sup>Optional</sup> <a name="publishTasks" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.publishTasks"></a>
+
+```typescript
+public readonly publishTasks: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Define publishing tasks that can be executed manually as well as workflows.
+
+Normally, publishing only happens within automated workflows. Enable this
+in order to create a publishing task for each publishing activity.
+
+---
+
+##### `releasableCommits`<sup>Optional</sup> <a name="releasableCommits" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releasableCommits"></a>
+
+```typescript
+public readonly releasableCommits: ReleasableCommits;
+```
+
+- *Type:* projen.ReleasableCommits
+- *Default:* ReleasableCommits.everyCommit()
+
+Find commits that should be considered releasable Used to decide if a release is required.
+
+---
+
+##### `releaseBranches`<sup>Optional</sup> <a name="releaseBranches" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseBranches"></a>
+
+```typescript
+public readonly releaseBranches: {[ key: string ]: BranchOptions};
+```
+
+- *Type:* {[ key: string ]: projen.release.BranchOptions}
+- *Default:* no additional branches are used for release. you can use `addBranch()` to add additional branches.
+
+Defines additional release branches.
+
+A workflow will be created for each
+release branch which will publish releases from commits in this branch.
+Each release branch _must_ be assigned a major version number which is used
+to enforce that versions published from that branch always use that major
+version. If multiple branches are used, the `majorVersion` field must also
+be provided for the default branch.
+
+---
+
+##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="releaseEveryCommit" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseEveryCommit"></a>
+
+- *Deprecated:* Use `releaseTrigger: ReleaseTrigger.continuous()` instead
+
+```typescript
+public readonly releaseEveryCommit: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Automatically release new versions every commit to one of branches in `releaseBranches`.
+
+---
+
+##### `releaseFailureIssue`<sup>Optional</sup> <a name="releaseFailureIssue" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseFailureIssue"></a>
+
+```typescript
+public readonly releaseFailureIssue: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Create a github issue on every failed publishing task.
+
+---
+
+##### `releaseFailureIssueLabel`<sup>Optional</sup> <a name="releaseFailureIssueLabel" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseFailureIssueLabel"></a>
+
+```typescript
+public readonly releaseFailureIssueLabel: string;
+```
+
+- *Type:* string
+- *Default:* "failed-release"
+
+The label to apply to issues indicating publish failures.
+
+Only applies if `releaseFailureIssue` is true.
+
+---
+
+##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="releaseSchedule" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseSchedule"></a>
+
+- *Deprecated:* Use `releaseTrigger: ReleaseTrigger.scheduled()` instead
+
+```typescript
+public readonly releaseSchedule: string;
+```
+
+- *Type:* string
+- *Default:* no scheduled releases
+
+CRON schedule to trigger new releases.
+
+---
+
+##### `releaseTagPrefix`<sup>Optional</sup> <a name="releaseTagPrefix" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseTagPrefix"></a>
+
+```typescript
+public readonly releaseTagPrefix: string;
+```
+
+- *Type:* string
+- *Default:* "v"
+
+Automatically add the given prefix to release tags.
+
+Useful if you are releasing on multiple branches with overlapping version numbers.
+Note: this prefix is used to detect the latest tagged version
+when bumping, so if you change this on a project with an existing version
+history, you may need to manually tag your latest release
+with the new prefix.
+
+---
+
+##### `releaseTrigger`<sup>Optional</sup> <a name="releaseTrigger" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseTrigger"></a>
+
+```typescript
+public readonly releaseTrigger: ReleaseTrigger;
+```
+
+- *Type:* projen.release.ReleaseTrigger
+- *Default:* Continuous releases (`ReleaseTrigger.continuous()`)
+
+The release trigger to use.
+
+---
+
+##### `releaseWorkflowName`<sup>Optional</sup> <a name="releaseWorkflowName" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowName"></a>
+
+```typescript
+public readonly releaseWorkflowName: string;
+```
+
+- *Type:* string
+- *Default:* "release"
+
+The name of the default release workflow.
+
+---
+
+##### `releaseWorkflowSetupSteps`<sup>Optional</sup> <a name="releaseWorkflowSetupSteps" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowSetupSteps"></a>
+
+```typescript
+public readonly releaseWorkflowSetupSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+
+A set of workflow steps to execute in order to setup the workflow container.
+
+---
+
+##### `versionrcOptions`<sup>Optional</sup> <a name="versionrcOptions" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionrcOptions"></a>
+
+```typescript
+public readonly versionrcOptions: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* standard configuration applicable for GitHub repositories
+
+Custom configuration used when creating changelog with commit-and-tag-version package.
+
+Given values either append to default configuration or overwrite values in it.
+
+---
+
+##### `workflowContainerImage`<sup>Optional</sup> <a name="workflowContainerImage" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowContainerImage"></a>
+
+```typescript
+public readonly workflowContainerImage: string;
+```
+
+- *Type:* string
+- *Default:* default image
+
+Container image to use for GitHub workflows.
+
+---
+
+##### `workflowNodeVersion`<sup>Optional</sup> <a name="workflowNodeVersion" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowNodeVersion"></a>
+
+```typescript
+public readonly workflowNodeVersion: string;
+```
+
+- *Type:* string
+- *Default:* "lts/*""
+
+Node version to setup in GitHub workflows if any node-based CLI utilities are needed.
+
+For example `publib`, the CLI projen uses to publish releases,
+is an npm library.
+
+---
+
+##### `workflowPermissions`<sup>Optional</sup> <a name="workflowPermissions" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowPermissions"></a>
+
+```typescript
+public readonly workflowPermissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
+- *Default:* `{ contents: JobPermission.WRITE }`
+
+Permissions granted to the release workflow job.
+
+---
+
+##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowRunsOn"></a>
+
+```typescript
+public readonly workflowRunsOn: string[];
+```
+
+- *Type:* string[]
+- *Default:* ["ubuntu-latest"]
+
+Github Runner selection labels.
+
+---
+
+##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowRunsOnGroup"></a>
+
+```typescript
+public readonly workflowRunsOnGroup: GroupRunnerOptions;
+```
+
+- *Type:* projen.GroupRunnerOptions
+
+Github Runner Group selection options.
 
 ---
 
