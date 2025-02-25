@@ -17,6 +17,7 @@
     ".projen/tasks.json",
     "jest.config.json",
     "LICENSE",
+    "renovate.json5",
     "src/PythonComponentOptions.ts",
     "src/TagReleaseOptions.ts",
     "tsconfig.dev.json"
