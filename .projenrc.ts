@@ -1,11 +1,10 @@
 import { PrimitiveType, Stability } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
-import { cdk, JsonPatch } from 'projen';
+import { cdk, JsonPatch, RenovatebotScheduleInterval } from 'projen';
 import {
   NodePackageManager,
   NpmAccess,
   Transform,
-  UpgradeDependenciesSchedule,
 } from 'projen/lib/javascript';
 const project = new cdk.JsiiProject({
   author: 'corymhall',
@@ -33,15 +32,14 @@ const project = new cdk.JsiiProject({
     dirs: [],
     prettier: true,
   },
-  depsUpgradeOptions: {
-    workflowOptions: {
-      labels: ['auto-approve'],
-      schedule: UpgradeDependenciesSchedule.WEEKLY,
-    },
+  renovatebot: true,
+  renovatebotOptions: {
+    labels: ['auto-approve'],
+    scheduleInterval: [RenovatebotScheduleInterval.WEEKLY],
   },
   autoApproveOptions: {
     label: 'auto-approve',
-    allowedUsernames: ['corymhall'],
+    allowedUsernames: ['corymhall', 'renovate[bot]'],
   },
   jestOptions: {
     configFilePath: 'jest.config.json',
