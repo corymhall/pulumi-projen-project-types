@@ -18,7 +18,9 @@ export class PythonComponent extends PythonProject {
         envdir: 'venv',
       },
     });
-    this.addDependency('pulumi');
+    const pulumiVersion =
+      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.150 <4.0';
+    this.addDependency(`pulumi@${pulumiVersion}`);
 
     new YamlFile(this, 'PulumiPlugin.yaml', {
       obj: {
