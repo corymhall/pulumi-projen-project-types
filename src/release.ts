@@ -1,9 +1,10 @@
 import * as path from 'path';
 import { Construct } from 'constructs';
-import { Project } from 'projen';
+import { Project, Task } from 'projen';
 import { GitHub } from 'projen/lib/github';
 import { JobPermission } from 'projen/lib/github/workflows-model';
-import { Release as ProjenRelease, ReleaseOptions, ReleaseTrigger } from 'projen/lib/release';
+import { Release as ProjenRelease, ReleaseTrigger } from 'projen/lib/release';
+import { TagReleaseOptions } from './TagReleaseOptions';
 
 export class ReleaseWorkflow extends Construct {
   constructor(scope: Construct, id: string) {
@@ -14,11 +15,13 @@ export class ReleaseWorkflow extends Construct {
       throw new Error('ReleaseWorkflow requires a GitHub Project');
     }
 
-    if (github.tryFindWorkflow('release')) {
+    const workflowName = 'github-release';
+
+    if (github.tryFindWorkflow(workflowName)) {
       throw new Error('A release workflow already exists');
     }
 
-    const release = github.addWorkflow('release');
+    const release = github.addWorkflow(workflowName);
     release.runName = 'Release ${{ github.ref_name }}';
     release.on({ push: { tags: ['v*.*.*'] } });
 
@@ -63,7 +66,8 @@ export class ReleaseWorkflow extends Construct {
 }
 
 export class TagRelease extends ProjenRelease {
-  constructor(scope: Construct, props: ReleaseOptions) {
+  public readonly publishTask: Task;
+  constructor(scope: Construct, props: TagReleaseOptions) {
     super(scope, {
       ...props,
       githubRelease: false,
@@ -88,7 +92,7 @@ export class TagRelease extends ProjenRelease {
       versionFileName,
     );
 
-    const publishTask = this.publisher.publishToGit({
+    this.publishTask = this.publisher.publishToGit({
       changelogFile,
       releaseTagFile,
       versionFile,
@@ -98,17 +102,10 @@ export class TagRelease extends ProjenRelease {
     });
 
     const project = Project.of(this);
-
-    if (props.versionFile === 'pyproject.toml') {
-      project.addGitIgnore(this.artifactsDirectory);
-      project.packageTask.spawn(project.addTask('dist', {
-        steps: [
-          { exec: `rm -rf ${this.artifactsDirectory}` },
-          { exec: `mkdir ${this.artifactsDirectory}` },
-          { exec: `cp pyproject.toml ${this.artifactsDirectory}/` },
-        ],
-      }));
-      publishTask.prependExec(`cp ${this.artifactsDirectory}/pyproject.toml . && git add pyproject.toml`);
+    const releaseTask = project.tasks.tryFind('release');
+    if (!releaseTask) {
+      throw new Error('Could not find release task');
     }
+    releaseTask.spawn(this.publishTask);
   }
 }

@@ -11,6 +11,7 @@
 /.github/workflows/release.yml linguist-generated
 /.github/workflows/upgrade-main.yml linguist-generated
 /.gitignore linguist-generated
+/.mergify.yml linguist-generated
 /.npmignore linguist-generated
 /.prettierignore linguist-generated
 /.prettierrc.json linguist-generated
@@ -24,4 +25,5 @@
 /package-lock.json linguist-generated
 /package.json linguist-generated
 /src/PythonComponentOptions.ts linguist-generated
+/src/TagReleaseOptions.ts linguist-generated
 /tsconfig.dev.json linguist-generated

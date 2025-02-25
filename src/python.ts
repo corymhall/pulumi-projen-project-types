@@ -1,10 +1,9 @@
-import { DependencyType, SampleDir, SampleFile, TomlFile, YamlFile } from 'projen';
+import { JsonFile, Project, SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { JobStep } from 'projen/lib/github/workflows-model';
 import { PythonProject } from 'projen/lib/python';
 import { PythonComponentOptions } from './PythonComponentOptions';
 import { TagRelease, ReleaseWorkflow } from './release';
-
 
 export class PythonComponent extends PythonProject {
   constructor(options: PythonComponentOptions) {
@@ -19,7 +18,7 @@ export class PythonComponent extends PythonProject {
         envdir: 'venv',
       },
     });
-    this.deps.addDependency('pulumi', DependencyType.RUNTIME);
+    this.addDependency('pulumi');
 
     new YamlFile(this, 'PulumiPlugin.yaml', {
       obj: {
@@ -28,15 +27,6 @@ export class PythonComponent extends PythonProject {
     });
 
     const componentName = options.componentName ?? this.moduleName;
-
-    new TomlFile(this, 'pyproject.toml', {
-      obj: {
-        project: {
-          name: this.moduleName,
-          version: '0.0.0',
-        },
-      },
-    });
 
     new SampleDir(this, this.moduleName, {
       files: {
@@ -82,12 +72,17 @@ export class PythonComponent extends PythonProject {
       contents: [
         'from pulumi.provider.experimental import component_provider_host, Metadata',
         'import importlib.metadata',
+        'import json',
+        '',
+        'with open(".version.json", "r") as f:',
+        '    pyproject = json.load(f)',
+        'version = pyproject["version"]',
         '',
         'if __name__ == "__main__":',
         '# Call the component provider host. This will discover any ComponentResource',
         '# subclasses in this package, infer their schema and host a provider that',
         '# allows constructing these components from a Pulumi program.',
-        `component_provider_host(Metadata("${componentName}", importlib.metadata.version("${this.moduleName}")))`,
+        `component_provider_host(Metadata("${componentName}", version))`,
       ].join('\n'),
     });
 
@@ -102,12 +97,40 @@ export class PythonComponent extends PythonProject {
       preBuildSteps: [setupStep],
     });
 
-    new TagRelease(this, {
+    new JsonFile(this, '.version.json', {
+      marker: false,
+      readonly: false,
+      obj: {
+        version: '0.0.0',
+      },
+    });
+
+    const tagRelease = new TagRelease(this, {
       artifactsDirectory: 'dist',
       branch: 'main',
       task: this.packageTask,
-      versionFile: 'pyproject.toml',
+      versionFile: '.version.json',
+      releaseTrigger: options.releaseTrigger,
     });
+
+    const project = Project.of(this);
+    const bumpTask = project.tasks.tryFind('bump');
+    bumpTask?.prependExec(
+      `mkdir -p ${tagRelease.artifactsDirectory} && cp .version.json ${tagRelease.artifactsDirectory}/`,
+    );
+    project.addGitIgnore(tagRelease.artifactsDirectory);
+    project.packageTask.spawn(
+      project.addTask('dist', {
+        steps: [
+          { exec: `mkdir -p ${tagRelease.artifactsDirectory}` },
+          { exec: `cp .version.json ${tagRelease.artifactsDirectory}/` },
+          { exec: `git checkout .version.json` },
+        ],
+      }),
+    );
+    tagRelease.publishTask.prependExec(
+      `cp ${tagRelease.artifactsDirectory}/.version.json . && git add .version.json`,
+    );
 
     new ReleaseWorkflow(this, 'release-workflow');
   }

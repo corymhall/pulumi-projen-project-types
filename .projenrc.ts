@@ -1,4 +1,4 @@
-import { PrimitiveType } from '@jsii/spec';
+import { PrimitiveType, Stability } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { cdk, JsonPatch } from 'projen';
 import {
@@ -21,7 +21,7 @@ const project = new cdk.JsiiProject({
   peerDeps: ['constructs', 'projen'],
   prettier: true,
   githubOptions: {
-    mergify: false,
+    mergify: true,
     workflows: true,
   },
   prettierOptions: {
@@ -58,6 +58,22 @@ const project = new cdk.JsiiProject({
   // packageName: undefined,  /* The "name" in package.json. */
 });
 
+new ProjenStruct(project, { name: 'TagReleaseOptions' })
+  .mixin(Struct.fromFqn('projen.release.ReleaseOptions'))
+  .omit('github')
+  .add({
+    name: 'bumpFile',
+    type: {
+      primitive: PrimitiveType.String,
+    },
+    optional: true,
+    docs: {
+      default: 'package.json',
+      summary:
+        'The file to bump the version in. Must be a commit-and-tag-version compatible bump file',
+    },
+  });
+
 new ProjenStruct(project, { name: 'PythonComponentOptions' })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
   .omit(
@@ -80,6 +96,18 @@ new ProjenStruct(project, { name: 'PythonComponentOptions' })
       default: 'the `moduleName`',
       summary: 'The name of the pulumi component',
     },
+  })
+  .add({
+    name: 'releaseTrigger',
+    type: {
+      fqn: 'projen.release.ReleaseTrigger',
+    },
+    optional: true,
+    docs: {
+      default: 'Continuous releases (`ReleaseTrigger.continuous()`)',
+      summary: 'The release trigger to use.',
+      stability: Stability.Experimental,
+    },
   });
 
 const eslint = project.tryFindObjectFile('.eslintrc.json');
@@ -95,4 +123,3 @@ jestConfig?.patch(
   }),
 );
 project.synth();
-
