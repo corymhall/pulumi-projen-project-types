@@ -72,6 +72,20 @@ new ProjenStruct(project, { name: 'TagReleaseOptions' })
     },
   });
 
+const pulumiOptions = new ProjenStruct(project, {
+  name: 'PulumiPythonOptions',
+}).add({
+  name: 'pulumiVersion',
+  type: { primitive: PrimitiveType.String },
+  optional: true,
+  docs: {
+    default: '>=3.150 <4.0',
+    summary:
+      'The pulumi version to use\n' +
+      'The version range should be valid semver\n',
+    see: 'https://www.npmjs.com/package/semver',
+  },
+});
 new ProjenStruct(project, { name: 'PythonComponentOptions' })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
   .omit(
@@ -84,6 +98,7 @@ new ProjenStruct(project, { name: 'PythonComponentOptions' })
     'setupConfig',
     'setupTools',
   )
+  .add({ name: 'pulumiPythonOptions', type: pulumiOptions, optional: true })
   .add({
     name: 'componentName',
     type: {

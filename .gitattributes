@@ -25,6 +25,7 @@
 /package-lock.json linguist-generated
 /package.json linguist-generated
 /renovate.json5 linguist-generated
+/src/PulumiPythonOptions.ts linguist-generated
 /src/PythonComponentOptions.ts linguist-generated
 /src/TagReleaseOptions.ts linguist-generated
 /tsconfig.dev.json linguist-generated

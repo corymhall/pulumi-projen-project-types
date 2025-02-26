@@ -2857,6 +2857,39 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
+### PulumiPythonOptions <a name="PulumiPythonOptions" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions"></a>
+
+PulumiPythonOptions.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions.Initializer"></a>
+
+```typescript
+import { PulumiPythonOptions } from '@hallcor/pulumi-projen-project-types'
+
+const pulumiPythonOptions: PulumiPythonOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pulumiVersion">pulumiVersion</a></code> | <code>string</code> | The pulumi version to use The version range should be valid semver. |
+
+---
+
+##### `pulumiVersion`<sup>Optional</sup> <a name="pulumiVersion" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pulumiVersion"></a>
+
+```typescript
+public readonly pulumiVersion: string;
+```
+
+- *Type:* string
+- *Default:* >=3.150 <4.0
+
+The pulumi version to use The version range should be valid semver.
+
+---
+
 ### PythonComponentOptions <a name="PythonComponentOptions" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions"></a>
 
 PythonComponentOptions.
@@ -2913,6 +2946,7 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcTs">projenrcTs</a></code> | <code>boolean</code> | Use projenrc in TypeScript. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcTsOptions">projenrcTsOptions</a></code> | <code>projen.typescript.ProjenrcTsOptions</code> | Options related to projenrc in TypeScript. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenTokenSecret">projenTokenSecret</a></code> | <code>string</code> | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pulumiPythonOptions">pulumiPythonOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions">PulumiPythonOptions</a></code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pytest">pytest</a></code> | <code>boolean</code> | Include pytest tests. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pytestOptions">pytestOptions</a></code> | <code>projen.python.PytestOptions</code> | pytest options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pythonExec">pythonExec</a></code> | <code>string</code> | Path to the python executable to use. |
@@ -3476,6 +3510,16 @@ The name of a secret which includes a GitHub Personal Access Token to be used by
 
 This token needs to have the `repo`, `workflows`
 and `packages` scope.
+
+---
+
+##### `pulumiPythonOptions`<sup>Optional</sup> <a name="pulumiPythonOptions" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pulumiPythonOptions"></a>
+
+```typescript
+public readonly pulumiPythonOptions: PulumiPythonOptions;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions">PulumiPythonOptions</a>
 
 ---
 
