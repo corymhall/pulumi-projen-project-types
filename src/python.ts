@@ -1,6 +1,5 @@
 import { JsonFile, Project, SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
-import { JobStep } from 'projen/lib/github/workflows-model';
 import { PythonProject } from 'projen/lib/python';
 import { PythonComponentOptions } from './PythonComponentOptions';
 import { TagRelease, ReleaseWorkflow } from './release';
@@ -86,15 +85,26 @@ export class PythonComponent extends PythonProject {
       ].join('\n'),
     });
 
-    const setupStep: JobStep = {
-      name: 'Setup Python',
-      uses: 'actions/setup-python@v5',
-    };
+    const github = this.github;
+    if (!github) {
+      throw new Error('This project must be a github project');
+    }
+    const installTask = this.tasks.tryFind('install');
+    if (!installTask) {
+      throw new Error('install task not found');
+    }
 
     new BuildWorkflow(this, {
       buildTask: this.buildTask,
       artifactsDirectory: 'dist',
-      preBuildSteps: [setupStep],
+      preBuildSteps: [
+        {
+          name: 'Setup Python',
+          uses: 'actions/setup-python@v5',
+        },
+        { run: 'python -m venv venv' },
+        { run: this.github.project.runTaskCommand(installTask) },
+      ],
     });
 
     new JsonFile(this, '.version.json', {
