@@ -29,6 +29,7 @@ export class ReleaseWorkflow extends Construct {
       permissions: {
         contents: JobPermission.WRITE,
       },
+      runsOn: ['ubuntu-latest'],
       steps: [
         {
           id: 'release-exists',
@@ -107,6 +108,7 @@ export class TagRelease extends ProjenRelease {
         permissions: {
           contents: JobPermission.WRITE,
         },
+        runsOn: ['ubuntu-latest'],
         steps: [
           WorkflowSteps.downloadArtifact({
             with: {
