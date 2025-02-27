@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { Construct } from 'constructs';
 import { Project, Task } from 'projen';
-import { GitHub } from 'projen/lib/github';
+import { GitHub, WorkflowSteps } from 'projen/lib/github';
 import { JobPermission } from 'projen/lib/github/workflows-model';
 import { Release as ProjenRelease, ReleaseTrigger } from 'projen/lib/release';
 import { TagReleaseOptions } from './TagReleaseOptions';
@@ -42,7 +42,7 @@ export class ReleaseWorkflow extends Construct {
             'fi',
           ].join('\n'),
           env: {
-            GH_TOKEN: '${{ github.token }}',
+            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
           },
         },
         {
@@ -56,7 +56,7 @@ export class ReleaseWorkflow extends Construct {
             '--verify-tag',
           ].join(' '),
           env: {
-            GH_TOKEN: '${{ github.token }}',
+            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
           },
         },
       ],
@@ -73,6 +73,7 @@ export class TagRelease extends ProjenRelease {
       githubRelease: false,
     });
 
+    const project = Project.of(this);
     const releaseTrigger = props.releaseTrigger ?? ReleaseTrigger.continuous();
 
     const changelogFileName = 'changelog.md';
@@ -101,11 +102,46 @@ export class TagRelease extends ProjenRelease {
       gitPushCommand: releaseTrigger.gitPushCommand,
     });
 
-    const project = Project.of(this);
+    this.addJobs({
+      release_git: {
+        permissions: {
+          contents: JobPermission.WRITE,
+        },
+        steps: [
+          WorkflowSteps.downloadArtifact({
+            with: {
+              name: 'build-artifact',
+              path: this.artifactsDirectory,
+            },
+          }),
+          {
+            name: 'Restore build artifact permissions',
+            run: `cd ${this.artifactsDirectory} && setfacl --restore=permissions-backup.acl`,
+            continueOnError: true,
+          },
+          WorkflowSteps.setupGitIdentity({
+            gitIdentity: {
+              email: 'github-actions@github.com',
+              name: 'github-actions',
+            },
+          }),
+          {
+            name: 'Release',
+            env: {
+              GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+            },
+            run: project.runTaskCommand(this.publishTask),
+          },
+        ],
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
+        name: 'Publish Git Tag',
+        needs: ['release'],
+      },
+    });
+
     const releaseTask = project.tasks.tryFind('release');
     if (!releaseTask) {
       throw new Error('Could not find release task');
     }
-    releaseTask.spawn(this.publishTask);
   }
 }
