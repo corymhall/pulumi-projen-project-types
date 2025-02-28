@@ -1,4 +1,4 @@
-import { JsonFile, Project, SampleDir, SampleFile, YamlFile } from 'projen';
+import { Project, SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
@@ -80,15 +80,17 @@ export class PythonComponent extends PythonProject {
       },
     });
 
-    const versionFile = new JsonFile(this, 'version.json', {
-      marker: false,
-      readonly: false,
-      obj: {
-        version: '0.0.0',
-      },
+    new SampleFile(this, 'version.json', {
+      contents: JSON.stringify(
+        {
+          version: '0.0.0',
+        },
+        undefined,
+        2,
+      ),
     });
 
-    const versionFilePath = versionFile.path;
+    const versionFilePath = 'version.json';
 
     new SampleFile(this, '__main__.py', {
       contents: [
