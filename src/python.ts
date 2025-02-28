@@ -80,13 +80,25 @@ export class PythonComponent extends PythonProject {
       },
     });
 
+    const versionFile = new JsonFile(this, 'version.json', {
+      marker: false,
+      readonly: false,
+      obj: {
+        version: '0.0.0',
+      },
+    });
+
+    const versionFilePath = versionFile.path;
+
     new SampleFile(this, '__main__.py', {
       contents: [
         'from pulumi.provider.experimental import component_provider_host, Metadata',
-        'import importlib.metadata',
+        'import os',
         'import json',
         '',
-        'with open(".version.json", "r") as f:',
+        'dir = os.path.dirname(os.path.abspath(__file__))',
+        `version_file_path = os.path.join(dir, "${versionFilePath}")`,
+        'with open(version_file_path, "r") as f:',
         '    pyproject = json.load(f)',
         'version = pyproject["version"]',
         '',
@@ -129,44 +141,36 @@ export class PythonComponent extends PythonProject {
       });
     }
 
-    new JsonFile(this, '.version.json', {
-      marker: false,
-      readonly: false,
-      obj: {
-        version: '0.0.0',
-      },
-    });
-
     const tagRelease = new TagRelease(this, {
       artifactsDirectory: 'dist',
       branch: 'main',
       task: this.packageTask,
-      versionFile: '.version.json',
+      versionFile: versionFilePath,
       releaseTrigger: options.releaseTrigger,
     });
 
     const project = Project.of(this);
     const bumpTask = project.tasks.tryFind('bump');
     bumpTask?.prependExec(
-      `mkdir -p ${tagRelease.artifactsDirectory} && cp .version.json ${tagRelease.artifactsDirectory}/`,
+      `mkdir -p ${tagRelease.artifactsDirectory} && cp ${versionFilePath} ${tagRelease.artifactsDirectory}/`,
     );
     project.addGitIgnore(tagRelease.artifactsDirectory);
     project.packageTask.spawn(
       project.addTask('dist', {
         steps: [
           { exec: `mkdir -p ${tagRelease.artifactsDirectory}` },
-          { exec: `cp .version.json ${tagRelease.artifactsDirectory}/` },
-          { exec: `git checkout .version.json` },
+          { exec: `cp ${versionFilePath} ${tagRelease.artifactsDirectory}/` },
+          { exec: `git checkout ${versionFilePath}` },
         ],
       }),
     );
     if (tagRelease.trigger.changelogPath) {
       tagRelease.publishTask.prependExec(
-        `cp ${tagRelease.artifactsDirectory}/.version.json . && git add .version.json`,
+        `cp ${tagRelease.artifactsDirectory}/${versionFilePath} . && git add ${versionFilePath}`,
       );
     } else {
       tagRelease.publishTask.prependExec(
-        `VERSION=$(cat ${tagRelease.artifactsDirectory}/version.txt); cp ${tagRelease.artifactsDirectory}/.version.json . && git add .version.json && git commit -m "chore(release): v$VERSION"`,
+        `VERSION=$(cat ${tagRelease.artifactsDirectory}/version.txt); cp ${tagRelease.artifactsDirectory}/${versionFilePath} . && git add ${versionFilePath} && git commit -m "chore(release): v$VERSION"`,
       );
     }
     new ReleaseWorkflow(this, 'release-workflow');
