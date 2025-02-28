@@ -113,7 +113,11 @@ export class TagRelease extends ProjenRelease {
         needs: ['release'],
         runsOn: ['ubuntu-latest'],
         steps: [
-          WorkflowSteps.checkout(),
+          WorkflowSteps.checkout({
+            with: {
+              ref: props.branch,
+            },
+          }),
           WorkflowSteps.downloadArtifact({
             with: {
               name: 'build-artifact',
@@ -137,7 +141,8 @@ export class TagRelease extends ProjenRelease {
               VERSION_FILE: versionFile,
               CHANGELOG: this.trigger.changelogPath ?? '',
               RELEASE_TAG_FILE: releaseTagFile,
-              GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+              GITHUB_TOKEN:
+                props.githubReleaseToken ?? '${{ secrets.GITHUB_TOKEN }}',
             },
             run: project.runTaskCommand(this.publishTask),
           },

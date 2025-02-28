@@ -344,6 +344,13 @@ export interface PythonComponentOptions {
    * @featured true
    */
   readonly name: string;
+  /**
+   * The GitHub Token to use when pushing the tag commit
+Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the
+Push/Tag will not trigger any other workflows
+   * @default ${{ secrets.GITHUB_TOKEN }}
+   */
+  readonly githubReleaseToken?: string;
   readonly pulumiPythonOptions?: PulumiPythonOptions;
   /**
    * The name of the pulumi component

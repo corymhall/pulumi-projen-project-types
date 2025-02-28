@@ -56,9 +56,24 @@ const project = new cdk.JsiiProject({
   // packageName: undefined,  /* The "name" in package.json. */
 });
 
+const githubReleaseTokenProp = {
+  name: 'githubReleaseToken',
+  type: {
+    primitive: PrimitiveType.String,
+  },
+  optional: true,
+  docs: {
+    default: '${{ secrets.GITHUB_TOKEN }}',
+    summary:
+      'The GitHub Token to use when pushing the tag commit\n' +
+      'Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the\n' +
+      'Push/Tag will not trigger any other workflows',
+  },
+};
 new ProjenStruct(project, { name: 'TagReleaseOptions' })
   .mixin(Struct.fromFqn('projen.release.ReleaseOptions'))
   .omit('github')
+  .add(githubReleaseTokenProp)
   .add({
     name: 'bumpFile',
     type: {
@@ -98,6 +113,7 @@ new ProjenStruct(project, { name: 'PythonComponentOptions' })
     'setupConfig',
     'setupTools',
   )
+  .add(githubReleaseTokenProp)
   .add({ name: 'pulumiPythonOptions', type: pulumiOptions, optional: true })
   .add({
     name: 'componentName',
