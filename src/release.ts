@@ -113,6 +113,7 @@ export class TagRelease extends ProjenRelease {
         needs: ['release'],
         runsOn: ['ubuntu-latest'],
         steps: [
+          WorkflowSteps.checkout(),
           WorkflowSteps.downloadArtifact({
             with: {
               name: 'build-artifact',
