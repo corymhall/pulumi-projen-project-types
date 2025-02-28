@@ -103,6 +103,9 @@ export class TagRelease extends ProjenRelease {
       gitPushCommand: this.trigger.gitPushCommand,
     });
 
+    const unbumpTask = project.tasks.tryFind('unbump');
+    unbumpTask?.reset('echo "nothing to do"');
+
     this.addJobs({
       release_git: {
         permissions: {
@@ -130,7 +133,7 @@ export class TagRelease extends ProjenRelease {
             continueOnError: true,
           },
           WorkflowSteps.setupGitIdentity({
-            gitIdentity: {
+            gitIdentity: props.gitIdentity ?? {
               email: 'github-actions@github.com',
               name: 'github-actions',
             },
