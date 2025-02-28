@@ -147,6 +147,7 @@ export class PythonComponent extends PythonProject {
       task: this.packageTask,
       versionFile: versionFilePath,
       releaseTrigger: options.releaseTrigger,
+      githubReleaseToken: options.githubReleaseToken,
     });
 
     const project = Project.of(this);

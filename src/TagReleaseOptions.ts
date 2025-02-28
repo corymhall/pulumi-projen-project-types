@@ -243,6 +243,13 @@ export interface TagReleaseOptions {
    */
   readonly bumpPackage?: string;
   /**
+   * The GitHub Token to use when pushing the tag commit
+Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the
+Push/Tag will not trigger any other workflows
+   * @default ${{ secrets.GITHUB_TOKEN }}
+   */
+  readonly githubReleaseToken?: string;
+  /**
    * The file to bump the version in. Must be a commit-and-tag-version compatible bump file
    * @default package.json
    */
