@@ -2963,6 +2963,7 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.devDeps">devDeps</a></code> | <code>string[]</code> | List of dev dependencies for this project. Dependencies use the format: `<module>@<semver>`. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.githubReleaseToken">githubReleaseToken</a></code> | <code>string</code> | The GitHub Token to use when pushing the tag commit Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the Push/Tag will not trigger any other workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.gitIdentity">gitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.gitpod">gitpod</a></code> | <code>boolean</code> | Add a Gitpod development environment. |
@@ -3244,6 +3245,19 @@ public readonly githubReleaseToken: string;
 - *Default:* ${{ secrets.GITHUB_TOKEN }}
 
 The GitHub Token to use when pushing the tag commit Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the Push/Tag will not trigger any other workflows.
+
+---
+
+##### `gitIdentity`<sup>Optional</sup> <a name="gitIdentity" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.gitIdentity"></a>
+
+```typescript
+public readonly gitIdentity: GitIdentity;
+```
+
+- *Type:* projen.github.GitIdentity
+- *Default:* github-actions user
+
+The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows.
 
 ---
 
@@ -3777,6 +3791,7 @@ const tagReleaseOptions: TagReleaseOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.githubRelease">githubRelease</a></code> | <code>boolean</code> | Create a GitHub release for each release. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.githubReleaseToken">githubReleaseToken</a></code> | <code>string</code> | The GitHub Token to use when pushing the tag commit Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the Push/Tag will not trigger any other workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.gitIdentity">gitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
@@ -3916,6 +3931,19 @@ public readonly githubReleaseToken: string;
 - *Default:* ${{ secrets.GITHUB_TOKEN }}
 
 The GitHub Token to use when pushing the tag commit Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the Push/Tag will not trigger any other workflows.
+
+---
+
+##### `gitIdentity`<sup>Optional</sup> <a name="gitIdentity" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.gitIdentity"></a>
+
+```typescript
+public readonly gitIdentity: GitIdentity;
+```
+
+- *Type:* projen.github.GitIdentity
+- *Default:* github-actions user
+
+The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows.
 
 ---
 

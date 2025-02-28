@@ -1,4 +1,4 @@
-import { PrimitiveType, Stability } from '@jsii/spec';
+import { PrimitiveType, Property, Stability } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { cdk, JsonPatch, RenovatebotScheduleInterval } from 'projen';
 import {
@@ -56,7 +56,7 @@ const project = new cdk.JsiiProject({
   // packageName: undefined,  /* The "name" in package.json. */
 });
 
-const githubReleaseTokenProp = {
+const githubReleaseTokenProp: Property = {
   name: 'githubReleaseToken',
   type: {
     primitive: PrimitiveType.String,
@@ -70,10 +70,24 @@ const githubReleaseTokenProp = {
       'Push/Tag will not trigger any other workflows',
   },
 };
+
+const gitIdentity: Property = {
+  name: 'gitIdentity',
+  type: { fqn: 'projen.github.GitIdentity' },
+  optional: true,
+  docs: {
+    default: 'github-actions user',
+    summary:
+      'The git identity to use when pushing the release commit and tag\n' +
+      'Note: if you use the default github-actions user then the\n' +
+      'Push/Tag will not trigger any other workflows',
+  },
+};
 new ProjenStruct(project, { name: 'TagReleaseOptions' })
   .mixin(Struct.fromFqn('projen.release.ReleaseOptions'))
   .omit('github')
   .add(githubReleaseTokenProp)
+  .add(gitIdentity)
   .add({
     name: 'bumpFile',
     type: {
@@ -114,6 +128,7 @@ new ProjenStruct(project, { name: 'PythonComponentOptions' })
     'setupTools',
   )
   .add(githubReleaseTokenProp)
+  .add(gitIdentity)
   .add({ name: 'pulumiPythonOptions', type: pulumiOptions, optional: true })
   .add({
     name: 'componentName',

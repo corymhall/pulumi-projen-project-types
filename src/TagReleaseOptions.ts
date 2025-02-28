@@ -250,6 +250,13 @@ Push/Tag will not trigger any other workflows
    */
   readonly githubReleaseToken?: string;
   /**
+   * The git identity to use when pushing the release commit and tag
+Note: if you use the default github-actions user then the
+Push/Tag will not trigger any other workflows
+   * @default github-actions user
+   */
+  readonly gitIdentity?: github.GitIdentity;
+  /**
    * The file to bump the version in. Must be a commit-and-tag-version compatible bump file
    * @default package.json
    */

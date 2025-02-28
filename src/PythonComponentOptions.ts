@@ -351,6 +351,13 @@ Push/Tag will not trigger any other workflows
    * @default ${{ secrets.GITHUB_TOKEN }}
    */
   readonly githubReleaseToken?: string;
+  /**
+   * The git identity to use when pushing the release commit and tag
+Note: if you use the default github-actions user then the
+Push/Tag will not trigger any other workflows
+   * @default github-actions user
+   */
+  readonly gitIdentity?: github.GitIdentity;
   readonly pulumiPythonOptions?: PulumiPythonOptions;
   /**
    * The name of the pulumi component
