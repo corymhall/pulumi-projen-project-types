@@ -463,6 +463,8 @@ When given a project, this it the project itself.
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.version">version</a></code> | <code>string</code> | Version of the package for distribution (should follow semver). |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.packagingManager">packagingManager</a></code> | <code>projen.python.IPythonPackaging</code> | API for managing packaging the project as a library. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.pytest">pytest</a></code> | <code>projen.python.Pytest</code> | Pytest component. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.autoMerge">autoMerge</a></code> | <code>projen.github.AutoMerge</code> | Component that sets up mergify for merging approved pull requests. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.buildWorkflow">buildWorkflow</a></code> | <code>projen.build.BuildWorkflow</code> | The PR build GitHub workflow. |
 
 ---
 
@@ -928,6 +930,32 @@ Pytest component.
 
 ---
 
+##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="@hallcor/pulumi-projen-project-types.PythonComponent.property.autoMerge"></a>
+
+```typescript
+public readonly autoMerge: AutoMerge;
+```
+
+- *Type:* projen.github.AutoMerge
+
+Component that sets up mergify for merging approved pull requests.
+
+---
+
+##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="@hallcor/pulumi-projen-project-types.PythonComponent.property.buildWorkflow"></a>
+
+```typescript
+public readonly buildWorkflow: BuildWorkflow;
+```
+
+- *Type:* projen.build.BuildWorkflow
+
+The PR build GitHub workflow.
+
+`undefined` if `buildWorkflow` is disabled.
+
+---
+
 #### Constants <a name="Constants" id="Constants"></a>
 
 | **Name** | **Type** | **Description** |
@@ -1261,6 +1289,7 @@ Returns the `Release` component of a project or `undefined` if the project does 
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.branches">branches</a></code> | <code>string[]</code> | Retrieve all release branch names. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.publisher">publisher</a></code> | <code>projen.release.Publisher</code> | Package publisher. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.publishTask">publishTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagRelease.property.trigger">trigger</a></code> | <code>projen.release.ReleaseTrigger</code> | *No description.* |
 
 ---
 
@@ -1329,6 +1358,16 @@ public readonly publishTask: Task;
 ```
 
 - *Type:* projen.Task
+
+---
+
+##### `trigger`<sup>Required</sup> <a name="trigger" id="@hallcor/pulumi-projen-project-types.TagRelease.property.trigger"></a>
+
+```typescript
+public readonly trigger: ReleaseTrigger;
+```
+
+- *Type:* projen.release.ReleaseTrigger
 
 ---
 

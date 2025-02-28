@@ -51,7 +51,6 @@ export class ReleaseWorkflow extends Construct {
           if: '!fromJSON(steps.release-exists.outputs.result)',
           run: [
             'gh release create ${{ github.ref_name }}',
-            '--repo=${{ github.repository }}',
             '--notes-from-tag',
             '--title=${{ github.ref_name }}',
             '--verify-tag',
@@ -67,6 +66,7 @@ export class ReleaseWorkflow extends Construct {
 }
 
 export class TagRelease extends ProjenRelease {
+  public readonly trigger: ReleaseTrigger;
   public readonly publishTask: Task;
   constructor(scope: Construct, props: TagReleaseOptions) {
     super(scope, {
@@ -75,7 +75,7 @@ export class TagRelease extends ProjenRelease {
     });
 
     const project = Project.of(this);
-    const releaseTrigger = props.releaseTrigger ?? ReleaseTrigger.continuous();
+    this.trigger = props.releaseTrigger ?? ReleaseTrigger.continuous();
 
     const changelogFileName = 'changelog.md';
     const versionFileName = 'version.txt';
@@ -98,9 +98,9 @@ export class TagRelease extends ProjenRelease {
       changelogFile,
       releaseTagFile,
       versionFile,
-      projectChangelogFile: releaseTrigger.changelogPath,
+      projectChangelogFile: this.trigger.changelogPath,
       gitBranch: props.branch,
-      gitPushCommand: releaseTrigger.gitPushCommand,
+      gitPushCommand: this.trigger.gitPushCommand,
     });
 
     this.addJobs({
@@ -108,6 +108,9 @@ export class TagRelease extends ProjenRelease {
         permissions: {
           contents: JobPermission.WRITE,
         },
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
+        name: 'Publish Git Tag',
+        needs: ['release'],
         runsOn: ['ubuntu-latest'],
         steps: [
           WorkflowSteps.downloadArtifact({
@@ -130,20 +133,15 @@ export class TagRelease extends ProjenRelease {
           {
             name: 'Release',
             env: {
+              VERSION_FILE: versionFile,
+              CHANGELOG: this.trigger.changelogPath ?? '',
+              RELEASE_TAG_FILE: releaseTagFile,
               GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
             },
             run: project.runTaskCommand(this.publishTask),
           },
         ],
-        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
-        name: 'Publish Git Tag',
-        needs: ['release'],
       },
     });
-
-    const releaseTask = project.tasks.tryFind('release');
-    if (!releaseTask) {
-      throw new Error('Could not find release task');
-    }
   }
 }

@@ -1,10 +1,21 @@
 import { JsonFile, Project, SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
+import { AutoMerge } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
 import { PythonComponentOptions } from './PythonComponentOptions';
 import { TagRelease, ReleaseWorkflow } from './release';
 
 export class PythonComponent extends PythonProject {
+  /**
+   * The PR build GitHub workflow. `undefined` if `buildWorkflow` is disabled.
+   */
+  public readonly buildWorkflow?: BuildWorkflow;
+
+  /**
+   * Component that sets up mergify for merging approved pull requests.
+   */
+  public readonly autoMerge?: AutoMerge;
+
   constructor(options: PythonComponentOptions) {
     super({
       ...options,
@@ -96,7 +107,7 @@ export class PythonComponent extends PythonProject {
       throw new Error('install task not found');
     }
 
-    new BuildWorkflow(this, {
+    this.buildWorkflow = new BuildWorkflow(this, {
       buildTask: this.buildTask,
       artifactsDirectory: 'dist',
       preBuildSteps: [
@@ -108,6 +119,15 @@ export class PythonComponent extends PythonProject {
         { run: this.github.project.runTaskCommand(installTask) },
       ],
     });
+
+    if ((options.autoMerge ?? true) && this.github?.mergify) {
+      this.autoMerge = new AutoMerge(this.github, options.autoMergeOptions);
+      this.autoMerge.addConditionsLater({
+        render: () =>
+          this.buildWorkflow?.buildJobIds.map((id) => `status-success=${id}`) ??
+          [],
+      });
+    }
 
     new JsonFile(this, '.version.json', {
       marker: false,
@@ -140,10 +160,15 @@ export class PythonComponent extends PythonProject {
         ],
       }),
     );
-    tagRelease.publishTask.prependExec(
-      `cp ${tagRelease.artifactsDirectory}/.version.json . && git add .version.json`,
-    );
-
+    if (tagRelease.trigger.changelogPath) {
+      tagRelease.publishTask.prependExec(
+        `cp ${tagRelease.artifactsDirectory}/.version.json . && git add .version.json`,
+      );
+    } else {
+      tagRelease.publishTask.prependExec(
+        `VERSION=$(cat ${tagRelease.artifactsDirectory}/version.txt); cp ${tagRelease.artifactsDirectory}/.version.json . && git add .version.json && git commit -m "chore(release): v$VERSION"`,
+      );
+    }
     new ReleaseWorkflow(this, 'release-workflow');
   }
 }
