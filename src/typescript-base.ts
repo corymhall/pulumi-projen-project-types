@@ -1,9 +1,5 @@
 import { JsonPatch } from 'projen';
-import {
-  NodePackageManager,
-  Transform,
-  UpgradeDependenciesSchedule,
-} from 'projen/lib/javascript';
+import { Transform } from 'projen/lib/javascript';
 import {
   TypeScriptProject as ProjenTypeScriptProject,
   TypeScriptProjectOptions,
@@ -19,33 +15,26 @@ export class TypeScriptProject extends ProjenTypeScriptProject {
         },
       },
       eslintOptions: {
-        dirs: [],
-        prettier: true,
+        dirs: options.eslintOptions?.dirs ?? [options.srcdir ?? 'src'],
+        prettier: options.prettier ?? true,
+        ...options.eslintOptions,
       },
-      packageManager: NodePackageManager.NPM,
-      depsUpgradeOptions: {
-        workflowOptions: {
-          labels: ['auto-approve'],
-          schedule: UpgradeDependenciesSchedule.WEEKLY,
-        },
-      },
+      packageManager: options.packageManager,
       jestOptions: {
         configFilePath: 'jest.config.json',
       },
       ...options,
     });
-    const eslint = this.tryFindObjectFile('.eslintrc.json');
-    // I don't want to show linting errors for things that get auto fixed
-    eslint?.addOverride('extends', ['plugin:import/typescript']);
 
     const jestConfig = this.tryFindObjectFile('jest.config.json');
-    jestConfig?.patch(JsonPatch.remove('/preset'));
-    jestConfig?.patch(JsonPatch.remove('/globals'));
     jestConfig?.patch(
       JsonPatch.add('/transform', {
         '^.+\\.(t|j)sx?$': new Transform('@swc/jest'),
       }),
     );
+    // const jestConfig = this.tryFindObjectFile('jest.config.json');
+    // jestConfig?.patch(JsonPatch.remove('/preset'));
+    // jestConfig?.patch(JsonPatch.remove('/globals'));
 
     this.addDevDeps('@swc/core', '@swc/jest');
   }
