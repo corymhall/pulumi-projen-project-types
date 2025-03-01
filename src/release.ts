@@ -106,6 +106,12 @@ export class TagRelease extends ProjenRelease {
     const unbumpTask = project.tasks.tryFind('unbump');
     unbumpTask?.reset('echo "nothing to do"');
 
+    const checkout = WorkflowSteps.checkout({
+      with: {
+        ref: props.branch,
+      },
+    });
+    checkout.with!['persist-credentials'] = false;
     this.addJobs({
       release_git: {
         permissions: {
@@ -116,11 +122,7 @@ export class TagRelease extends ProjenRelease {
         needs: ['release'],
         runsOn: ['ubuntu-latest'],
         steps: [
-          WorkflowSteps.checkout({
-            with: {
-              ref: props.branch,
-            },
-          }),
+          checkout,
           WorkflowSteps.downloadArtifact({
             with: {
               name: 'build-artifact',

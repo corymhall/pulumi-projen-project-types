@@ -2912,7 +2912,7 @@ const pulumiPythonOptions: PulumiPythonOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pulumiVersion">pulumiVersion</a></code> | <code>string</code> | The pulumi version to use The version range should be valid semver. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pulumiVersion">pulumiVersion</a></code> | <code>string</code> | The pulumi version to use. |
 
 ---
 
@@ -2923,9 +2923,11 @@ public readonly pulumiVersion: string;
 ```
 
 - *Type:* string
-- *Default:* >=3.150 <4.0
+- *Default:* >=3.153 <4.0
 
-The pulumi version to use The version range should be valid semver.
+The pulumi version to use.
+
+The version range should be valid semver
 
 ---
 

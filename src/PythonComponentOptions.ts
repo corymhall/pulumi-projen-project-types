@@ -346,15 +346,15 @@ export interface PythonComponentOptions {
   readonly name: string;
   /**
    * The GitHub Token to use when pushing the tag commit
-Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the
-Push/Tag will not trigger any other workflows
+   * Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the
+   * Push/Tag will not trigger any other workflows
    * @default ${{ secrets.GITHUB_TOKEN }}
    */
   readonly githubReleaseToken?: string;
   /**
    * The git identity to use when pushing the release commit and tag
-Note: if you use the default github-actions user then the
-Push/Tag will not trigger any other workflows
+   * Note: if you use the default github-actions user then the
+   * Push/Tag will not trigger any other workflows
    * @default github-actions user
    */
   readonly gitIdentity?: github.GitIdentity;

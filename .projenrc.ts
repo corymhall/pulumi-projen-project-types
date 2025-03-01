@@ -5,6 +5,7 @@ import {
   NodePackageManager,
   NpmAccess,
   Transform,
+  UpgradeDependenciesSchedule,
 } from 'projen/lib/javascript';
 const project = new cdk.JsiiProject({
   author: 'corymhall',
@@ -31,6 +32,10 @@ const project = new cdk.JsiiProject({
   eslintOptions: {
     dirs: [],
     prettier: true,
+  },
+  depsUpgradeOptions: {
+    include: ['projen'],
+    workflowOptions: { schedule: UpgradeDependenciesSchedule.WEEKLY },
   },
   renovatebot: true,
   renovatebotOptions: {
@@ -66,8 +71,8 @@ const githubReleaseTokenProp: Property = {
     default: '${{ secrets.GITHUB_TOKEN }}',
     summary:
       'The GitHub Token to use when pushing the tag commit\n' +
-      'Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the\n' +
-      'Push/Tag will not trigger any other workflows',
+      '   * Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the\n' +
+      '   * Push/Tag will not trigger any other workflows',
   },
 };
 
@@ -79,8 +84,8 @@ const gitIdentity: Property = {
     default: 'github-actions user',
     summary:
       'The git identity to use when pushing the release commit and tag\n' +
-      'Note: if you use the default github-actions user then the\n' +
-      'Push/Tag will not trigger any other workflows',
+      '   * Note: if you use the default github-actions user then the\n' +
+      '   * Push/Tag will not trigger any other workflows',
   },
 };
 new ProjenStruct(project, { name: 'TagReleaseOptions' })
@@ -108,10 +113,9 @@ const pulumiOptions = new ProjenStruct(project, {
   type: { primitive: PrimitiveType.String },
   optional: true,
   docs: {
-    default: '>=3.150 <4.0',
+    default: '>=3.153 <4.0',
     summary:
-      'The pulumi version to use\n' +
-      'The version range should be valid semver\n',
+      'The pulumi version to use. The version range should be valid semver',
     see: 'https://www.npmjs.com/package/semver',
   },
 });

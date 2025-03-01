@@ -29,7 +29,7 @@ export class PythonComponent extends PythonProject {
       },
     });
     const pulumiVersion =
-      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.150 <4.0';
+      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.153 <4.0';
     this.addDependency(`pulumi@${pulumiVersion}`);
 
     new YamlFile(this, 'PulumiPlugin.yaml', {
@@ -136,6 +136,9 @@ export class PythonComponent extends PythonProject {
 
     if ((options.autoMerge ?? true) && this.github?.mergify) {
       this.autoMerge = new AutoMerge(this.github, options.autoMergeOptions);
+      if (options.githubOptions?.pullRequestLint ?? true) {
+        this.autoMerge.addConditions('status-success=pull-request-lint');
+      }
       this.autoMerge.addConditionsLater({
         render: () =>
           this.buildWorkflow?.buildJobIds.map((id) => `status-success=${id}`) ??
