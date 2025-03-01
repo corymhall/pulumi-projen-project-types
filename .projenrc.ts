@@ -92,19 +92,7 @@ new ProjenStruct(project, { name: 'TagReleaseOptions' })
   .mixin(Struct.fromFqn('projen.release.ReleaseOptions'))
   .omit('github')
   .add(githubReleaseTokenProp)
-  .add(gitIdentity)
-  .add({
-    name: 'bumpFile',
-    type: {
-      primitive: PrimitiveType.String,
-    },
-    optional: true,
-    docs: {
-      default: 'package.json',
-      summary:
-        'The file to bump the version in. Must be a commit-and-tag-version compatible bump file',
-    },
-  });
+  .add(gitIdentity);
 
 const pulumiOptions = new ProjenStruct(project, {
   name: 'PulumiPythonOptions',
@@ -119,6 +107,38 @@ const pulumiOptions = new ProjenStruct(project, {
     see: 'https://www.npmjs.com/package/semver',
   },
 });
+
+new ProjenStruct(project, { name: 'TypeScriptComponentOptions' })
+  .mixin(Struct.fromFqn('projen.typescript.TypeScriptProjectOptions'))
+  .withoutDeprecated()
+  .omit(
+    'package',
+    'release',
+    'releaseToNpm',
+    'package',
+    'github',
+    'jsiiReleaseVersion',
+    'npmDistTag',
+    'releaseBranches',
+  )
+  .update('entrypoint', {
+    docs: {
+      default: 'src/index.ts',
+    },
+  })
+  .add(githubReleaseTokenProp)
+  .add(gitIdentity)
+  .add({
+    name: 'componentName',
+    type: {
+      primitive: PrimitiveType.String,
+    },
+    optional: true,
+    docs: {
+      default: 'the `moduleName`',
+      summary: 'The name of the pulumi component',
+    },
+  });
 new ProjenStruct(project, { name: 'PythonComponentOptions' })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
   .omit(

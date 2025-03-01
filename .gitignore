@@ -57,4 +57,5 @@ tsconfig.json
 !/.projenrc.ts
 !/src/TagReleaseOptions.ts
 !/src/PulumiPythonOptions.ts
+!/src/TypeScriptComponentOptions.ts
 !/src/PythonComponentOptions.ts

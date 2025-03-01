@@ -1,4 +1,4 @@
-import { Project, SampleDir, SampleFile, YamlFile } from 'projen';
+import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
@@ -146,7 +146,7 @@ export class PythonComponent extends PythonProject {
       });
     }
 
-    const tagRelease = new TagRelease(this, {
+    new TagRelease(this, {
       artifactsDirectory: 'dist',
       branch: 'main',
       task: this.packageTask,
@@ -156,30 +156,6 @@ export class PythonComponent extends PythonProject {
       gitIdentity: options.gitIdentity,
     });
 
-    const project = Project.of(this);
-    const bumpTask = project.tasks.tryFind('bump');
-    bumpTask?.prependExec(
-      `mkdir -p ${tagRelease.artifactsDirectory} && cp ${versionFilePath} ${tagRelease.artifactsDirectory}/`,
-    );
-    project.addGitIgnore(tagRelease.artifactsDirectory);
-    project.packageTask.spawn(
-      project.addTask('dist', {
-        steps: [
-          { exec: `mkdir -p ${tagRelease.artifactsDirectory}` },
-          { exec: `cp ${versionFilePath} ${tagRelease.artifactsDirectory}/` },
-          { exec: `git checkout ${versionFilePath}` },
-        ],
-      }),
-    );
-    if (tagRelease.trigger.changelogPath) {
-      tagRelease.publishTask.prependExec(
-        `cp ${tagRelease.artifactsDirectory}/${versionFilePath} . && git add ${versionFilePath}`,
-      );
-    } else {
-      tagRelease.publishTask.prependExec(
-        `VERSION=$(cat ${tagRelease.artifactsDirectory}/version.txt); cp ${tagRelease.artifactsDirectory}/${versionFilePath} . && git add ${versionFilePath} && git commit -m "chore(release): v$VERSION"`,
-      );
-    }
     new ReleaseWorkflow(this, 'release-workflow');
   }
 }

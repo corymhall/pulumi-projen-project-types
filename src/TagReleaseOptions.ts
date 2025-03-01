@@ -256,9 +256,4 @@ export interface TagReleaseOptions {
    * @default github-actions user
    */
   readonly gitIdentity?: github.GitIdentity;
-  /**
-   * The file to bump the version in. Must be a commit-and-tag-version compatible bump file
-   * @default package.json
-   */
-  readonly bumpFile?: string;
 }
