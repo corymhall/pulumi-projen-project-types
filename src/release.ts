@@ -31,6 +31,9 @@ export class ReleaseWorkflow extends Construct {
       },
       runsOn: ['ubuntu-latest'],
       steps: [
+        // you can't use --repository with --notes-from-tag so you need the
+        // repo cloned
+        WorkflowSteps.checkout({ with: { fetchDepth: 0 } }),
         {
           id: 'release-exists',
           name: 'Verify if release exists',
