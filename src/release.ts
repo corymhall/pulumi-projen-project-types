@@ -133,9 +133,9 @@ export class TagRelease extends ProjenRelease {
     const checkout = WorkflowSteps.checkout({
       with: {
         ref: props.branch,
+        token: props.githubReleaseToken ?? '${{ secrets.GITHUB_TOKEN }}',
       },
     });
-    checkout.with!['persist-credentials'] = false;
     this.addJobs({
       release_git: {
         permissions: {
