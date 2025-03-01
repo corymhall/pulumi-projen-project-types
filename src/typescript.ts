@@ -1,12 +1,16 @@
 import { YamlFile } from 'projen';
-import { TypeScriptProjectOptions } from 'projen/lib/typescript';
+import { ReleaseWorkflow, TagRelease } from './release';
 import { TypeScriptProject } from './typescript-base';
+import { TypeScriptComponentOptions } from './TypeScriptComponentOptions';
 
 export class TypeScriptComponent extends TypeScriptProject {
-  constructor(options: TypeScriptProjectOptions) {
+  constructor(options: TypeScriptComponentOptions) {
     super({
       ...options,
-      entrypoint: 'src/index.ts',
+      release: false,
+      releaseWorkflow: false,
+      entrypoint: options.entrypoint ?? 'src/index.ts',
+      package: false,
     });
 
     this.addDeps('@pulumi/pulumi');
@@ -15,5 +19,20 @@ export class TypeScriptComponent extends TypeScriptProject {
         runtime: 'nodejs',
       },
     });
+
+    const versionFile = this.package.file.path;
+
+    new TagRelease(this, {
+      ...options,
+      artifactsDirectory: this.artifactsDirectory,
+      branch: options.defaultReleaseBranch ?? 'main',
+      versionFile,
+      task: this.packageTask,
+      releaseTrigger: options.releaseTrigger,
+      githubReleaseToken: options.githubReleaseToken,
+      gitIdentity: options.gitIdentity,
+    });
+
+    new ReleaseWorkflow(this, 'github-release');
   }
 }

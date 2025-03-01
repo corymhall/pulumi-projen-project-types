@@ -106,6 +106,30 @@ export class TagRelease extends ProjenRelease {
     const unbumpTask = project.tasks.tryFind('unbump');
     unbumpTask?.reset('echo "nothing to do"');
 
+    const bumpTask = project.tasks.tryFind('bump');
+    bumpTask?.prependExec(
+      `mkdir -p ${this.artifactsDirectory} && cp ${props.versionFile} ${this.artifactsDirectory}/`,
+    );
+    project.addGitIgnore(this.artifactsDirectory);
+    project.packageTask.spawn(
+      project.addTask('dist', {
+        steps: [
+          { exec: `mkdir -p ${this.artifactsDirectory}` },
+          { exec: `cp ${props.versionFile} ${this.artifactsDirectory}/` },
+          { exec: `git checkout ${props.versionFile}` },
+        ],
+      }),
+    );
+    if (this.trigger.changelogPath) {
+      this.publishTask.prependExec(
+        `cp ${this.artifactsDirectory}/${props.versionFile} . && git add ${props.versionFile}`,
+      );
+    } else {
+      this.publishTask.prependExec(
+        `VERSION=$(cat ${this.artifactsDirectory}/version.txt); cp ${this.artifactsDirectory}/${props.versionFile} . && git add ${props.versionFile} && git commit -m "chore(release): v$VERSION"`,
+      );
+    }
+
     const checkout = WorkflowSteps.checkout({
       with: {
         ref: props.branch,
