@@ -17,8 +17,15 @@ export class PythonComponent extends PythonProject {
   public readonly autoMerge?: AutoMerge;
 
   constructor(options: PythonComponentOptions) {
+    // hack to workaround https://github.com/projen/projen/issues/2475
+    const initOptions = options as any;
+    if ('__new__' in initOptions) {
+      initOptions.__new__.args.devDeps = [
+        'hallcor.pulumi-projen-project-types',
+      ];
+    }
     super({
-      ...options,
+      ...initOptions,
       pip: true,
       github: true,
       poetry: false,
