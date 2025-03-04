@@ -1,14 +1,13 @@
 import { YamlFile } from 'projen';
 import { ReleaseWorkflow, TagRelease } from './release';
 import { TypeScriptProject } from './typescript-base';
-import { TypeScriptComponentOptions } from './TypeScriptComponentOptions';
+import { TypeScriptComponentOptions } from './typescript-options';
 
 export class TypeScriptComponent extends TypeScriptProject {
   constructor(options: TypeScriptComponentOptions) {
     super({
       ...options,
       release: false,
-      releaseWorkflow: false,
       entrypoint: options.entrypoint ?? 'src/index.ts',
       package: false,
     });

@@ -57,5 +57,9 @@ tsconfig.json
 !/.projenrc.ts
 !/src/TagReleaseOptions.ts
 !/src/PulumiPythonOptions.ts
-!/src/TypeScriptComponentOptions.ts
+!/src/typescript-options/eslint-options.ts
+!/src/typescript-options/prettier-settings.ts
+!/src/typescript-options/prettier-options.ts
+!/src/typescript-options/project-props.ts
+!/src/typescript-options/component-options.ts
 !/src/PythonComponentOptions.ts

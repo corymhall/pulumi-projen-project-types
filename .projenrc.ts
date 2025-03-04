@@ -108,9 +108,47 @@ const pulumiOptions = new ProjenStruct(project, {
   },
 });
 
-new ProjenStruct(project, { name: 'TypeScriptComponentOptions' })
+const eslintOptions = new ProjenStruct(project, {
+  name: 'EslintOptions',
+  filePath: 'src/typescript-options/eslint-options.ts',
+})
+  .mixin(Struct.fromFqn('projen.javascript.EslintOptions'))
+  .update('dirs', { docs: { default: 'src' } })
+  .update('prettier', { docs: { default: 'true' } });
+
+const prettierSettings = new ProjenStruct(project, {
+  name: 'PrettierSettings',
+  filePath: 'src/typescript-options/prettier-settings.ts',
+})
+  .mixin(Struct.fromFqn('projen.javascript.PrettierSettings'))
+  .update('singleQuote', { docs: { default: 'true' } });
+
+const prettierOptions = new ProjenStruct(project, {
+  name: 'PrettierOptions',
+  filePath: 'src/typescript-options/prettier-options.ts',
+})
+  .mixin(Struct.fromFqn('projen.javascript.PrettierOptions'))
+  .update('settings', { type: prettierSettings });
+
+const tsProps = new ProjenStruct(project, {
+  name: 'TypeScriptProjectProps',
+  filePath: 'src/typescript-options/project-props.ts',
+})
   .mixin(Struct.fromFqn('projen.typescript.TypeScriptProjectOptions'))
   .withoutDeprecated()
+  .update('eslintOptions', {
+    type: eslintOptions,
+  })
+  .update('prettierOptions', {
+    type: prettierOptions,
+  })
+  .update('prettier', { docs: { default: 'true' } });
+
+new ProjenStruct(project, {
+  name: 'TypeScriptComponentOptions',
+  filePath: 'src/typescript-options/component-options.ts',
+})
+  .mixin(tsProps)
   .omit(
     'package',
     'release',
@@ -139,6 +177,7 @@ new ProjenStruct(project, { name: 'TypeScriptComponentOptions' })
       summary: 'The name of the pulumi component',
     },
   });
+
 new ProjenStruct(project, { name: 'PythonComponentOptions' })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
   .omit(

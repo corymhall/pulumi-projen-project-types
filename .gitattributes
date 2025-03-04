@@ -28,5 +28,9 @@
 /src/PulumiPythonOptions.ts linguist-generated
 /src/PythonComponentOptions.ts linguist-generated
 /src/TagReleaseOptions.ts linguist-generated
-/src/TypeScriptComponentOptions.ts linguist-generated
+/src/typescript-options/component-options.ts linguist-generated
+/src/typescript-options/eslint-options.ts linguist-generated
+/src/typescript-options/prettier-options.ts linguist-generated
+/src/typescript-options/prettier-settings.ts linguist-generated
+/src/typescript-options/project-props.ts linguist-generated
 /tsconfig.dev.json linguist-generated

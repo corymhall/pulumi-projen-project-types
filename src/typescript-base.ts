@@ -1,12 +1,10 @@
 import { JsonPatch } from 'projen';
 import { Transform } from 'projen/lib/javascript';
-import {
-  TypeScriptProject as ProjenTypeScriptProject,
-  TypeScriptProjectOptions,
-} from 'projen/lib/typescript';
+import { TypeScriptProject as ProjenTypeScriptProject } from 'projen/lib/typescript';
+import { TypeScriptProjectProps } from './typescript-options';
 
 export class TypeScriptProject extends ProjenTypeScriptProject {
-  constructor(options: TypeScriptProjectOptions) {
+  constructor(options: TypeScriptProjectProps) {
     super({
       prettier: true,
       prettierOptions: {
@@ -19,7 +17,6 @@ export class TypeScriptProject extends ProjenTypeScriptProject {
         prettier: options.prettier ?? true,
         ...options.eslintOptions,
       },
-      packageManager: options.packageManager,
       jestOptions: {
         configFilePath: 'jest.config.json',
       },
@@ -32,9 +29,6 @@ export class TypeScriptProject extends ProjenTypeScriptProject {
         '^.+\\.(t|j)sx?$': new Transform('@swc/jest'),
       }),
     );
-    // const jestConfig = this.tryFindObjectFile('jest.config.json');
-    // jestConfig?.patch(JsonPatch.remove('/preset'));
-    // jestConfig?.patch(JsonPatch.remove('/globals'));
 
     this.addDevDeps('@swc/core', '@swc/jest');
   }

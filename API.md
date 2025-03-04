@@ -2901,18 +2901,18 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 ```typescript
 import { TypeScriptProject } from '@hallcor/pulumi-projen-project-types'
 
-new TypeScriptProject(options: TypeScriptProjectOptions)
+new TypeScriptProject(options: TypeScriptProjectProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProject.Initializer.parameter.options">options</a></code> | <code>projen.typescript.TypeScriptProjectOptions</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProject.Initializer.parameter.options">options</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps">TypeScriptProjectProps</a></code> | *No description.* |
 
 ---
 
 ##### `options`<sup>Required</sup> <a name="options" id="@hallcor/pulumi-projen-project-types.TypeScriptProject.Initializer.parameter.options"></a>
 
-- *Type:* projen.typescript.TypeScriptProjectOptions
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps">TypeScriptProjectProps</a>
 
 ---
 
@@ -4401,6 +4401,706 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
+### EslintOptions <a name="EslintOptions" id="@hallcor/pulumi-projen-project-types.EslintOptions"></a>
+
+EslintOptions.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.EslintOptions.Initializer"></a>
+
+```typescript
+import { EslintOptions } from '@hallcor/pulumi-projen-project-types'
+
+const eslintOptions: EslintOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.dirs">dirs</a></code> | <code>string[]</code> | Files or glob patterns or directories with source files to lint (e.g. [ "src" ]). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.aliasExtensions">aliasExtensions</a></code> | <code>string[]</code> | Enable import alias for module paths. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.aliasMap">aliasMap</a></code> | <code>{[ key: string ]: string}</code> | Enable import alias for module paths. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.commandOptions">commandOptions</a></code> | <code>projen.javascript.EslintCommandOptions</code> | Options for eslint command executed by eslint task. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.devdirs">devdirs</a></code> | <code>string[]</code> | Files or glob patterns or directories with source files that include tests and build tools. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.fileExtensions">fileExtensions</a></code> | <code>string[]</code> | File types that should be linted (e.g. [ ".js", ".ts" ]). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.ignorePatterns">ignorePatterns</a></code> | <code>string[]</code> | List of file patterns that should not be linted, using the same syntax as .gitignore patterns. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.lintProjenRc">lintProjenRc</a></code> | <code>boolean</code> | Should we lint .projenrc.js. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.lintProjenRcFile">lintProjenRcFile</a></code> | <code>string</code> | Projenrc file to lint. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Enable prettier for code formatting. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.sortExtends">sortExtends</a></code> | <code>projen.ICompareString</code> | The extends array in eslint is order dependent. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.tsAlwaysTryTypes">tsAlwaysTryTypes</a></code> | <code>boolean</code> | Always try to resolve types under `<root>@types` directory even it doesn't contain any source code. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.tsconfigPath">tsconfigPath</a></code> | <code>string</code> | Path to `tsconfig.json` which should be used by eslint. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions.property.yaml">yaml</a></code> | <code>boolean</code> | Write eslint configuration as YAML instead of JSON. |
+
+---
+
+##### `dirs`<sup>Required</sup> <a name="dirs" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.dirs"></a>
+
+```typescript
+public readonly dirs: string[];
+```
+
+- *Type:* string[]
+- *Default:* src
+
+Files or glob patterns or directories with source files to lint (e.g. [ "src" ]).
+
+---
+
+##### `aliasExtensions`<sup>Optional</sup> <a name="aliasExtensions" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.aliasExtensions"></a>
+
+```typescript
+public readonly aliasExtensions: string[];
+```
+
+- *Type:* string[]
+- *Default:* undefined
+
+Enable import alias for module paths.
+
+---
+
+##### `aliasMap`<sup>Optional</sup> <a name="aliasMap" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.aliasMap"></a>
+
+```typescript
+public readonly aliasMap: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* undefined
+
+Enable import alias for module paths.
+
+---
+
+##### `commandOptions`<sup>Optional</sup> <a name="commandOptions" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.commandOptions"></a>
+
+```typescript
+public readonly commandOptions: EslintCommandOptions;
+```
+
+- *Type:* projen.javascript.EslintCommandOptions
+
+Options for eslint command executed by eslint task.
+
+---
+
+##### `devdirs`<sup>Optional</sup> <a name="devdirs" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.devdirs"></a>
+
+```typescript
+public readonly devdirs: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Files or glob patterns or directories with source files that include tests and build tools.
+
+These sources are linted but may also import packages from `devDependencies`.
+
+---
+
+##### `fileExtensions`<sup>Optional</sup> <a name="fileExtensions" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.fileExtensions"></a>
+
+```typescript
+public readonly fileExtensions: string[];
+```
+
+- *Type:* string[]
+- *Default:* [".ts"]
+
+File types that should be linted (e.g. [ ".js", ".ts" ]).
+
+---
+
+##### `ignorePatterns`<sup>Optional</sup> <a name="ignorePatterns" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.ignorePatterns"></a>
+
+```typescript
+public readonly ignorePatterns: string[];
+```
+
+- *Type:* string[]
+- *Default:* [ '*.js', '*.d.ts', 'node_modules/', '*.generated.ts', 'coverage' ]
+
+List of file patterns that should not be linted, using the same syntax as .gitignore patterns.
+
+---
+
+##### ~~`lintProjenRc`~~<sup>Optional</sup> <a name="lintProjenRc" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.lintProjenRc"></a>
+
+- *Deprecated:* set to `false` to remove any automatic rules and add manually
+
+```typescript
+public readonly lintProjenRc: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Should we lint .projenrc.js.
+
+---
+
+##### ~~`lintProjenRcFile`~~<sup>Optional</sup> <a name="lintProjenRcFile" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.lintProjenRcFile"></a>
+
+- *Deprecated:* provide as `devdirs`
+
+```typescript
+public readonly lintProjenRcFile: string;
+```
+
+- *Type:* string
+- *Default:* "projenrc.js"
+
+Projenrc file to lint.
+
+Use empty string to disable.
+
+---
+
+##### `prettier`<sup>Optional</sup> <a name="prettier" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.prettier"></a>
+
+```typescript
+public readonly prettier: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable prettier for code formatting.
+
+---
+
+##### `sortExtends`<sup>Optional</sup> <a name="sortExtends" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.sortExtends"></a>
+
+```typescript
+public readonly sortExtends: ICompareString;
+```
+
+- *Type:* projen.ICompareString
+- *Default:* Use known ESLint best practices to place "prettier" plugins at the end of the array
+
+The extends array in eslint is order dependent.
+
+This option allows to sort the extends array in any way seen fit.
+
+---
+
+##### `tsAlwaysTryTypes`<sup>Optional</sup> <a name="tsAlwaysTryTypes" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.tsAlwaysTryTypes"></a>
+
+```typescript
+public readonly tsAlwaysTryTypes: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Always try to resolve types under `<root>@types` directory even it doesn't contain any source code.
+
+This prevents `import/no-unresolved` eslint errors when importing a `@types/*` module that would otherwise remain unresolved.
+
+---
+
+##### `tsconfigPath`<sup>Optional</sup> <a name="tsconfigPath" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.tsconfigPath"></a>
+
+```typescript
+public readonly tsconfigPath: string;
+```
+
+- *Type:* string
+- *Default:* "./tsconfig.json"
+
+Path to `tsconfig.json` which should be used by eslint.
+
+---
+
+##### `yaml`<sup>Optional</sup> <a name="yaml" id="@hallcor/pulumi-projen-project-types.EslintOptions.property.yaml"></a>
+
+```typescript
+public readonly yaml: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Write eslint configuration as YAML instead of JSON.
+
+---
+
+### PrettierOptions <a name="PrettierOptions" id="@hallcor/pulumi-projen-project-types.PrettierOptions"></a>
+
+PrettierOptions.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PrettierOptions.Initializer"></a>
+
+```typescript
+import { PrettierOptions } from '@hallcor/pulumi-projen-project-types'
+
+const prettierOptions: PrettierOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions.property.ignoreFile">ignoreFile</a></code> | <code>boolean</code> | Defines an .prettierIgnore file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions.property.ignoreFileOptions">ignoreFileOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .prettierignore file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions.property.overrides">overrides</a></code> | <code>projen.javascript.PrettierOverride[]</code> | Provide a list of patterns to override prettier configuration. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions.property.settings">settings</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings">PrettierSettings</a></code> | Prettier settings. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions.property.yaml">yaml</a></code> | <code>boolean</code> | Write prettier configuration as YAML instead of JSON. |
+
+---
+
+##### `ignoreFile`<sup>Optional</sup> <a name="ignoreFile" id="@hallcor/pulumi-projen-project-types.PrettierOptions.property.ignoreFile"></a>
+
+```typescript
+public readonly ignoreFile: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Defines an .prettierIgnore file.
+
+---
+
+##### `ignoreFileOptions`<sup>Optional</sup> <a name="ignoreFileOptions" id="@hallcor/pulumi-projen-project-types.PrettierOptions.property.ignoreFileOptions"></a>
+
+```typescript
+public readonly ignoreFileOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .prettierignore file.
+
+---
+
+##### `overrides`<sup>Optional</sup> <a name="overrides" id="@hallcor/pulumi-projen-project-types.PrettierOptions.property.overrides"></a>
+
+```typescript
+public readonly overrides: PrettierOverride[];
+```
+
+- *Type:* projen.javascript.PrettierOverride[]
+- *Default:* []
+
+Provide a list of patterns to override prettier configuration.
+
+---
+
+##### `settings`<sup>Optional</sup> <a name="settings" id="@hallcor/pulumi-projen-project-types.PrettierOptions.property.settings"></a>
+
+```typescript
+public readonly settings: PrettierSettings;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PrettierSettings">PrettierSettings</a>
+- *Default:* default settings
+
+Prettier settings.
+
+---
+
+##### `yaml`<sup>Optional</sup> <a name="yaml" id="@hallcor/pulumi-projen-project-types.PrettierOptions.property.yaml"></a>
+
+```typescript
+public readonly yaml: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Write prettier configuration as YAML instead of JSON.
+
+---
+
+### PrettierSettings <a name="PrettierSettings" id="@hallcor/pulumi-projen-project-types.PrettierSettings"></a>
+
+PrettierSettings.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PrettierSettings.Initializer"></a>
+
+```typescript
+import { PrettierSettings } from '@hallcor/pulumi-projen-project-types'
+
+const prettierSettings: PrettierSettings = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.arrowParens">arrowParens</a></code> | <code>projen.javascript.ArrowParens</code> | Include parentheses around a sole arrow function parameter. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.bracketSameLine">bracketSameLine</a></code> | <code>boolean</code> | Put > of opening tags on the last line instead of on a new line. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.bracketSpacing">bracketSpacing</a></code> | <code>boolean</code> | Print spaces between brackets. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.cursorOffset">cursorOffset</a></code> | <code>number</code> | Print (to stderr) where a cursor at the given position would move to after formatting. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.embeddedLanguageFormatting">embeddedLanguageFormatting</a></code> | <code>projen.javascript.EmbeddedLanguageFormatting</code> | Control how Prettier formats quoted code embedded in the file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.endOfLine">endOfLine</a></code> | <code>projen.javascript.EndOfLine</code> | Which end of line characters to apply. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.filepath">filepath</a></code> | <code>string</code> | Specify the input filepath. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.htmlWhitespaceSensitivity">htmlWhitespaceSensitivity</a></code> | <code>projen.javascript.HTMLWhitespaceSensitivity</code> | How to handle whitespaces in HTML. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.insertPragma">insertPragma</a></code> | <code>boolean</code> | Insert. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.jsxSingleQuote">jsxSingleQuote</a></code> | <code>boolean</code> | Use single quotes in JSX. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.parser">parser</a></code> | <code>string</code> | Which parser to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.plugins">plugins</a></code> | <code>string[]</code> | Add a plugin. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.pluginSearchDirs">pluginSearchDirs</a></code> | <code>string[]</code> | Custom directory that contains prettier plugins in node_modules subdirectory. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.printWidth">printWidth</a></code> | <code>number</code> | The line length where Prettier will try wrap. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.proseWrap">proseWrap</a></code> | <code>projen.javascript.ProseWrap</code> | How to wrap prose. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.quoteProps">quoteProps</a></code> | <code>projen.javascript.QuoteProps</code> | Change when properties in objects are quoted. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.rangeEnd">rangeEnd</a></code> | <code>number</code> | Format code ending at a given character offset (exclusive). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.rangeStart">rangeStart</a></code> | <code>number</code> | Format code starting at a given character offset. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.requirePragma">requirePragma</a></code> | <code>boolean</code> | Require either '@prettier' or '@format' to be present in the file's first docblock comment in order for it to be formatted. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.semi">semi</a></code> | <code>boolean</code> | Print semicolons. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.singleQuote">singleQuote</a></code> | <code>boolean</code> | Use single quotes instead of double quotes. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.tabWidth">tabWidth</a></code> | <code>number</code> | Number of spaces per indentation level. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.trailingComma">trailingComma</a></code> | <code>projen.javascript.TrailingComma</code> | Print trailing commas wherever possible when multi-line. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.useTabs">useTabs</a></code> | <code>boolean</code> | Indent with tabs instead of spaces. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PrettierSettings.property.vueIndentScriptAndStyle">vueIndentScriptAndStyle</a></code> | <code>boolean</code> | Indent script and style tags in Vue files. |
+
+---
+
+##### `arrowParens`<sup>Optional</sup> <a name="arrowParens" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.arrowParens"></a>
+
+```typescript
+public readonly arrowParens: ArrowParens;
+```
+
+- *Type:* projen.javascript.ArrowParens
+- *Default:* ArrowParens.ALWAYS
+
+Include parentheses around a sole arrow function parameter.
+
+---
+
+##### `bracketSameLine`<sup>Optional</sup> <a name="bracketSameLine" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.bracketSameLine"></a>
+
+```typescript
+public readonly bracketSameLine: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Put > of opening tags on the last line instead of on a new line.
+
+---
+
+##### `bracketSpacing`<sup>Optional</sup> <a name="bracketSpacing" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.bracketSpacing"></a>
+
+```typescript
+public readonly bracketSpacing: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Print spaces between brackets.
+
+---
+
+##### `cursorOffset`<sup>Optional</sup> <a name="cursorOffset" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.cursorOffset"></a>
+
+```typescript
+public readonly cursorOffset: number;
+```
+
+- *Type:* number
+- *Default:* 1
+
+Print (to stderr) where a cursor at the given position would move to after formatting.
+
+This option cannot be used with --range-start and --range-end.
+
+---
+
+##### `embeddedLanguageFormatting`<sup>Optional</sup> <a name="embeddedLanguageFormatting" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.embeddedLanguageFormatting"></a>
+
+```typescript
+public readonly embeddedLanguageFormatting: EmbeddedLanguageFormatting;
+```
+
+- *Type:* projen.javascript.EmbeddedLanguageFormatting
+- *Default:* EmbeddedLanguageFormatting.AUTO
+
+Control how Prettier formats quoted code embedded in the file.
+
+---
+
+##### `endOfLine`<sup>Optional</sup> <a name="endOfLine" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.endOfLine"></a>
+
+```typescript
+public readonly endOfLine: EndOfLine;
+```
+
+- *Type:* projen.javascript.EndOfLine
+- *Default:* EndOfLine.LF
+
+Which end of line characters to apply.
+
+---
+
+##### `filepath`<sup>Optional</sup> <a name="filepath" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.filepath"></a>
+
+```typescript
+public readonly filepath: string;
+```
+
+- *Type:* string
+- *Default:* none
+
+Specify the input filepath.
+
+This will be used to do parser inference.
+
+---
+
+##### `htmlWhitespaceSensitivity`<sup>Optional</sup> <a name="htmlWhitespaceSensitivity" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.htmlWhitespaceSensitivity"></a>
+
+```typescript
+public readonly htmlWhitespaceSensitivity: HTMLWhitespaceSensitivity;
+```
+
+- *Type:* projen.javascript.HTMLWhitespaceSensitivity
+- *Default:* HTMLWhitespaceSensitivity.CSS
+
+How to handle whitespaces in HTML.
+
+---
+
+##### `insertPragma`<sup>Optional</sup> <a name="insertPragma" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.insertPragma"></a>
+
+```typescript
+public readonly insertPragma: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Insert.
+
+---
+
+##### `jsxSingleQuote`<sup>Optional</sup> <a name="jsxSingleQuote" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.jsxSingleQuote"></a>
+
+```typescript
+public readonly jsxSingleQuote: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use single quotes in JSX.
+
+---
+
+##### `parser`<sup>Optional</sup> <a name="parser" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.parser"></a>
+
+```typescript
+public readonly parser: string;
+```
+
+- *Type:* string
+- *Default:* Prettier automatically infers the parser from the input file path, so you shouldn’t have to change this setting.
+
+Which parser to use.
+
+---
+
+##### `plugins`<sup>Optional</sup> <a name="plugins" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.plugins"></a>
+
+```typescript
+public readonly plugins: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Add a plugin.
+
+Multiple plugins can be passed as separate `--plugin`s.
+
+---
+
+##### `pluginSearchDirs`<sup>Optional</sup> <a name="pluginSearchDirs" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.pluginSearchDirs"></a>
+
+```typescript
+public readonly pluginSearchDirs: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Custom directory that contains prettier plugins in node_modules subdirectory.
+
+Overrides default behavior when plugins are searched relatively to the location of
+Prettier.
+Multiple values are accepted.
+
+---
+
+##### `printWidth`<sup>Optional</sup> <a name="printWidth" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.printWidth"></a>
+
+```typescript
+public readonly printWidth: number;
+```
+
+- *Type:* number
+- *Default:* 80
+
+The line length where Prettier will try wrap.
+
+---
+
+##### `proseWrap`<sup>Optional</sup> <a name="proseWrap" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.proseWrap"></a>
+
+```typescript
+public readonly proseWrap: ProseWrap;
+```
+
+- *Type:* projen.javascript.ProseWrap
+- *Default:* ProseWrap.PRESERVE
+
+How to wrap prose.
+
+---
+
+##### `quoteProps`<sup>Optional</sup> <a name="quoteProps" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.quoteProps"></a>
+
+```typescript
+public readonly quoteProps: QuoteProps;
+```
+
+- *Type:* projen.javascript.QuoteProps
+- *Default:* QuoteProps.ASNEEDED
+
+Change when properties in objects are quoted.
+
+---
+
+##### `rangeEnd`<sup>Optional</sup> <a name="rangeEnd" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.rangeEnd"></a>
+
+```typescript
+public readonly rangeEnd: number;
+```
+
+- *Type:* number
+- *Default:* null
+
+Format code ending at a given character offset (exclusive).
+
+The range will extend forwards to the end of the selected statement.
+This option cannot be used with --cursor-offset.
+
+---
+
+##### `rangeStart`<sup>Optional</sup> <a name="rangeStart" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.rangeStart"></a>
+
+```typescript
+public readonly rangeStart: number;
+```
+
+- *Type:* number
+- *Default:* 0
+
+Format code starting at a given character offset.
+
+The range will extend backwards to the start of the first line containing the selected
+statement.
+This option cannot be used with --cursor-offset.
+
+---
+
+##### `requirePragma`<sup>Optional</sup> <a name="requirePragma" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.requirePragma"></a>
+
+```typescript
+public readonly requirePragma: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Require either '@prettier' or '@format' to be present in the file's first docblock comment in order for it to be formatted.
+
+---
+
+##### `semi`<sup>Optional</sup> <a name="semi" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.semi"></a>
+
+```typescript
+public readonly semi: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Print semicolons.
+
+---
+
+##### `singleQuote`<sup>Optional</sup> <a name="singleQuote" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.singleQuote"></a>
+
+```typescript
+public readonly singleQuote: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Use single quotes instead of double quotes.
+
+---
+
+##### `tabWidth`<sup>Optional</sup> <a name="tabWidth" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.tabWidth"></a>
+
+```typescript
+public readonly tabWidth: number;
+```
+
+- *Type:* number
+- *Default:* 2
+
+Number of spaces per indentation level.
+
+---
+
+##### `trailingComma`<sup>Optional</sup> <a name="trailingComma" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.trailingComma"></a>
+
+```typescript
+public readonly trailingComma: TrailingComma;
+```
+
+- *Type:* projen.javascript.TrailingComma
+- *Default:* TrailingComma.ES5
+
+Print trailing commas wherever possible when multi-line.
+
+---
+
+##### `useTabs`<sup>Optional</sup> <a name="useTabs" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.useTabs"></a>
+
+```typescript
+public readonly useTabs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Indent with tabs instead of spaces.
+
+---
+
+##### `vueIndentScriptAndStyle`<sup>Optional</sup> <a name="vueIndentScriptAndStyle" id="@hallcor/pulumi-projen-project-types.PrettierSettings.property.vueIndentScriptAndStyle"></a>
+
+```typescript
+public readonly vueIndentScriptAndStyle: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Indent script and style tags in Vue files.
+
+---
+
 ### PulumiPythonOptions <a name="PulumiPythonOptions" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions"></a>
 
 PulumiPythonOptions.
@@ -5879,7 +6579,7 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.entrypoint">entrypoint</a></code> | <code>string</code> | Module entrypoint (`main` in `package.json`). Set to an empty string to not include `main` in your package.json. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.entrypointTypes">entrypointTypes</a></code> | <code>string</code> | The .d.ts file that includes the type declarations for this module. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.eslint">eslint</a></code> | <code>boolean</code> | Setup eslint. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.eslintOptions">eslintOptions</a></code> | <code>projen.javascript.EslintOptions</code> | Eslint options. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.eslintOptions">eslintOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions">EslintOptions</a></code> | Eslint options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.githubReleaseToken">githubReleaseToken</a></code> | <code>string</code> | The GitHub Token to use when pushing the tag commit Note: if you use the default `${{ secrets.GITHUB_TOKEN }}` then the Push/Tag will not trigger any other workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.gitIdentity">gitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows. |
@@ -5916,7 +6616,7 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.postBuildSteps">postBuildSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Steps to execute after build as part of the release workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.prettierOptions">prettierOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions">PrettierOptions</a></code> | Prettier options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenDevDependency">projenDevDependency</a></code> | <code>boolean</code> | Indicates of "projen" should be installed as a devDependency. |
@@ -6618,7 +7318,7 @@ Setup eslint.
 public readonly eslintOptions: EslintOptions;
 ```
 
-- *Type:* projen.javascript.EslintOptions
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.EslintOptions">EslintOptions</a>
 - *Default:* opinionated default options
 
 Eslint options.
@@ -7152,7 +7852,7 @@ public readonly prettier: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
+- *Default:* true
 
 Setup prettier.
 
@@ -7164,7 +7864,7 @@ Setup prettier.
 public readonly prettierOptions: PrettierOptions;
 ```
 
-- *Type:* projen.javascript.PrettierOptions
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PrettierOptions">PrettierOptions</a>
 - *Default:* default options
 
 Prettier options.
@@ -7810,6 +8510,2079 @@ Github Runner Group selection options.
 ---
 
 ##### `yarnBerryOptions`<sup>Optional</sup> <a name="yarnBerryOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.yarnBerryOptions"></a>
+
+```typescript
+public readonly yarnBerryOptions: YarnBerryOptions;
+```
+
+- *Type:* projen.javascript.YarnBerryOptions
+- *Default:* Yarn Berry v4 with all default options
+
+Options for Yarn Berry.
+
+---
+
+### TypeScriptProjectProps <a name="TypeScriptProjectProps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps"></a>
+
+TypeScriptProjectProps.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.Initializer"></a>
+
+```typescript
+import { TypeScriptProjectProps } from '@hallcor/pulumi-projen-project-types'
+
+const typeScriptProjectProps: TypeScriptProjectProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.name">name</a></code> | <code>string</code> | This is the name of your project. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | Allow the project to include `peerDependencies` and `bundledDependencies`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorUrl">authorUrl</a></code> | <code>string</code> | Author's URL / Website. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoDetectBin">autoDetectBin</a></code> | <code>boolean</code> | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bin">bin</a></code> | <code>{[ key: string ]: string}</code> | Binary programs vended with your module. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bugsEmail">bugsEmail</a></code> | <code>string</code> | The email address to which issues should be reported. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bugsUrl">bugsUrl</a></code> | <code>string</code> | The url to your project's issue tracker. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bundledDeps">bundledDeps</a></code> | <code>string[]</code> | List of dependencies to bundle into this module. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bunVersion">bunVersion</a></code> | <code>string</code> | The version of Bun to use if using Bun as a package manager. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.deps">deps</a></code> | <code>string[]</code> | Runtime dependencies of this module. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.description">description</a></code> | <code>string</code> | The description is just a string that helps people understand the purpose of the package. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.devContainer">devContainer</a></code> | <code>boolean</code> | Add a VSCode development environment (used for GitHub Codespaces). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.devDeps">devDeps</a></code> | <code>string[]</code> | Build dependencies for this module. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.disableTsconfig">disableTsconfig</a></code> | <code>boolean</code> | Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.disableTsconfigDev">disableTsconfigDev</a></code> | <code>boolean</code> | Do not generate a `tsconfig.dev.json` file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.docgen">docgen</a></code> | <code>boolean</code> | Docgen by Typedoc. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | Docs directory. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.entrypoint">entrypoint</a></code> | <code>string</code> | Module entrypoint (`main` in `package.json`). Set to an empty string to not include `main` in your package.json. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.entrypointTypes">entrypointTypes</a></code> | <code>string</code> | The .d.ts file that includes the type declarations for this module. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.eslint">eslint</a></code> | <code>boolean</code> | Setup eslint. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.eslintOptions">eslintOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.EslintOptions">EslintOptions</a></code> | Eslint options. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitpod">gitpod</a></code> | <code>boolean</code> | Add a Gitpod development environment. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.homepage">homepage</a></code> | <code>string</code> | Package's Homepage / Website. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.jestOptions">jestOptions</a></code> | <code>projen.javascript.JestOptions</code> | Jest options. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.keywords">keywords</a></code> | <code>string[]</code> | Keywords to include in `package.json`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.libdir">libdir</a></code> | <code>string</code> | Typescript  artifacts output directory. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.license">license</a></code> | <code>string</code> | License's SPDX identifier. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.licensed">licensed</a></code> | <code>boolean</code> | Indicates if a license should be added. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.logging">logging</a></code> | <code>projen.LoggerOptions</code> | Configure logging options such as verbosity. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | The maximum node version supported by this package. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.nextVersionCommand">nextVersionCommand</a></code> | <code>string</code> | A shell command to control the next version to release. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmignoreEnabled">npmignoreEnabled</a></code> | <code>boolean</code> | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmIgnoreOptions">npmIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .npmignore file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmProvenance">npmProvenance</a></code> | <code>boolean</code> | Should provenance statements be generated when the package is published. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.peerDeps">peerDeps</a></code> | <code>string[]</code> | Peer dependencies for this module. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.pnpmVersion">pnpmVersion</a></code> | <code>string</code> | The version of PNPM to use if using PNPM as a package manager. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.postBuildSteps">postBuildSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Steps to execute after build as part of the release workflow. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prettierOptions">prettierOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions">PrettierOptions</a></code> | Prettier options. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenDevDependency">projenDevDependency</a></code> | <code>boolean</code> | Indicates of "projen" should be installed as a devDependency. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJs">projenrcJs</a></code> | <code>boolean</code> | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcJsonOptions</code> | Options for .projenrc.json. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJsOptions">projenrcJsOptions</a></code> | <code>projen.javascript.ProjenrcOptions</code> | Options for .projenrc.js. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcTs">projenrcTs</a></code> | <code>boolean</code> | Use TypeScript for your projenrc file (`.projenrc.ts`). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcTsOptions">projenrcTsOptions</a></code> | <code>projen.typescript.ProjenrcOptions</code> | Options for .projenrc.ts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenVersion">projenVersion</a></code> | <code>string</code> | Version of projen to install. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.publishDryRun">publishDryRun</a></code> | <code>boolean</code> | Instead of actually publishing to package managers, just print the publishing command. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.publishTasks">publishTasks</a></code> | <code>boolean</code> | Define publishing tasks that can be executed manually as well as workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.readme">readme</a></code> | <code>projen.SampleReadmeProps</code> | The README setup. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseFailureIssue">releaseFailureIssue</a></code> | <code>boolean</code> | Create a github issue on every failed publishing task. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseFailureIssueLabel">releaseFailureIssueLabel</a></code> | <code>string</code> | The label to apply to issues indicating publish failures. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.repository">repository</a></code> | <code>string</code> | The repository is the location where the actual code for your package lives. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.repositoryDirectory">repositoryDirectory</a></code> | <code>string</code> | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.sampleCode">sampleCode</a></code> | <code>boolean</code> | Generate one-time sample in `src/` and `test/` if there are no files there. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.scopedPackagesOptions">scopedPackagesOptions</a></code> | <code>projen.javascript.ScopedPackagesOptions[]</code> | Options for privately hosted scoped packages. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.srcdir">srcdir</a></code> | <code>string</code> | Typescript sources directory. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name of the development tsconfig.json file. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowBootstrapSteps">workflowBootstrapSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Workflow steps to use in order to bootstrap this repo. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
+
+---
+
+##### `defaultReleaseBranch`<sup>Required</sup> <a name="defaultReleaseBranch" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.defaultReleaseBranch"></a>
+
+```typescript
+public readonly defaultReleaseBranch: string;
+```
+
+- *Type:* string
+- *Default:* "main"
+
+The name of the main release branch.
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+- *Default:* $BASEDIR
+
+This is the name of your project.
+
+---
+
+##### `allowLibraryDependencies`<sup>Optional</sup> <a name="allowLibraryDependencies" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.allowLibraryDependencies"></a>
+
+```typescript
+public readonly allowLibraryDependencies: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Allow the project to include `peerDependencies` and `bundledDependencies`.
+
+This is normally only allowed for libraries. For apps, there's no meaning
+for specifying these.
+
+---
+
+##### `artifactsDirectory`<sup>Optional</sup> <a name="artifactsDirectory" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.artifactsDirectory"></a>
+
+```typescript
+public readonly artifactsDirectory: string;
+```
+
+- *Type:* string
+- *Default:* "dist"
+
+A directory which will contain build artifacts.
+
+---
+
+##### `authorEmail`<sup>Optional</sup> <a name="authorEmail" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorEmail"></a>
+
+```typescript
+public readonly authorEmail: string;
+```
+
+- *Type:* string
+
+Author's e-mail.
+
+---
+
+##### `authorName`<sup>Optional</sup> <a name="authorName" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorName"></a>
+
+```typescript
+public readonly authorName: string;
+```
+
+- *Type:* string
+
+Author's name.
+
+---
+
+##### `authorOrganization`<sup>Optional</sup> <a name="authorOrganization" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorOrganization"></a>
+
+```typescript
+public readonly authorOrganization: boolean;
+```
+
+- *Type:* boolean
+
+Is the author an organization.
+
+---
+
+##### `authorUrl`<sup>Optional</sup> <a name="authorUrl" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorUrl"></a>
+
+```typescript
+public readonly authorUrl: string;
+```
+
+- *Type:* string
+
+Author's URL / Website.
+
+---
+
+##### `autoApproveOptions`<sup>Optional</sup> <a name="autoApproveOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoApproveOptions"></a>
+
+```typescript
+public readonly autoApproveOptions: AutoApproveOptions;
+```
+
+- *Type:* projen.github.AutoApproveOptions
+- *Default:* auto approve is disabled
+
+Enable and configure the 'auto approve' workflow.
+
+---
+
+##### `autoApproveUpgrades`<sup>Optional</sup> <a name="autoApproveUpgrades" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoApproveUpgrades"></a>
+
+```typescript
+public readonly autoApproveUpgrades: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
+
+Throw if set to true but `autoApproveOptions` are not defined.
+
+---
+
+##### `autoDetectBin`<sup>Optional</sup> <a name="autoDetectBin" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoDetectBin"></a>
+
+```typescript
+public readonly autoDetectBin: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section.
+
+---
+
+##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoMerge"></a>
+
+```typescript
+public readonly autoMerge: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable automatic merging on GitHub.
+
+Has no effect if `github.mergify`
+is set to false.
+
+---
+
+##### `autoMergeOptions`<sup>Optional</sup> <a name="autoMergeOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.autoMergeOptions"></a>
+
+```typescript
+public readonly autoMergeOptions: AutoMergeOptions;
+```
+
+- *Type:* projen.github.AutoMergeOptions
+- *Default:* see defaults in `AutoMergeOptions`
+
+Configure options for automatic merging on GitHub.
+
+Has no effect if
+`github.mergify` or `autoMerge` is set to false.
+
+---
+
+##### `bin`<sup>Optional</sup> <a name="bin" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bin"></a>
+
+```typescript
+public readonly bin: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+
+Binary programs vended with your module.
+
+You can use this option to add/customize how binaries are represented in
+your `package.json`, but unless `autoDetectBin` is `false`, every
+executable file under `bin` will automatically be added to this section.
+
+---
+
+##### `bugsEmail`<sup>Optional</sup> <a name="bugsEmail" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bugsEmail"></a>
+
+```typescript
+public readonly bugsEmail: string;
+```
+
+- *Type:* string
+
+The email address to which issues should be reported.
+
+---
+
+##### `bugsUrl`<sup>Optional</sup> <a name="bugsUrl" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bugsUrl"></a>
+
+```typescript
+public readonly bugsUrl: string;
+```
+
+- *Type:* string
+
+The url to your project's issue tracker.
+
+---
+
+##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.buildWorkflow"></a>
+
+```typescript
+public readonly buildWorkflow: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if not a subproject
+
+Define a GitHub workflow for building PRs.
+
+---
+
+##### `buildWorkflowOptions`<sup>Optional</sup> <a name="buildWorkflowOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.buildWorkflowOptions"></a>
+
+```typescript
+public readonly buildWorkflowOptions: BuildWorkflowOptions;
+```
+
+- *Type:* projen.javascript.BuildWorkflowOptions
+
+Options for PR build workflow.
+
+---
+
+##### `bumpPackage`<sup>Optional</sup> <a name="bumpPackage" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bumpPackage"></a>
+
+```typescript
+public readonly bumpPackage: string;
+```
+
+- *Type:* string
+- *Default:* A recent version of "commit-and-tag-version"
+
+The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string.
+
+This can be any compatible package version, including the deprecated `standard-version@9`.
+
+---
+
+##### `bundledDeps`<sup>Optional</sup> <a name="bundledDeps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bundledDeps"></a>
+
+```typescript
+public readonly bundledDeps: string[];
+```
+
+- *Type:* string[]
+
+List of dependencies to bundle into this module.
+
+These modules will be
+added both to the `dependencies` section and `bundledDependencies` section of
+your `package.json`.
+
+The recommendation is to only specify the module name here (e.g.
+`express`). This will behave similar to `yarn add` or `npm install` in the
+sense that it will add the module as a dependency to your `package.json`
+file with the latest version (`^`). You can specify semver requirements in
+the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and
+this will be what you `package.json` will eventually include.
+
+---
+
+##### `bundlerOptions`<sup>Optional</sup> <a name="bundlerOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bundlerOptions"></a>
+
+```typescript
+public readonly bundlerOptions: BundlerOptions;
+```
+
+- *Type:* projen.javascript.BundlerOptions
+
+Options for `Bundler`.
+
+---
+
+##### `bunVersion`<sup>Optional</sup> <a name="bunVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.bunVersion"></a>
+
+```typescript
+public readonly bunVersion: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+The version of Bun to use if using Bun as a package manager.
+
+---
+
+##### `checkLicenses`<sup>Optional</sup> <a name="checkLicenses" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.checkLicenses"></a>
+
+```typescript
+public readonly checkLicenses: LicenseCheckerOptions;
+```
+
+- *Type:* projen.javascript.LicenseCheckerOptions
+- *Default:* no license checks are run during the build and all licenses will be accepted
+
+Configure which licenses should be deemed acceptable for use by dependencies.
+
+This setting will cause the build to fail, if any prohibited or not allowed licenses ares encountered.
+
+---
+
+##### `clobber`<sup>Optional</sup> <a name="clobber" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.clobber"></a>
+
+```typescript
+public readonly clobber: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true, but false for subprojects
+
+Add a `clobber` task which resets the repo to origin.
+
+---
+
+##### `codeArtifactOptions`<sup>Optional</sup> <a name="codeArtifactOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.codeArtifactOptions"></a>
+
+```typescript
+public readonly codeArtifactOptions: CodeArtifactOptions;
+```
+
+- *Type:* projen.javascript.CodeArtifactOptions
+- *Default:* undefined
+
+Options for npm packages using AWS CodeArtifact.
+
+This is required if publishing packages to, or installing scoped packages from AWS CodeArtifact
+
+---
+
+##### `codeCov`<sup>Optional</sup> <a name="codeCov" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.codeCov"></a>
+
+```typescript
+public readonly codeCov: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`.
+
+---
+
+##### `codeCovTokenSecret`<sup>Optional</sup> <a name="codeCovTokenSecret" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.codeCovTokenSecret"></a>
+
+```typescript
+public readonly codeCovTokenSecret: string;
+```
+
+- *Type:* string
+- *Default:* if this option is not specified, only public repositories are supported
+
+Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories.
+
+---
+
+##### `commitGenerated`<sup>Optional</sup> <a name="commitGenerated" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.commitGenerated"></a>
+
+```typescript
+public readonly commitGenerated: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Whether to commit the managed files by default.
+
+---
+
+##### `copyrightOwner`<sup>Optional</sup> <a name="copyrightOwner" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.copyrightOwner"></a>
+
+```typescript
+public readonly copyrightOwner: string;
+```
+
+- *Type:* string
+- *Default:* defaults to the value of authorName or "" if `authorName` is undefined.
+
+License copyright owner.
+
+---
+
+##### `copyrightPeriod`<sup>Optional</sup> <a name="copyrightPeriod" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.copyrightPeriod"></a>
+
+```typescript
+public readonly copyrightPeriod: string;
+```
+
+- *Type:* string
+- *Default:* current year
+
+The copyright years to put in the LICENSE file.
+
+---
+
+##### `dependabot`<sup>Optional</sup> <a name="dependabot" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.dependabot"></a>
+
+```typescript
+public readonly dependabot: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use dependabot to handle dependency upgrades.
+
+Cannot be used in conjunction with `depsUpgrade`.
+
+---
+
+##### `dependabotOptions`<sup>Optional</sup> <a name="dependabotOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.dependabotOptions"></a>
+
+```typescript
+public readonly dependabotOptions: DependabotOptions;
+```
+
+- *Type:* projen.github.DependabotOptions
+- *Default:* default options
+
+Options for dependabot.
+
+---
+
+##### `deps`<sup>Optional</sup> <a name="deps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.deps"></a>
+
+```typescript
+public readonly deps: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Runtime dependencies of this module.
+
+The recommendation is to only specify the module name here (e.g.
+`express`). This will behave similar to `yarn add` or `npm install` in the
+sense that it will add the module as a dependency to your `package.json`
+file with the latest version (`^`). You can specify semver requirements in
+the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and
+this will be what you `package.json` will eventually include.
+
+---
+
+##### `depsUpgrade`<sup>Optional</sup> <a name="depsUpgrade" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.depsUpgrade"></a>
+
+```typescript
+public readonly depsUpgrade: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Use tasks and github workflows to handle dependency upgrades.
+
+Cannot be used in conjunction with `dependabot`.
+
+---
+
+##### `depsUpgradeOptions`<sup>Optional</sup> <a name="depsUpgradeOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.depsUpgradeOptions"></a>
+
+```typescript
+public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
+```
+
+- *Type:* projen.javascript.UpgradeDependenciesOptions
+- *Default:* default options
+
+Options for `UpgradeDependencies`.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+
+The description is just a string that helps people understand the purpose of the package.
+
+It can be used when searching for packages in a package manager as well.
+See https://classic.yarnpkg.com/en/docs/package-json/#toc-description
+
+---
+
+##### `devContainer`<sup>Optional</sup> <a name="devContainer" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.devContainer"></a>
+
+```typescript
+public readonly devContainer: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Add a VSCode development environment (used for GitHub Codespaces).
+
+---
+
+##### `devDeps`<sup>Optional</sup> <a name="devDeps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.devDeps"></a>
+
+```typescript
+public readonly devDeps: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Build dependencies for this module.
+
+These dependencies will only be
+available in your build environment but will not be fetched when this
+module is consumed.
+
+The recommendation is to only specify the module name here (e.g.
+`express`). This will behave similar to `yarn add` or `npm install` in the
+sense that it will add the module as a dependency to your `package.json`
+file with the latest version (`^`). You can specify semver requirements in
+the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and
+this will be what you `package.json` will eventually include.
+
+---
+
+##### `disableTsconfig`<sup>Optional</sup> <a name="disableTsconfig" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.disableTsconfig"></a>
+
+```typescript
+public readonly disableTsconfig: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler).
+
+---
+
+##### `disableTsconfigDev`<sup>Optional</sup> <a name="disableTsconfigDev" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.disableTsconfigDev"></a>
+
+```typescript
+public readonly disableTsconfigDev: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Do not generate a `tsconfig.dev.json` file.
+
+---
+
+##### `docgen`<sup>Optional</sup> <a name="docgen" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.docgen"></a>
+
+```typescript
+public readonly docgen: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Docgen by Typedoc.
+
+---
+
+##### `docsDirectory`<sup>Optional</sup> <a name="docsDirectory" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.docsDirectory"></a>
+
+```typescript
+public readonly docsDirectory: string;
+```
+
+- *Type:* string
+- *Default:* "docs"
+
+Docs directory.
+
+---
+
+##### `entrypoint`<sup>Optional</sup> <a name="entrypoint" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.entrypoint"></a>
+
+```typescript
+public readonly entrypoint: string;
+```
+
+- *Type:* string
+- *Default:* "lib/index.js"
+
+Module entrypoint (`main` in `package.json`). Set to an empty string to not include `main` in your package.json.
+
+---
+
+##### `entrypointTypes`<sup>Optional</sup> <a name="entrypointTypes" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.entrypointTypes"></a>
+
+```typescript
+public readonly entrypointTypes: string;
+```
+
+- *Type:* string
+- *Default:* .d.ts file derived from the project's entrypoint (usually lib/index.d.ts)
+
+The .d.ts file that includes the type declarations for this module.
+
+---
+
+##### `eslint`<sup>Optional</sup> <a name="eslint" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.eslint"></a>
+
+```typescript
+public readonly eslint: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Setup eslint.
+
+---
+
+##### `eslintOptions`<sup>Optional</sup> <a name="eslintOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.eslintOptions"></a>
+
+```typescript
+public readonly eslintOptions: EslintOptions;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.EslintOptions">EslintOptions</a>
+- *Default:* opinionated default options
+
+Eslint options.
+
+---
+
+##### `github`<sup>Optional</sup> <a name="github" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.github"></a>
+
+```typescript
+public readonly github: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable GitHub integration.
+
+Enabled by default for root projects. Disabled for non-root projects.
+
+---
+
+##### `githubOptions`<sup>Optional</sup> <a name="githubOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.githubOptions"></a>
+
+```typescript
+public readonly githubOptions: GitHubOptions;
+```
+
+- *Type:* projen.github.GitHubOptions
+- *Default:* see GitHubOptions
+
+Options for GitHub integration.
+
+---
+
+##### `gitignore`<sup>Optional</sup> <a name="gitignore" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitignore"></a>
+
+```typescript
+public readonly gitignore: string[];
+```
+
+- *Type:* string[]
+
+Additional entries to .gitignore.
+
+---
+
+##### `gitIgnoreOptions`<sup>Optional</sup> <a name="gitIgnoreOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitIgnoreOptions"></a>
+
+```typescript
+public readonly gitIgnoreOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .gitignore file.
+
+---
+
+##### `gitOptions`<sup>Optional</sup> <a name="gitOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitOptions"></a>
+
+```typescript
+public readonly gitOptions: GitOptions;
+```
+
+- *Type:* projen.GitOptions
+
+Configuration options for git.
+
+---
+
+##### `gitpod`<sup>Optional</sup> <a name="gitpod" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.gitpod"></a>
+
+```typescript
+public readonly gitpod: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Add a Gitpod development environment.
+
+---
+
+##### `homepage`<sup>Optional</sup> <a name="homepage" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.homepage"></a>
+
+```typescript
+public readonly homepage: string;
+```
+
+- *Type:* string
+
+Package's Homepage / Website.
+
+---
+
+##### `jest`<sup>Optional</sup> <a name="jest" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.jest"></a>
+
+```typescript
+public readonly jest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Setup jest unit tests.
+
+---
+
+##### `jestOptions`<sup>Optional</sup> <a name="jestOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.jestOptions"></a>
+
+```typescript
+public readonly jestOptions: JestOptions;
+```
+
+- *Type:* projen.javascript.JestOptions
+- *Default:* default options
+
+Jest options.
+
+---
+
+##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="jsiiReleaseVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.jsiiReleaseVersion"></a>
+
+```typescript
+public readonly jsiiReleaseVersion: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+Version requirement of `publib` which is used to publish modules to npm.
+
+---
+
+##### `keywords`<sup>Optional</sup> <a name="keywords" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.keywords"></a>
+
+```typescript
+public readonly keywords: string[];
+```
+
+- *Type:* string[]
+
+Keywords to include in `package.json`.
+
+---
+
+##### `libdir`<sup>Optional</sup> <a name="libdir" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.libdir"></a>
+
+```typescript
+public readonly libdir: string;
+```
+
+- *Type:* string
+- *Default:* "lib"
+
+Typescript  artifacts output directory.
+
+---
+
+##### `license`<sup>Optional</sup> <a name="license" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.license"></a>
+
+```typescript
+public readonly license: string;
+```
+
+- *Type:* string
+- *Default:* "Apache-2.0"
+
+License's SPDX identifier.
+
+See https://github.com/projen/projen/tree/main/license-text for a list of supported licenses.
+Use the `licensed` option if you want to no license to be specified.
+
+---
+
+##### `licensed`<sup>Optional</sup> <a name="licensed" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.licensed"></a>
+
+```typescript
+public readonly licensed: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Indicates if a license should be added.
+
+---
+
+##### `logging`<sup>Optional</sup> <a name="logging" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.logging"></a>
+
+```typescript
+public readonly logging: LoggerOptions;
+```
+
+- *Type:* projen.LoggerOptions
+- *Default:* {}
+
+Configure logging options such as verbosity.
+
+---
+
+##### `majorVersion`<sup>Optional</sup> <a name="majorVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.majorVersion"></a>
+
+```typescript
+public readonly majorVersion: number;
+```
+
+- *Type:* number
+- *Default:* Major version is not enforced.
+
+Major version to release from the default branch.
+
+If this is specified, we bump the latest version of this major version line.
+If not specified, we bump the global latest version.
+
+---
+
+##### `maxNodeVersion`<sup>Optional</sup> <a name="maxNodeVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.maxNodeVersion"></a>
+
+```typescript
+public readonly maxNodeVersion: string;
+```
+
+- *Type:* string
+- *Default:* no maximum version is enforced
+
+The maximum node version supported by this package.
+
+Most projects should not use this option.
+The value indicates that the package is incompatible with any newer versions of node.
+This requirement is enforced via the engines field.
+
+You will normally not need to set this option.
+Consider this option only if your package is known to not function with newer versions of node.
+
+---
+
+##### `minMajorVersion`<sup>Optional</sup> <a name="minMajorVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.minMajorVersion"></a>
+
+```typescript
+public readonly minMajorVersion: number;
+```
+
+- *Type:* number
+- *Default:* No minimum version is being enforced
+
+Minimal Major version to release.
+
+This can be useful to set to 1, as breaking changes before the 1.x major
+release are not incrementing the major version number.
+
+Can not be set together with `majorVersion`.
+
+---
+
+##### `minNodeVersion`<sup>Optional</sup> <a name="minNodeVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.minNodeVersion"></a>
+
+```typescript
+public readonly minNodeVersion: string;
+```
+
+- *Type:* string
+- *Default:* no minimum version is enforced
+
+The minimum node version required by this package to function.
+
+Most projects should not use this option.
+The value indicates that the package is incompatible with any older versions of node.
+This requirement is enforced via the engines field.
+
+You will normally not need to set this option, even if your package is incompatible with EOL versions of node.
+Consider this option only if your package depends on a specific feature, that is not available in other LTS versions.
+Setting this option has very high impact on the consumers of your package,
+as package managers will actively prevent usage with node versions you have marked as incompatible.
+
+To change the node version of your CI/CD workflows, use `workflowNodeVersion`.
+
+---
+
+##### `nextVersionCommand`<sup>Optional</sup> <a name="nextVersionCommand" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.nextVersionCommand"></a>
+
+```typescript
+public readonly nextVersionCommand: string;
+```
+
+- *Type:* string
+- *Default:* The next version will be determined based on the commit history and project settings.
+
+A shell command to control the next version to release.
+
+If present, this shell command will be run before the bump is executed, and
+it determines what version to release. It will be executed in the following
+environment:
+
+- Working directory: the project directory.
+- `$VERSION`: the current version. Looks like `1.2.3`.
+- `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+
+The command should print one of the following to `stdout`:
+
+- Nothing: the next version number will be determined based on commit history.
+- `x.y.z`: the next version number will be `x.y.z`.
+- `major|minor|patch`: the next version number will be the current version number
+  with the indicated component bumped.
+
+This setting cannot be specified together with `minMajorVersion`; the invoked
+script can be used to achieve the effects of `minMajorVersion`.
+
+---
+
+##### `npmAccess`<sup>Optional</sup> <a name="npmAccess" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmAccess"></a>
+
+```typescript
+public readonly npmAccess: NpmAccess;
+```
+
+- *Type:* projen.javascript.NpmAccess
+- *Default:* for scoped packages (e.g. `foo@bar`), the default is `NpmAccess.RESTRICTED`, for non-scoped packages, the default is `NpmAccess.PUBLIC`.
+
+Access level of the npm package.
+
+---
+
+##### `npmDistTag`<sup>Optional</sup> <a name="npmDistTag" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmDistTag"></a>
+
+```typescript
+public readonly npmDistTag: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+The npmDistTag to use when publishing from the default branch.
+
+To set the npm dist-tag for release branches, set the `npmDistTag` property
+for each branch.
+
+---
+
+##### `npmignoreEnabled`<sup>Optional</sup> <a name="npmignoreEnabled" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmignoreEnabled"></a>
+
+```typescript
+public readonly npmignoreEnabled: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs.
+
+---
+
+##### `npmIgnoreOptions`<sup>Optional</sup> <a name="npmIgnoreOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmIgnoreOptions"></a>
+
+```typescript
+public readonly npmIgnoreOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .npmignore file.
+
+---
+
+##### `npmProvenance`<sup>Optional</sup> <a name="npmProvenance" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmProvenance"></a>
+
+```typescript
+public readonly npmProvenance: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true for public packages, false otherwise
+
+Should provenance statements be generated when the package is published.
+
+A supported package manager is required to publish a package with npm provenance statements and
+you will need to use a supported CI/CD provider.
+
+Note that the projen `Release` and `Publisher` components are using `publib` to publish packages,
+which is using npm internally and supports provenance statements independently of the package manager used.
+
+---
+
+##### `npmRegistryUrl`<sup>Optional</sup> <a name="npmRegistryUrl" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmRegistryUrl"></a>
+
+```typescript
+public readonly npmRegistryUrl: string;
+```
+
+- *Type:* string
+- *Default:* "https://registry.npmjs.org"
+
+The base URL of the npm package registry.
+
+Must be a URL (e.g. start with "https://" or "http://")
+
+---
+
+##### `npmTokenSecret`<sup>Optional</sup> <a name="npmTokenSecret" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.npmTokenSecret"></a>
+
+```typescript
+public readonly npmTokenSecret: string;
+```
+
+- *Type:* string
+- *Default:* "NPM_TOKEN"
+
+GitHub secret which contains the NPM token to use when publishing packages.
+
+---
+
+##### `outdir`<sup>Optional</sup> <a name="outdir" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.outdir"></a>
+
+```typescript
+public readonly outdir: string;
+```
+
+- *Type:* string
+- *Default:* "."
+
+The root directory of the project. Relative to this directory, all files are synthesized.
+
+If this project has a parent, this directory is relative to the parent
+directory and it cannot be the same as the parent or any of it's other
+subprojects.
+
+---
+
+##### `package`<sup>Optional</sup> <a name="package" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.package"></a>
+
+```typescript
+public readonly package: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
+
+---
+
+##### `packageManager`<sup>Optional</sup> <a name="packageManager" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.packageManager"></a>
+
+```typescript
+public readonly packageManager: NodePackageManager;
+```
+
+- *Type:* projen.javascript.NodePackageManager
+- *Default:* NodePackageManager.YARN_CLASSIC
+
+The Node Package Manager used to execute scripts.
+
+---
+
+##### `packageName`<sup>Optional</sup> <a name="packageName" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.packageName"></a>
+
+```typescript
+public readonly packageName: string;
+```
+
+- *Type:* string
+- *Default:* defaults to project name
+
+The "name" in package.json.
+
+---
+
+##### `parent`<sup>Optional</sup> <a name="parent" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.parent"></a>
+
+```typescript
+public readonly parent: Project;
+```
+
+- *Type:* projen.Project
+
+The parent project, if this project is part of a bigger project.
+
+---
+
+##### `peerDependencyOptions`<sup>Optional</sup> <a name="peerDependencyOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.peerDependencyOptions"></a>
+
+```typescript
+public readonly peerDependencyOptions: PeerDependencyOptions;
+```
+
+- *Type:* projen.javascript.PeerDependencyOptions
+
+Options for `peerDeps`.
+
+---
+
+##### `peerDeps`<sup>Optional</sup> <a name="peerDeps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.peerDeps"></a>
+
+```typescript
+public readonly peerDeps: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Peer dependencies for this module.
+
+Dependencies listed here are required to
+be installed (and satisfied) by the _consumer_ of this library. Using peer
+dependencies allows you to ensure that only a single module of a certain
+library exists in the `node_modules` tree of your consumers.
+
+Note that prior to npm@7, peer dependencies are _not_ automatically
+installed, which means that adding peer dependencies to a library will be a
+breaking change for your customers.
+
+Unless `peerDependencyOptions.pinnedDevDependency` is disabled (it is
+enabled by default), projen will automatically add a dev dependency with a
+pinned version for each peer dependency. This will ensure that you build &
+test your module against the lowest peer version required.
+
+---
+
+##### `pnpmVersion`<sup>Optional</sup> <a name="pnpmVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.pnpmVersion"></a>
+
+```typescript
+public readonly pnpmVersion: string;
+```
+
+- *Type:* string
+- *Default:* "9"
+
+The version of PNPM to use if using PNPM as a package manager.
+
+---
+
+##### `postBuildSteps`<sup>Optional</sup> <a name="postBuildSteps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.postBuildSteps"></a>
+
+```typescript
+public readonly postBuildSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+- *Default:* []
+
+Steps to execute after build as part of the release workflow.
+
+---
+
+##### `prerelease`<sup>Optional</sup> <a name="prerelease" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prerelease"></a>
+
+```typescript
+public readonly prerelease: string;
+```
+
+- *Type:* string
+- *Default:* normal semantic versions
+
+Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `prettier`<sup>Optional</sup> <a name="prettier" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prettier"></a>
+
+```typescript
+public readonly prettier: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Setup prettier.
+
+---
+
+##### `prettierOptions`<sup>Optional</sup> <a name="prettierOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prettierOptions"></a>
+
+```typescript
+public readonly prettierOptions: PrettierOptions;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PrettierOptions">PrettierOptions</a>
+- *Default:* default options
+
+Prettier options.
+
+---
+
+##### `projenCommand`<sup>Optional</sup> <a name="projenCommand" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCommand"></a>
+
+```typescript
+public readonly projenCommand: string;
+```
+
+- *Type:* string
+- *Default:* "npx projen"
+
+The shell command to use in order to run the projen CLI.
+
+Can be used to customize in special environments.
+
+---
+
+##### `projenCredentials`<sup>Optional</sup> <a name="projenCredentials" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCredentials"></a>
+
+```typescript
+public readonly projenCredentials: GithubCredentials;
+```
+
+- *Type:* projen.github.GithubCredentials
+- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+
+Choose a method of providing GitHub API access for projen workflows.
+
+---
+
+##### `projenDevDependency`<sup>Optional</sup> <a name="projenDevDependency" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenDevDependency"></a>
+
+```typescript
+public readonly projenDevDependency: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if not a subproject
+
+Indicates of "projen" should be installed as a devDependency.
+
+---
+
+##### `projenrcJs`<sup>Optional</sup> <a name="projenrcJs" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJs"></a>
+
+```typescript
+public readonly projenrcJs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if projenrcJson is false
+
+Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation.
+
+---
+
+##### `projenrcJson`<sup>Optional</sup> <a name="projenrcJson" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJson"></a>
+
+```typescript
+public readonly projenrcJson: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation.
+
+---
+
+##### `projenrcJsonOptions`<sup>Optional</sup> <a name="projenrcJsonOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJsonOptions"></a>
+
+```typescript
+public readonly projenrcJsonOptions: ProjenrcJsonOptions;
+```
+
+- *Type:* projen.ProjenrcJsonOptions
+- *Default:* default options
+
+Options for .projenrc.json.
+
+---
+
+##### `projenrcJsOptions`<sup>Optional</sup> <a name="projenrcJsOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJsOptions"></a>
+
+```typescript
+public readonly projenrcJsOptions: ProjenrcOptions;
+```
+
+- *Type:* projen.javascript.ProjenrcOptions
+- *Default:* default options
+
+Options for .projenrc.js.
+
+---
+
+##### `projenrcTs`<sup>Optional</sup> <a name="projenrcTs" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcTs"></a>
+
+```typescript
+public readonly projenrcTs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use TypeScript for your projenrc file (`.projenrc.ts`).
+
+---
+
+##### `projenrcTsOptions`<sup>Optional</sup> <a name="projenrcTsOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcTsOptions"></a>
+
+```typescript
+public readonly projenrcTsOptions: ProjenrcOptions;
+```
+
+- *Type:* projen.typescript.ProjenrcOptions
+
+Options for .projenrc.ts.
+
+---
+
+##### `projenVersion`<sup>Optional</sup> <a name="projenVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenVersion"></a>
+
+```typescript
+public readonly projenVersion: string;
+```
+
+- *Type:* string
+- *Default:* Defaults to the latest version.
+
+Version of projen to install.
+
+---
+
+##### `publishDryRun`<sup>Optional</sup> <a name="publishDryRun" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.publishDryRun"></a>
+
+```typescript
+public readonly publishDryRun: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Instead of actually publishing to package managers, just print the publishing command.
+
+---
+
+##### `publishTasks`<sup>Optional</sup> <a name="publishTasks" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.publishTasks"></a>
+
+```typescript
+public readonly publishTasks: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Define publishing tasks that can be executed manually as well as workflows.
+
+Normally, publishing only happens within automated workflows. Enable this
+in order to create a publishing task for each publishing activity.
+
+---
+
+##### `pullRequestTemplate`<sup>Optional</sup> <a name="pullRequestTemplate" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.pullRequestTemplate"></a>
+
+```typescript
+public readonly pullRequestTemplate: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Include a GitHub pull request template.
+
+---
+
+##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="pullRequestTemplateContents" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.pullRequestTemplateContents"></a>
+
+```typescript
+public readonly pullRequestTemplateContents: string[];
+```
+
+- *Type:* string[]
+- *Default:* default content
+
+The contents of the pull request template.
+
+---
+
+##### `readme`<sup>Optional</sup> <a name="readme" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.readme"></a>
+
+```typescript
+public readonly readme: SampleReadmeProps;
+```
+
+- *Type:* projen.SampleReadmeProps
+- *Default:* { filename: 'README.md', contents: '# replace this' }
+
+The README setup.
+
+---
+
+##### `releasableCommits`<sup>Optional</sup> <a name="releasableCommits" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releasableCommits"></a>
+
+```typescript
+public readonly releasableCommits: ReleasableCommits;
+```
+
+- *Type:* projen.ReleasableCommits
+- *Default:* ReleasableCommits.everyCommit()
+
+Find commits that should be considered releasable Used to decide if a release is required.
+
+---
+
+##### `release`<sup>Optional</sup> <a name="release" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.release"></a>
+
+```typescript
+public readonly release: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true (false for subprojects)
+
+Add release management to this project.
+
+---
+
+##### `releaseBranches`<sup>Optional</sup> <a name="releaseBranches" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseBranches"></a>
+
+```typescript
+public readonly releaseBranches: {[ key: string ]: BranchOptions};
+```
+
+- *Type:* {[ key: string ]: projen.release.BranchOptions}
+- *Default:* no additional branches are used for release. you can use `addBranch()` to add additional branches.
+
+Defines additional release branches.
+
+A workflow will be created for each
+release branch which will publish releases from commits in this branch.
+Each release branch _must_ be assigned a major version number which is used
+to enforce that versions published from that branch always use that major
+version. If multiple branches are used, the `majorVersion` field must also
+be provided for the default branch.
+
+---
+
+##### `releaseFailureIssue`<sup>Optional</sup> <a name="releaseFailureIssue" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseFailureIssue"></a>
+
+```typescript
+public readonly releaseFailureIssue: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Create a github issue on every failed publishing task.
+
+---
+
+##### `releaseFailureIssueLabel`<sup>Optional</sup> <a name="releaseFailureIssueLabel" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseFailureIssueLabel"></a>
+
+```typescript
+public readonly releaseFailureIssueLabel: string;
+```
+
+- *Type:* string
+- *Default:* "failed-release"
+
+The label to apply to issues indicating publish failures.
+
+Only applies if `releaseFailureIssue` is true.
+
+---
+
+##### `releaseTagPrefix`<sup>Optional</sup> <a name="releaseTagPrefix" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseTagPrefix"></a>
+
+```typescript
+public readonly releaseTagPrefix: string;
+```
+
+- *Type:* string
+- *Default:* "v"
+
+Automatically add the given prefix to release tags.
+
+Useful if you are releasing on multiple branches with overlapping version numbers.
+Note: this prefix is used to detect the latest tagged version
+when bumping, so if you change this on a project with an existing version
+history, you may need to manually tag your latest release
+with the new prefix.
+
+---
+
+##### `releaseToNpm`<sup>Optional</sup> <a name="releaseToNpm" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseToNpm"></a>
+
+```typescript
+public readonly releaseToNpm: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Automatically release to npm when new versions are introduced.
+
+---
+
+##### `releaseTrigger`<sup>Optional</sup> <a name="releaseTrigger" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseTrigger"></a>
+
+```typescript
+public readonly releaseTrigger: ReleaseTrigger;
+```
+
+- *Type:* projen.release.ReleaseTrigger
+- *Default:* Continuous releases (`ReleaseTrigger.continuous()`)
+
+The release trigger to use.
+
+---
+
+##### `releaseWorkflowName`<sup>Optional</sup> <a name="releaseWorkflowName" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowName"></a>
+
+```typescript
+public readonly releaseWorkflowName: string;
+```
+
+- *Type:* string
+- *Default:* "release"
+
+The name of the default release workflow.
+
+---
+
+##### `releaseWorkflowSetupSteps`<sup>Optional</sup> <a name="releaseWorkflowSetupSteps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowSetupSteps"></a>
+
+```typescript
+public readonly releaseWorkflowSetupSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+
+A set of workflow steps to execute in order to setup the workflow container.
+
+---
+
+##### `renovatebot`<sup>Optional</sup> <a name="renovatebot" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.renovatebot"></a>
+
+```typescript
+public readonly renovatebot: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use renovatebot to handle dependency upgrades.
+
+---
+
+##### `renovatebotOptions`<sup>Optional</sup> <a name="renovatebotOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.renovatebotOptions"></a>
+
+```typescript
+public readonly renovatebotOptions: RenovatebotOptions;
+```
+
+- *Type:* projen.RenovatebotOptions
+- *Default:* default options
+
+Options for renovatebot.
+
+---
+
+##### `repository`<sup>Optional</sup> <a name="repository" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.repository"></a>
+
+```typescript
+public readonly repository: string;
+```
+
+- *Type:* string
+
+The repository is the location where the actual code for your package lives.
+
+See https://classic.yarnpkg.com/en/docs/package-json/#toc-repository
+
+---
+
+##### `repositoryDirectory`<sup>Optional</sup> <a name="repositoryDirectory" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.repositoryDirectory"></a>
+
+```typescript
+public readonly repositoryDirectory: string;
+```
+
+- *Type:* string
+
+If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives.
+
+---
+
+##### `sampleCode`<sup>Optional</sup> <a name="sampleCode" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.sampleCode"></a>
+
+```typescript
+public readonly sampleCode: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Generate one-time sample in `src/` and `test/` if there are no files there.
+
+---
+
+##### `scopedPackagesOptions`<sup>Optional</sup> <a name="scopedPackagesOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.scopedPackagesOptions"></a>
+
+```typescript
+public readonly scopedPackagesOptions: ScopedPackagesOptions[];
+```
+
+- *Type:* projen.javascript.ScopedPackagesOptions[]
+- *Default:* fetch all scoped packages from the public npm registry
+
+Options for privately hosted scoped packages.
+
+---
+
+##### `srcdir`<sup>Optional</sup> <a name="srcdir" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.srcdir"></a>
+
+```typescript
+public readonly srcdir: string;
+```
+
+- *Type:* string
+- *Default:* "src"
+
+Typescript sources directory.
+
+---
+
+##### `stability`<sup>Optional</sup> <a name="stability" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.stability"></a>
+
+```typescript
+public readonly stability: string;
+```
+
+- *Type:* string
+
+Package's Stability.
+
+---
+
+##### `stale`<sup>Optional</sup> <a name="stale" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.stale"></a>
+
+```typescript
+public readonly stale: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Auto-close of stale issues and pull request.
+
+See `staleOptions` for options.
+
+---
+
+##### `staleOptions`<sup>Optional</sup> <a name="staleOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.staleOptions"></a>
+
+```typescript
+public readonly staleOptions: StaleOptions;
+```
+
+- *Type:* projen.github.StaleOptions
+- *Default:* see defaults in `StaleOptions`
+
+Auto-close stale issues and pull requests.
+
+To disable set `stale` to `false`.
+
+---
+
+##### `testdir`<sup>Optional</sup> <a name="testdir" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.testdir"></a>
+
+```typescript
+public readonly testdir: string;
+```
+
+- *Type:* string
+- *Default:* "test"
+
+Jest tests directory.
+
+Tests files should be named `xxx.test.ts`.
+If this directory is under `srcdir` (e.g. `src/test`, `src/__tests__`),
+then tests are going to be compiled into `lib/` and executed as javascript.
+If the test directory is outside of `src`, then we configure jest to
+compile the code in-memory.
+
+---
+
+##### `tsconfig`<sup>Optional</sup> <a name="tsconfig" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsconfig"></a>
+
+```typescript
+public readonly tsconfig: TypescriptConfigOptions;
+```
+
+- *Type:* projen.javascript.TypescriptConfigOptions
+- *Default:* default options
+
+Custom TSConfig.
+
+---
+
+##### `tsconfigDev`<sup>Optional</sup> <a name="tsconfigDev" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsconfigDev"></a>
+
+```typescript
+public readonly tsconfigDev: TypescriptConfigOptions;
+```
+
+- *Type:* projen.javascript.TypescriptConfigOptions
+- *Default:* use the production tsconfig options
+
+Custom tsconfig options for the development tsconfig.json file (used for testing).
+
+---
+
+##### `tsconfigDevFile`<sup>Optional</sup> <a name="tsconfigDevFile" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsconfigDevFile"></a>
+
+```typescript
+public readonly tsconfigDevFile: string;
+```
+
+- *Type:* string
+- *Default:* "tsconfig.dev.json"
+
+The name of the development tsconfig.json file.
+
+---
+
+##### `tsJestOptions`<sup>Optional</sup> <a name="tsJestOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.tsJestOptions"></a>
+
+```typescript
+public readonly tsJestOptions: TsJestOptions;
+```
+
+- *Type:* projen.typescript.TsJestOptions
+
+Options for ts-jest.
+
+---
+
+##### `typescriptVersion`<sup>Optional</sup> <a name="typescriptVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.typescriptVersion"></a>
+
+```typescript
+public readonly typescriptVersion: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+TypeScript version to use.
+
+NOTE: Typescript is not semantically versioned and should remain on the
+same minor, so we recommend using a `~` dependency (e.g. `~1.2.3`).
+
+---
+
+##### `versionrcOptions`<sup>Optional</sup> <a name="versionrcOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.versionrcOptions"></a>
+
+```typescript
+public readonly versionrcOptions: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* standard configuration applicable for GitHub repositories
+
+Custom configuration used when creating changelog with commit-and-tag-version package.
+
+Given values either append to default configuration or overwrite values in it.
+
+---
+
+##### `vscode`<sup>Optional</sup> <a name="vscode" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.vscode"></a>
+
+```typescript
+public readonly vscode: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable VSCode integration.
+
+Enabled by default for root projects. Disabled for non-root projects.
+
+---
+
+##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="workflowBootstrapSteps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowBootstrapSteps"></a>
+
+```typescript
+public readonly workflowBootstrapSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+- *Default:* "yarn install --frozen-lockfile && yarn projen"
+
+Workflow steps to use in order to bootstrap this repo.
+
+---
+
+##### `workflowContainerImage`<sup>Optional</sup> <a name="workflowContainerImage" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowContainerImage"></a>
+
+```typescript
+public readonly workflowContainerImage: string;
+```
+
+- *Type:* string
+- *Default:* default image
+
+Container image to use for GitHub workflows.
+
+---
+
+##### `workflowGitIdentity`<sup>Optional</sup> <a name="workflowGitIdentity" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowGitIdentity"></a>
+
+```typescript
+public readonly workflowGitIdentity: GitIdentity;
+```
+
+- *Type:* projen.github.GitIdentity
+- *Default:* GitHub Actions
+
+The git identity to use in workflows.
+
+---
+
+##### `workflowNodeVersion`<sup>Optional</sup> <a name="workflowNodeVersion" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowNodeVersion"></a>
+
+```typescript
+public readonly workflowNodeVersion: string;
+```
+
+- *Type:* string
+- *Default:* `minNodeVersion` if set, otherwise `lts/*`.
+
+The node version used in GitHub Actions workflows.
+
+Always use this option if your GitHub Actions workflows require a specific to run.
+
+---
+
+##### `workflowPackageCache`<sup>Optional</sup> <a name="workflowPackageCache" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowPackageCache"></a>
+
+```typescript
+public readonly workflowPackageCache: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Enable Node.js package cache in GitHub workflows.
+
+---
+
+##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowRunsOn"></a>
+
+```typescript
+public readonly workflowRunsOn: string[];
+```
+
+- *Type:* string[]
+- *Default:* ["ubuntu-latest"]
+
+Github Runner selection labels.
+
+---
+
+##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.workflowRunsOnGroup"></a>
+
+```typescript
+public readonly workflowRunsOnGroup: GroupRunnerOptions;
+```
+
+- *Type:* projen.GroupRunnerOptions
+
+Github Runner Group selection options.
+
+---
+
+##### `yarnBerryOptions`<sup>Optional</sup> <a name="yarnBerryOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.yarnBerryOptions"></a>
 
 ```typescript
 public readonly yarnBerryOptions: YarnBerryOptions;

@@ -106,20 +106,20 @@ export class TagRelease extends ProjenRelease {
       gitPushCommand: this.trigger.gitPushCommand,
     });
 
+    // by default the unbump task resets the version to 0.0.0
+    // but we don't want to do that since we are keeping the version
+    // and that would cause a diff and fail the task
+    // instead just checkout the previous version so diff won't fail
     const unbumpTask = project.tasks.tryFind('unbump');
-    unbumpTask?.reset('echo "nothing to do"');
+    unbumpTask?.reset(`git checkout ${props.versionFile}`);
 
-    const bumpTask = project.tasks.tryFind('bump');
-    bumpTask?.prependExec(
-      `mkdir -p ${this.artifactsDirectory} && cp ${props.versionFile} ${this.artifactsDirectory}/`,
-    );
     project.addGitIgnore(this.artifactsDirectory);
     project.packageTask.spawn(
       project.addTask('dist', {
         steps: [
           { exec: `mkdir -p ${this.artifactsDirectory}` },
           { exec: `cp ${props.versionFile} ${this.artifactsDirectory}/` },
-          { exec: `git checkout ${props.versionFile}` },
+          { exec: `touch ${releaseTagFile}` }, // the check version workflow step requires this file
         ],
       }),
     );
