@@ -2,6 +2,8 @@ import * as path from 'path';
 import { Construct } from 'constructs';
 import { Project, Task } from 'projen';
 import { GitHub, WorkflowSteps } from 'projen/lib/github';
+import { DEFAULT_GITHUB_ACTIONS_USER } from 'projen/lib/github/constants';
+
 import { JobPermission } from 'projen/lib/github/workflows-model';
 import { Release as ProjenRelease, ReleaseTrigger } from 'projen/lib/release';
 import { TagReleaseOptions } from './TagReleaseOptions';
@@ -132,13 +134,11 @@ export class TagRelease extends ProjenRelease {
         `VERSION=$(cat ${this.artifactsDirectory}/version.txt); cp ${this.artifactsDirectory}/${props.versionFile} . && git add ${props.versionFile} && git commit -m "chore(release): v$VERSION"`,
       );
     }
+    const github = GitHub.of(project);
+    if (!github) {
+      throw new Error('ReleaseWorkflow requires a GitHub Project');
+    }
 
-    const checkout = WorkflowSteps.checkout({
-      with: {
-        ref: props.branch,
-        token: props.githubReleaseToken ?? '${{ secrets.GITHUB_TOKEN }}',
-      },
-    });
     this.addJobs({
       release_git: {
         permissions: {
@@ -149,7 +149,13 @@ export class TagRelease extends ProjenRelease {
         needs: ['release'],
         runsOn: ['ubuntu-latest'],
         steps: [
-          checkout,
+          ...github.projenCredentials.setupSteps,
+          WorkflowSteps.checkout({
+            with: {
+              ref: props.branch,
+              token: github.projenCredentials.tokenRef,
+            },
+          }),
           WorkflowSteps.downloadArtifact({
             with: {
               name: 'build-artifact',
@@ -162,10 +168,7 @@ export class TagRelease extends ProjenRelease {
             continueOnError: true,
           },
           WorkflowSteps.setupGitIdentity({
-            gitIdentity: props.gitIdentity ?? {
-              email: 'github-actions@github.com',
-              name: 'github-actions',
-            },
+            gitIdentity: props.gitIdentity ?? DEFAULT_GITHUB_ACTIONS_USER,
           }),
           {
             name: 'Release',
@@ -173,8 +176,7 @@ export class TagRelease extends ProjenRelease {
               VERSION_FILE: versionFile,
               CHANGELOG: this.trigger.changelogPath ?? '',
               RELEASE_TAG_FILE: releaseTagFile,
-              GITHUB_TOKEN:
-                props.githubReleaseToken ?? '${{ secrets.GITHUB_TOKEN }}',
+              GITHUB_TOKEN: github.projenCredentials.tokenRef,
             },
             run: project.runTaskCommand(this.publishTask),
           },
