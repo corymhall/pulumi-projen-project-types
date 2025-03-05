@@ -28,7 +28,6 @@ export class TypeScriptComponent extends TypeScriptProject {
       versionFile,
       task: this.packageTask,
       releaseTrigger: options.releaseTrigger,
-      githubReleaseToken: options.githubReleaseToken,
       gitIdentity: options.gitIdentity,
     });
 

@@ -45,7 +45,7 @@ export class PythonComponent extends PythonProject {
       },
     });
 
-    const componentName = options.componentName ?? this.moduleName;
+    const componentName = options.componentName ?? this.name;
 
     new SampleDir(this, this.moduleName, {
       files: {
@@ -112,10 +112,10 @@ export class PythonComponent extends PythonProject {
         'version = pyproject["version"]',
         '',
         'if __name__ == "__main__":',
-        '# Call the component provider host. This will discover any ComponentResource',
-        '# subclasses in this package, infer their schema and host a provider that',
-        '# allows constructing these components from a Pulumi program.',
-        `component_provider_host(Metadata("${componentName}", version))`,
+        '    # Call the component provider host. This will discover any ComponentResource',
+        '    # subclasses in this package, infer their schema and host a provider that',
+        '    # allows constructing these components from a Pulumi program.',
+        `    component_provider_host(Metadata("${componentName}", version))`,
       ].join('\n'),
     });
 
@@ -159,7 +159,6 @@ export class PythonComponent extends PythonProject {
       task: this.packageTask,
       versionFile: versionFilePath,
       releaseTrigger: options.releaseTrigger,
-      githubReleaseToken: options.githubReleaseToken,
       gitIdentity: options.gitIdentity,
     });
 
