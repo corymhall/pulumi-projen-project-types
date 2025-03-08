@@ -4,12 +4,68 @@ import { Project, Task } from 'projen';
 import { GitHub, WorkflowSteps } from 'projen/lib/github';
 import { DEFAULT_GITHUB_ACTIONS_USER } from 'projen/lib/github/constants';
 
-import { JobPermission } from 'projen/lib/github/workflows-model';
+import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 import { Release as ProjenRelease, ReleaseTrigger } from 'projen/lib/release';
 import { TagReleaseOptions } from './TagReleaseOptions';
 
+export interface CreateReleaseOptions {
+  /**
+   * The path to the changelog file to generate release notes from
+   */
+  readonly changelogPath: string;
+
+  /**
+   * The name of the release tag. This could be something like `${{ github.ref_name }}`
+   * or `$(cat dist/releasetag.txt)`
+   */
+  readonly releaseTag: string;
+
+  /**
+   * Whether to only run this step if the `release-exists` step returned true
+   * @default false
+   */
+  readonly verifyReleaseExists?: boolean;
+}
+
 export class ReleaseWorkflow extends Construct {
-  constructor(scope: Construct, id: string) {
+  public static releaseExists(): JobStep {
+    return {
+      id: 'release-exists',
+      name: 'Verify if release exists',
+      run: [
+        'if gh release view ${{ github.ref_name }} --repo=${{ github.repository }} &>/dev/null',
+        'then',
+        'echo "result=true" >> $GITHUB_OUTPUT',
+        'else',
+        'echo "result=false" >> $GITHUB_OUTPUT',
+        'fi',
+      ].join('\n'),
+      env: {
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+      },
+    };
+  }
+  public static createRelease(options: CreateReleaseOptions): JobStep {
+    return {
+      name: 'Create Release',
+      if: options.verifyReleaseExists
+        ? '!fromJSON(steps.release-exists.outputs.result)'
+        : undefined,
+      run: [
+        'gh release create',
+        options.releaseTag,
+        // `$(cat ${options.releasetagPath})`,
+        '--repo ${{ github.repository }}',
+        `--notes-file ${options.changelogPath}`,
+        `--title ${options.releaseTag}`,
+        '--verify-tag',
+      ].join(' '),
+      env: {
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+      },
+    };
+  }
+  constructor(scope: Construct, id: string, changelogPath: string) {
     super(scope, id);
     const project = Project.of(this);
     const github = GitHub.of(project);
@@ -33,37 +89,13 @@ export class ReleaseWorkflow extends Construct {
       },
       runsOn: ['ubuntu-latest'],
       steps: [
-        // you can't use --repository with --notes-from-tag so you need the
-        // repo cloned
         WorkflowSteps.checkout({ with: { fetchDepth: 0 } }),
-        {
-          id: 'release-exists',
-          name: 'Verify if release exists',
-          run: [
-            'if gh release view ${{ github.ref_name }} --repo=${{ github.repository }} &>/dev/null',
-            'then',
-            'echo "result=true" >> $GITHUB_OUTPUT',
-            'else',
-            'echo "result=false" >> $GITHUB_OUTPUT',
-            'fi',
-          ].join('\n'),
-          env: {
-            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
-          },
-        },
-        {
-          name: 'Create Release',
-          if: '!fromJSON(steps.release-exists.outputs.result)',
-          run: [
-            'gh release create ${{ github.ref_name }}',
-            '--notes-from-tag',
-            '--title=${{ github.ref_name }}',
-            '--verify-tag',
-          ].join(' '),
-          env: {
-            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
-          },
-        },
+        ReleaseWorkflow.releaseExists(),
+        ReleaseWorkflow.createRelease({
+          changelogPath,
+          releaseTag: '${{ github.ref_name }}',
+          verifyReleaseExists: true,
+        }),
       ],
       name: 'Publish to GitHub Release',
     });
@@ -139,14 +171,61 @@ export class TagRelease extends ProjenRelease {
       throw new Error('ReleaseWorkflow requires a GitHub Project');
     }
 
+    const downloadArtifact = WorkflowSteps.downloadArtifact({
+      with: {
+        name: 'build-artifact',
+        path: this.artifactsDirectory,
+      },
+    });
+    const restoreArtifact = {
+      name: 'Restore build artifact permissions',
+      run: `cd ${this.artifactsDirectory} && setfacl --restore=permissions-backup.acl`,
+      continueOnError: true,
+    };
+
+    this.addJobs({
+      check_tag: {
+        permissions: {
+          contents: JobPermission.WRITE,
+        },
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
+        name: 'Check Tag',
+        needs: ['release'],
+        runsOn: ['ubuntu-latest'],
+        outputs: {
+          should_release: {
+            outputName: 'should_release',
+            stepId: 'tag-exists',
+          },
+        },
+        steps: [
+          downloadArtifact,
+          restoreArtifact,
+          {
+            id: 'tag-exists',
+            run: [
+              'TAG=$(cat dist/releasetag.txt)',
+              'if [ ! -z "$TAG" ]',
+              'then',
+              'echo "should_release=true" >> $GITHUB_OUTPUT',
+              'else',
+              'echo "should_release=false" >> $GITHUB_OUTPUT',
+              'fi',
+              'cat $GITHUB_OUTPUT',
+            ].join('\n'),
+          },
+        ],
+      },
+    });
+
     this.addJobs({
       release_git: {
         permissions: {
           contents: JobPermission.WRITE,
         },
-        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release == 'true'",
         name: 'Publish Git Tag',
-        needs: ['release'],
+        needs: ['release', 'check_tag'],
         runsOn: ['ubuntu-latest'],
         steps: [
           ...github.projenCredentials.setupSteps,
@@ -156,17 +235,8 @@ export class TagRelease extends ProjenRelease {
               token: github.projenCredentials.tokenRef,
             },
           }),
-          WorkflowSteps.downloadArtifact({
-            with: {
-              name: 'build-artifact',
-              path: this.artifactsDirectory,
-            },
-          }),
-          {
-            name: 'Restore build artifact permissions',
-            run: `cd ${this.artifactsDirectory} && setfacl --restore=permissions-backup.acl`,
-            continueOnError: true,
-          },
+          downloadArtifact,
+          restoreArtifact,
           WorkflowSteps.setupGitIdentity({
             gitIdentity: props.gitIdentity ?? DEFAULT_GITHUB_ACTIONS_USER,
           }),
@@ -183,5 +253,35 @@ export class TagRelease extends ProjenRelease {
         ],
       },
     });
+
+    if (!this.trigger.isManual) {
+      this.addJobs({
+        release_github: {
+          permissions: {
+            contents: JobPermission.WRITE,
+          },
+          needs: ['release_git', 'release', 'check_tag'],
+          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release == 'true'",
+          name: 'Publish GitHub Release',
+          runsOn: ['ubuntu-latest'],
+          steps: [
+            downloadArtifact,
+            restoreArtifact,
+            ReleaseWorkflow.createRelease({
+              changelogPath: changelogFile,
+              releaseTag: `$(cat ${releaseTagFile})`,
+            }),
+          ],
+        },
+      });
+    } else {
+      if (this.trigger.changelogPath) {
+        new ReleaseWorkflow(this, 'release-github', this.trigger.changelogPath);
+      } else {
+        this.project.logger.warn(
+          'manual release trigger has no changelogPath, not generating release-github workflow',
+        );
+      }
+    }
   }
 }
