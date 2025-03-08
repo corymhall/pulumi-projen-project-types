@@ -184,13 +184,48 @@ export class TagRelease extends ProjenRelease {
     };
 
     this.addJobs({
-      release_git: {
+      check_tag: {
         permissions: {
           contents: JobPermission.WRITE,
         },
         if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
-        name: 'Publish Git Tag',
+        name: 'Check Release Exists',
         needs: ['release'],
+        runsOn: ['ubuntu-latest'],
+        outputs: {
+          release_exists: {
+            outputName: 'should_release',
+            stepId: 'tag-exists',
+          },
+        },
+        steps: [
+          downloadArtifact,
+          restoreArtifact,
+          {
+            id: 'tag-exists',
+            run: [
+              'TAG=$(cat dist/releasetag.txt)',
+              'if [ ! -z "$TAG" ]',
+              'then',
+              'echo "should_release=true" >> $GITHUB_OUTPUT',
+              'else',
+              'echo "should_release=false" >> $GITHUB_OUTPUT',
+              'fi',
+              'cat $GITHUB_OUTPUT',
+            ].join('\n'),
+          },
+        ],
+      },
+    });
+
+    this.addJobs({
+      release_git: {
+        permissions: {
+          contents: JobPermission.WRITE,
+        },
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check-tag.outputs.should_release != 'true'",
+        name: 'Publish Git Tag',
+        needs: ['release', 'check-tag'],
         runsOn: ['ubuntu-latest'],
         steps: [
           ...github.projenCredentials.setupSteps,
@@ -225,8 +260,8 @@ export class TagRelease extends ProjenRelease {
           permissions: {
             contents: JobPermission.WRITE,
           },
-          needs: ['release_git'],
-          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
+          needs: ['release_git', 'release', 'check-tag'],
+          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check-tag.outputs.should_release != 'true'",
           name: 'Publish GitHub Release',
           runsOn: ['ubuntu-latest'],
           steps: [
