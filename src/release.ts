@@ -189,11 +189,11 @@ export class TagRelease extends ProjenRelease {
           contents: JobPermission.WRITE,
         },
         if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
-        name: 'Check Release Exists',
+        name: 'Check Tag',
         needs: ['release'],
         runsOn: ['ubuntu-latest'],
         outputs: {
-          release_exists: {
+          should_release: {
             outputName: 'should_release',
             stepId: 'tag-exists',
           },
