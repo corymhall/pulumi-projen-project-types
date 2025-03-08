@@ -223,9 +223,9 @@ export class TagRelease extends ProjenRelease {
         permissions: {
           contents: JobPermission.WRITE,
         },
-        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check-tag.outputs.should_release != 'true'",
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release != 'true'",
         name: 'Publish Git Tag',
-        needs: ['release', 'check-tag'],
+        needs: ['release', 'check_tag'],
         runsOn: ['ubuntu-latest'],
         steps: [
           ...github.projenCredentials.setupSteps,
@@ -260,8 +260,8 @@ export class TagRelease extends ProjenRelease {
           permissions: {
             contents: JobPermission.WRITE,
           },
-          needs: ['release_git', 'release', 'check-tag'],
-          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check-tag.outputs.should_release != 'true'",
+          needs: ['release_git', 'release', 'check_tag'],
+          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release != 'true'",
           name: 'Publish GitHub Release',
           runsOn: ['ubuntu-latest'],
           steps: [
