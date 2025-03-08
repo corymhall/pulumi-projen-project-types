@@ -986,13 +986,14 @@ this task should synthesize the project files.
 ```typescript
 import { ReleaseWorkflow } from '@hallcor/pulumi-projen-project-types'
 
-new ReleaseWorkflow(scope: Construct, id: string)
+new ReleaseWorkflow(scope: Construct, id: string, changelogPath: string)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.ReleaseWorkflow.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.ReleaseWorkflow.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.ReleaseWorkflow.Initializer.parameter.changelogPath">changelogPath</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -1003,6 +1004,12 @@ new ReleaseWorkflow(scope: Construct, id: string)
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="@hallcor/pulumi-projen-project-types.ReleaseWorkflow.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `changelogPath`<sup>Required</sup> <a name="changelogPath" id="@hallcor/pulumi-projen-project-types.ReleaseWorkflow.Initializer.parameter.changelogPath"></a>
 
 - *Type:* string
 
@@ -1029,6 +1036,8 @@ Returns a string representation of this construct.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.ReleaseWorkflow.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.ReleaseWorkflow.createRelease">createRelease</a></code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.ReleaseWorkflow.releaseExists">releaseExists</a></code> | *No description.* |
 
 ---
 
@@ -1063,6 +1072,28 @@ this type-testing method instead.
 Any object.
 
 ---
+
+##### `createRelease` <a name="createRelease" id="@hallcor/pulumi-projen-project-types.ReleaseWorkflow.createRelease"></a>
+
+```typescript
+import { ReleaseWorkflow } from '@hallcor/pulumi-projen-project-types'
+
+ReleaseWorkflow.createRelease(options: CreateReleaseOptions)
+```
+
+###### `options`<sup>Required</sup> <a name="options" id="@hallcor/pulumi-projen-project-types.ReleaseWorkflow.createRelease.parameter.options"></a>
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.CreateReleaseOptions">CreateReleaseOptions</a>
+
+---
+
+##### `releaseExists` <a name="releaseExists" id="@hallcor/pulumi-projen-project-types.ReleaseWorkflow.releaseExists"></a>
+
+```typescript
+import { ReleaseWorkflow } from '@hallcor/pulumi-projen-project-types'
+
+ReleaseWorkflow.releaseExists()
+```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
@@ -4400,6 +4431,66 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 ---
 
 ## Structs <a name="Structs" id="Structs"></a>
+
+### CreateReleaseOptions <a name="CreateReleaseOptions" id="@hallcor/pulumi-projen-project-types.CreateReleaseOptions"></a>
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.CreateReleaseOptions.Initializer"></a>
+
+```typescript
+import { CreateReleaseOptions } from '@hallcor/pulumi-projen-project-types'
+
+const createReleaseOptions: CreateReleaseOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.CreateReleaseOptions.property.changelogPath">changelogPath</a></code> | <code>string</code> | The path to the changelog file to generate release notes from. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.CreateReleaseOptions.property.releaseTag">releaseTag</a></code> | <code>string</code> | The name of the release tag. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.CreateReleaseOptions.property.verifyReleaseExists">verifyReleaseExists</a></code> | <code>boolean</code> | Whether to only run this step if the `release-exists` step returned true. |
+
+---
+
+##### `changelogPath`<sup>Required</sup> <a name="changelogPath" id="@hallcor/pulumi-projen-project-types.CreateReleaseOptions.property.changelogPath"></a>
+
+```typescript
+public readonly changelogPath: string;
+```
+
+- *Type:* string
+
+The path to the changelog file to generate release notes from.
+
+---
+
+##### `releaseTag`<sup>Required</sup> <a name="releaseTag" id="@hallcor/pulumi-projen-project-types.CreateReleaseOptions.property.releaseTag"></a>
+
+```typescript
+public readonly releaseTag: string;
+```
+
+- *Type:* string
+
+The name of the release tag.
+
+This could be something like `${{ github.ref_name }}`
+or `$(cat dist/releasetag.txt)`
+
+---
+
+##### `verifyReleaseExists`<sup>Optional</sup> <a name="verifyReleaseExists" id="@hallcor/pulumi-projen-project-types.CreateReleaseOptions.property.verifyReleaseExists"></a>
+
+```typescript
+public readonly verifyReleaseExists: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Whether to only run this step if the `release-exists` step returned true.
+
+---
 
 ### EslintOptions <a name="EslintOptions" id="@hallcor/pulumi-projen-project-types.EslintOptions"></a>
 

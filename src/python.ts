@@ -3,7 +3,7 @@ import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
 import { PythonComponentOptions } from './PythonComponentOptions';
-import { TagRelease, ReleaseWorkflow } from './release';
+import { TagRelease } from './release';
 
 export class PythonComponent extends PythonProject {
   /**
@@ -161,7 +161,5 @@ export class PythonComponent extends PythonProject {
       releaseTrigger: options.releaseTrigger,
       gitIdentity: options.gitIdentity,
     });
-
-    new ReleaseWorkflow(this, 'release-workflow');
   }
 }
