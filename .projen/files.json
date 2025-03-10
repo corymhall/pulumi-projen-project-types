@@ -17,7 +17,6 @@
     ".projen/tasks.json",
     "jest.config.json",
     "LICENSE",
-    "renovate.json5",
     "src/PulumiPythonOptions.ts",
     "src/PythonComponentOptions.ts",
     "src/TagReleaseOptions.ts",
