@@ -24,11 +24,11 @@ export interface PulumiEscActionOptions {
   readonly keys?: string[];
 }
 
-// enum PulumiTokenType {
-//   ORGANIZATION = 'urn:pulumi:token-type:access_token:organization',
-//   TEAM = 'urn:pulumi:token-type:access_token:team',
-//   PERSONAL = 'urn:pulumi:token-type:access_token:personal',
-// }
+export enum PulumiTokenType {
+  ORG = 'urn:pulumi:token-type:access_token:organization',
+  TEAM = 'urn:pulumi:token-type:access_token:team',
+  PERSONAL = 'urn:pulumi:token-type:access_token:personal',
+}
 
 export interface PulumiAuthOptions extends PulumiEscActionOptions {
   /**
@@ -36,8 +36,14 @@ export interface PulumiAuthOptions extends PulumiEscActionOptions {
    */
   readonly organization: string;
 
-  // TODO: can you use anything other than organization?
-  // readonly requestedTokenType?: PulumiTokenType;
+  /**
+   * The type of pulumi token to get
+   *
+   * Note: organization tokens are only valid for enterprise organizations
+   *
+   * @default ORG
+   */
+  readonly requestedTokenType?: PulumiTokenType;
 }
 
 export interface PulumiEscPersonalAccessTokenOptions
@@ -93,6 +99,7 @@ export class PulumiEscSetup {
           with: {
             organization: options.organization,
             'requested-token-type':
+              options.requestedTokenType ??
               'urn:pulumi:token-type:access_token:organization',
           },
           uses: 'pulumi/auth-actions@v1',

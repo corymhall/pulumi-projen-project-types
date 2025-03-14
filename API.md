@@ -5356,6 +5356,7 @@ const pulumiAuthOptions: PulumiAuthOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.organization">organization</a></code> | <code>string</code> | The Pulumi organization to authenticate with. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedTokenType">requestedTokenType</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType">PulumiTokenType</a></code> | The type of pulumi token to get. |
 
 ---
 
@@ -5393,6 +5394,21 @@ public readonly organization: string;
 - *Type:* string
 
 The Pulumi organization to authenticate with.
+
+---
+
+##### `requestedTokenType`<sup>Optional</sup> <a name="requestedTokenType" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedTokenType"></a>
+
+```typescript
+public readonly requestedTokenType: PulumiTokenType;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType">PulumiTokenType</a>
+- *Default:* ORG
+
+The type of pulumi token to get.
+
+Note: organization tokens are only valid for enterprise organizations
 
 ---
 
@@ -11090,4 +11106,32 @@ public readonly permissions: JobPermissions;
 ---
 
 
+
+## Enums <a name="Enums" id="Enums"></a>
+
+### PulumiTokenType <a name="PulumiTokenType" id="@hallcor/pulumi-projen-project-types.PulumiTokenType"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType.ORG">ORG</a></code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType.TEAM">TEAM</a></code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType.PERSONAL">PERSONAL</a></code> | *No description.* |
+
+---
+
+##### `ORG` <a name="ORG" id="@hallcor/pulumi-projen-project-types.PulumiTokenType.ORG"></a>
+
+---
+
+
+##### `TEAM` <a name="TEAM" id="@hallcor/pulumi-projen-project-types.PulumiTokenType.TEAM"></a>
+
+---
+
+
+##### `PERSONAL` <a name="PERSONAL" id="@hallcor/pulumi-projen-project-types.PulumiTokenType.PERSONAL"></a>
+
+---
 
