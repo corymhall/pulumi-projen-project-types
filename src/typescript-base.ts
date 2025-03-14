@@ -1,10 +1,18 @@
 import { JsonPatch } from 'projen';
+import { GithubCredentials } from 'projen/lib/github';
 import { Transform } from 'projen/lib/javascript';
 import { TypeScriptProject as ProjenTypeScriptProject } from 'projen/lib/typescript';
-import { TypeScriptProjectProps } from './typescript-options';
+import { TypeScriptProjectProps } from './structs';
 
 export class TypeScriptProject extends ProjenTypeScriptProject {
   constructor(options: TypeScriptProjectProps) {
+    let githubCredentials: GithubCredentials | undefined;
+    if (options.projenCredentials) {
+      const creds = GithubCredentials.fromPersonalAccessToken();
+      (creds as any).options.setupSteps = options.projenCredentials.setupSteps;
+      (creds as any).options.tokenRef = options.projenCredentials.tokenRef;
+      githubCredentials = creds;
+    }
     super({
       prettier: true,
       prettierOptions: {
@@ -21,6 +29,7 @@ export class TypeScriptProject extends ProjenTypeScriptProject {
         configFilePath: 'jest.config.json',
       },
       ...options,
+      projenCredentials: githubCredentials,
     });
 
     const jestConfig = this.tryFindObjectFile('jest.config.json');

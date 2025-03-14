@@ -2,8 +2,8 @@ import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
-import { PythonComponentOptions } from './PythonComponentOptions';
 import { TagRelease } from './release';
+import { PythonComponentOptions } from './structs';
 
 export class PythonComponent extends PythonProject {
   /**

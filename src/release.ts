@@ -6,7 +6,7 @@ import { DEFAULT_GITHUB_ACTIONS_USER } from 'projen/lib/github/constants';
 
 import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 import { Release as ProjenRelease, ReleaseTrigger } from 'projen/lib/release';
-import { TagReleaseOptions } from './TagReleaseOptions';
+import { TagReleaseOptions } from './structs';
 
 export interface CreateReleaseOptions {
   /**

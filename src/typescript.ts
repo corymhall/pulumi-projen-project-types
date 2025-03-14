@@ -1,7 +1,7 @@
 import { YamlFile } from 'projen';
 import { TagRelease } from './release';
+import { TypeScriptComponentOptions } from './structs';
 import { TypeScriptProject } from './typescript-base';
-import { TypeScriptComponentOptions } from './typescript-options';
 
 export class TypeScriptComponent extends TypeScriptProject {
   constructor(options: TypeScriptComponentOptions) {

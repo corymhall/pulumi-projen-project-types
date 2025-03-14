@@ -4718,6 +4718,122 @@ Write eslint configuration as YAML instead of JSON.
 
 ---
 
+### GithubCredentialsAppOptions <a name="GithubCredentialsAppOptions" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions"></a>
+
+GithubCredentialsAppOptions.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.Initializer"></a>
+
+```typescript
+import { GithubCredentialsAppOptions } from '@hallcor/pulumi-projen-project-types'
+
+const githubCredentialsAppOptions: GithubCredentialsAppOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.clientIdSecret">clientIdSecret</a></code> | <code>string</code> | The name of the secret that contains the app client id. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.permissions">permissions</a></code> | <code>projen.github.workflows.AppPermissions</code> | The permissions granted to the token. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.privateKeySecret">privateKeySecret</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps to inject environment variables from Pulumi ESC. |
+
+---
+
+##### `clientIdSecret`<sup>Optional</sup> <a name="clientIdSecret" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.clientIdSecret"></a>
+
+```typescript
+public readonly clientIdSecret: string;
+```
+
+- *Type:* string
+- *Default:* PROJEN_APP_CLIENT_ID
+
+The name of the secret that contains the app client id.
+
+---
+
+##### `permissions`<sup>Optional</sup> <a name="permissions" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.permissions"></a>
+
+```typescript
+public readonly permissions: AppPermissions;
+```
+
+- *Type:* projen.github.workflows.AppPermissions
+- *Default:* all permissions granted to the app
+
+The permissions granted to the token.
+
+---
+
+##### `privateKeySecret`<sup>Optional</sup> <a name="privateKeySecret" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.privateKeySecret"></a>
+
+```typescript
+public readonly privateKeySecret: string;
+```
+
+- *Type:* string
+
+---
+
+##### `pulumiEscSetup`<sup>Optional</sup> <a name="pulumiEscSetup" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.pulumiEscSetup"></a>
+
+```typescript
+public readonly pulumiEscSetup: PulumiEscSetup;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a>
+- *Default:* do not include pulumi esc setup
+
+Optionally include setup steps to inject environment variables from Pulumi ESC.
+
+---
+
+### GithubCredentialsPersonalAccessTokenOptions <a name="GithubCredentialsPersonalAccessTokenOptions" id="@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions"></a>
+
+GithubCredentialsPersonalAccessTokenOptions.
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.Initializer"></a>
+
+```typescript
+import { GithubCredentialsPersonalAccessTokenOptions } from '@hallcor/pulumi-projen-project-types'
+
+const githubCredentialsPersonalAccessTokenOptions: GithubCredentialsPersonalAccessTokenOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps to inject environment variables from Pulumi ESC. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.secret">secret</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `pulumiEscSetup`<sup>Optional</sup> <a name="pulumiEscSetup" id="@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.pulumiEscSetup"></a>
+
+```typescript
+public readonly pulumiEscSetup: PulumiEscSetup;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a>
+- *Default:* do not include pulumi esc setup
+
+Optionally include setup steps to inject environment variables from Pulumi ESC.
+
+---
+
+##### `secret`<sup>Optional</sup> <a name="secret" id="@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.secret"></a>
+
+```typescript
+public readonly secret: string;
+```
+
+- *Type:* string
+
+---
+
 ### PrettierOptions <a name="PrettierOptions" id="@hallcor/pulumi-projen-project-types.PrettierOptions"></a>
 
 PrettierOptions.
@@ -5192,6 +5308,164 @@ Indent script and style tags in Vue files.
 
 ---
 
+### PulumiAuthOptions <a name="PulumiAuthOptions" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions"></a>
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.Initializer"></a>
+
+```typescript
+import { PulumiAuthOptions } from '@hallcor/pulumi-projen-project-types'
+
+const pulumiAuthOptions: PulumiAuthOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.organization">organization</a></code> | <code>string</code> | The Pulumi organization to authenticate with. |
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The ESC environment to open.
+
+---
+
+##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys"></a>
+
+```typescript
+public readonly keys: string[];
+```
+
+- *Type:* string[]
+- *Default:* all keys from the environment will be injected
+
+list of keys to inject into the current action/workflow environment.
+
+---
+
+##### `organization`<sup>Required</sup> <a name="organization" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.organization"></a>
+
+```typescript
+public readonly organization: string;
+```
+
+- *Type:* string
+
+The Pulumi organization to authenticate with.
+
+---
+
+### PulumiEscActionOptions <a name="PulumiEscActionOptions" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions"></a>
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.Initializer"></a>
+
+```typescript
+import { PulumiEscActionOptions } from '@hallcor/pulumi-projen-project-types'
+
+const pulumiEscActionOptions: PulumiEscActionOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The ESC environment to open.
+
+---
+
+##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.keys"></a>
+
+```typescript
+public readonly keys: string[];
+```
+
+- *Type:* string[]
+- *Default:* all keys from the environment will be injected
+
+list of keys to inject into the current action/workflow environment.
+
+---
+
+### PulumiEscPersonalAccessTokenOptions <a name="PulumiEscPersonalAccessTokenOptions" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions"></a>
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.Initializer"></a>
+
+```typescript
+import { PulumiEscPersonalAccessTokenOptions } from '@hallcor/pulumi-projen-project-types'
+
+const pulumiEscPersonalAccessTokenOptions: PulumiEscPersonalAccessTokenOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.secret">secret</a></code> | <code>string</code> | The secret name for the access token. |
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The ESC environment to open.
+
+---
+
+##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.keys"></a>
+
+```typescript
+public readonly keys: string[];
+```
+
+- *Type:* string[]
+- *Default:* all keys from the environment will be injected
+
+list of keys to inject into the current action/workflow environment.
+
+---
+
+##### `secret`<sup>Optional</sup> <a name="secret" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.secret"></a>
+
+```typescript
+public readonly secret: string;
+```
+
+- *Type:* string
+
+The secret name for the access token.
+
+---
+
 ### PulumiPythonOptions <a name="PulumiPythonOptions" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions"></a>
 
 PulumiPythonOptions.
@@ -5267,14 +5541,11 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.homepage">homepage</a></code> | <code>string</code> | A URL to the website of the project. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.license">license</a></code> | <code>string</code> | License of this package as an SPDX identifier. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.logging">logging</a></code> | <code>projen.LoggerOptions</code> | Configure logging options such as verbosity. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.mergify">mergify</a></code> | <code>boolean</code> | Whether mergify should be enabled on this repository or not. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.mergifyOptions">mergifyOptions</a></code> | <code>projen.github.MergifyOptions</code> | Options for mergify. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.packageName">packageName</a></code> | <code>string</code> | Package name. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenCredentials">projenCredentials</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials">GithubCredentials</a></code> | Choose a method of providing GitHub API access for projen workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcJs">projenrcJs</a></code> | <code>boolean</code> | Use projenrc in javascript. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcJsonOptions</code> | Options for .projenrc.json. |
@@ -5283,7 +5554,6 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcPythonOptions">projenrcPythonOptions</a></code> | <code>projen.python.ProjenrcOptions</code> | Options related to projenrc in python. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcTs">projenrcTs</a></code> | <code>boolean</code> | Use projenrc in TypeScript. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenrcTsOptions">projenrcTsOptions</a></code> | <code>projen.typescript.ProjenrcTsOptions</code> | Options related to projenrc in TypeScript. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenTokenSecret">projenTokenSecret</a></code> | <code>string</code> | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pulumiPythonOptions">pulumiPythonOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions">PulumiPythonOptions</a></code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pytest">pytest</a></code> | <code>boolean</code> | Include pytest tests. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.pytestOptions">pytestOptions</a></code> | <code>projen.python.PytestOptions</code> | pytest options. |
@@ -5619,36 +5889,6 @@ Configure logging options such as verbosity.
 
 ---
 
-##### ~~`mergify`~~<sup>Optional</sup> <a name="mergify" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.mergify"></a>
-
-- *Deprecated:* use `githubOptions.mergify` instead
-
-```typescript
-public readonly mergify: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Whether mergify should be enabled on this repository or not.
-
----
-
-##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="mergifyOptions" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.mergifyOptions"></a>
-
-- *Deprecated:* use `githubOptions.mergifyOptions` instead
-
-```typescript
-public readonly mergifyOptions: MergifyOptions;
-```
-
-- *Type:* projen.github.MergifyOptions
-- *Default:* default options
-
-Options for mergify.
-
----
-
 ##### `outdir`<sup>Optional</sup> <a name="outdir" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.outdir"></a>
 
 ```typescript
@@ -5690,21 +5930,6 @@ The parent project, if this project is part of a bigger project.
 
 ---
 
-##### ~~`projectType`~~<sup>Optional</sup> <a name="projectType" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projectType"></a>
-
-- *Deprecated:* no longer supported at the base project level
-
-```typescript
-public readonly projectType: ProjectType;
-```
-
-- *Type:* projen.ProjectType
-- *Default:* ProjectType.UNKNOWN
-
-Which type of project this is (library/app).
-
----
-
 ##### `projenCommand`<sup>Optional</sup> <a name="projenCommand" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenCommand"></a>
 
 ```typescript
@@ -5726,7 +5951,7 @@ Can be used to customize in special environments.
 public readonly projenCredentials: GithubCredentials;
 ```
 
-- *Type:* projen.github.GithubCredentials
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.GithubCredentials">GithubCredentials</a>
 - *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
 
 Choose a method of providing GitHub API access for projen workflows.
@@ -5843,24 +6068,6 @@ public readonly projenrcTsOptions: ProjenrcTsOptions;
 - *Default:* default options
 
 Options related to projenrc in TypeScript.
-
----
-
-##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="projenTokenSecret" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.projenTokenSecret"></a>
-
-- *Deprecated:* use `projenCredentials`
-
-```typescript
-public readonly projenTokenSecret: string;
-```
-
-- *Type:* string
-- *Default:* "PROJEN_GITHUB_TOKEN"
-
-The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows.
-
-This token needs to have the `repo`, `workflows`
-and `packages` scope.
 
 ---
 
@@ -6680,7 +6887,7 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.prettierOptions">prettierOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions">PrettierOptions</a></code> | Prettier options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenCredentials">projenCredentials</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials">GithubCredentials</a></code> | Choose a method of providing GitHub API access for projen workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenDevDependency">projenDevDependency</a></code> | <code>boolean</code> | Indicates of "projen" should be installed as a devDependency. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenrcJs">projenrcJs</a></code> | <code>boolean</code> | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
@@ -7941,7 +8148,7 @@ Can be used to customize in special environments.
 public readonly projenCredentials: GithubCredentials;
 ```
 
-- *Type:* projen.github.GithubCredentials
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.GithubCredentials">GithubCredentials</a>
 - *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
 
 Choose a method of providing GitHub API access for projen workflows.
@@ -8673,7 +8880,7 @@ const typeScriptProjectProps: TypeScriptProjectProps = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.prettierOptions">prettierOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PrettierOptions">PrettierOptions</a></code> | Prettier options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenCredentials">projenCredentials</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials">GithubCredentials</a></code> | Choose a method of providing GitHub API access for projen workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenDevDependency">projenDevDependency</a></code> | <code>boolean</code> | Indicates of "projen" should be installed as a devDependency. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJs">projenrcJs</a></code> | <code>boolean</code> | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
@@ -9968,7 +10175,7 @@ Can be used to customize in special environments.
 public readonly projenCredentials: GithubCredentials;
 ```
 
-- *Type:* projen.github.GithubCredentials
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.GithubCredentials">GithubCredentials</a>
 - *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
 
 Choose a method of providing GitHub API access for projen workflows.
@@ -10641,6 +10848,178 @@ public readonly yarnBerryOptions: YarnBerryOptions;
 - *Default:* Yarn Berry v4 with all default options
 
 Options for Yarn Berry.
+
+---
+
+## Classes <a name="Classes" id="Classes"></a>
+
+### GithubCredentials <a name="GithubCredentials" id="@hallcor/pulumi-projen-project-types.GithubCredentials"></a>
+
+Represents a method of providing GitHub API access for projen workflows.
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.fromApp">fromApp</a></code> | Provide API access through a GitHub App. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.fromPersonalAccessToken">fromPersonalAccessToken</a></code> | Provide API access through a GitHub personal access token. |
+
+---
+
+##### `fromApp` <a name="fromApp" id="@hallcor/pulumi-projen-project-types.GithubCredentials.fromApp"></a>
+
+```typescript
+import { GithubCredentials } from '@hallcor/pulumi-projen-project-types'
+
+GithubCredentials.fromApp(options?: GithubCredentialsAppOptions)
+```
+
+Provide API access through a GitHub App.
+
+The GitHub App must be installed on the GitHub repo, its App ID and a
+private key must be added as secrets to the repo. The name of the secrets
+can be specified here.
+
+> [https://projen.io/docs/integrations/github/#github-app](https://projen.io/docs/integrations/github/#github-app)
+
+###### `options`<sup>Optional</sup> <a name="options" id="@hallcor/pulumi-projen-project-types.GithubCredentials.fromApp.parameter.options"></a>
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions">GithubCredentialsAppOptions</a>
+
+---
+
+##### `fromPersonalAccessToken` <a name="fromPersonalAccessToken" id="@hallcor/pulumi-projen-project-types.GithubCredentials.fromPersonalAccessToken"></a>
+
+```typescript
+import { GithubCredentials } from '@hallcor/pulumi-projen-project-types'
+
+GithubCredentials.fromPersonalAccessToken(options?: GithubCredentialsPersonalAccessTokenOptions)
+```
+
+Provide API access through a GitHub personal access token.
+
+The token must be added as a secret to the GitHub repo, and the name of the
+secret can be specified here.
+
+> [https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+###### `options`<sup>Optional</sup> <a name="options" id="@hallcor/pulumi-projen-project-types.GithubCredentials.fromPersonalAccessToken.parameter.options"></a>
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions">GithubCredentialsPersonalAccessTokenOptions</a>
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.property.setupSteps">setupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Setup steps to obtain GitHub credentials. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.property.tokenRef">tokenRef</a></code> | <code>string</code> | The value to use in a workflow when a GitHub token is expected. |
+
+---
+
+##### `setupSteps`<sup>Required</sup> <a name="setupSteps" id="@hallcor/pulumi-projen-project-types.GithubCredentials.property.setupSteps"></a>
+
+```typescript
+public readonly setupSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+
+Setup steps to obtain GitHub credentials.
+
+---
+
+##### `tokenRef`<sup>Required</sup> <a name="tokenRef" id="@hallcor/pulumi-projen-project-types.GithubCredentials.property.tokenRef"></a>
+
+```typescript
+public readonly tokenRef: string;
+```
+
+- *Type:* string
+
+The value to use in a workflow when a GitHub token is expected.
+
+This
+typically looks like "${{ some.path.to.a.value }}".
+
+---
+
+
+### PulumiEscSetup <a name="PulumiEscSetup" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup"></a>
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.fromOidcAuth">fromOidcAuth</a></code> | Provides ESC access using OIDC authentication via the pulumi/auth-actions action. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.fromPersonalAccessToken">fromPersonalAccessToken</a></code> | Provides ESC access using a personal access token. |
+
+---
+
+##### `fromOidcAuth` <a name="fromOidcAuth" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.fromOidcAuth"></a>
+
+```typescript
+import { PulumiEscSetup } from '@hallcor/pulumi-projen-project-types'
+
+PulumiEscSetup.fromOidcAuth(options: PulumiAuthOptions)
+```
+
+Provides ESC access using OIDC authentication via the pulumi/auth-actions action.
+
+###### `options`<sup>Required</sup> <a name="options" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.fromOidcAuth.parameter.options"></a>
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions">PulumiAuthOptions</a>
+
+---
+
+##### `fromPersonalAccessToken` <a name="fromPersonalAccessToken" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.fromPersonalAccessToken"></a>
+
+```typescript
+import { PulumiEscSetup } from '@hallcor/pulumi-projen-project-types'
+
+PulumiEscSetup.fromPersonalAccessToken(options: PulumiEscPersonalAccessTokenOptions)
+```
+
+Provides ESC access using a personal access token.
+
+The token must be added as a secret to the GitHub repo, and the name of the
+secret can be specified here.
+
+###### `options`<sup>Required</sup> <a name="options" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.fromPersonalAccessToken.parameter.options"></a>
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions">PulumiEscPersonalAccessTokenOptions</a>
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.setupSteps">setupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.keys">keys</a></code> | <code>string[]</code> | *No description.* |
+
+---
+
+##### `setupSteps`<sup>Required</sup> <a name="setupSteps" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.setupSteps"></a>
+
+```typescript
+public readonly setupSteps: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+
+---
+
+##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.keys"></a>
+
+```typescript
+public readonly keys: string[];
+```
+
+- *Type:* string[]
 
 ---
 
