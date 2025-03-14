@@ -1,4 +1,4 @@
-import { JobStep } from 'projen/lib/github/workflows-model';
+import { JobPermissions, JobStep } from 'projen/lib/github/workflows-model';
 import {
   GithubCredentialsAppOptions,
   GithubCredentialsPersonalAccessTokenOptions,
@@ -7,6 +7,7 @@ import {
 interface GithubCredentialsOptions {
   readonly setupSteps: JobStep[];
   readonly tokenRef: string;
+  readonly permissions?: JobPermissions;
 }
 
 /**
@@ -69,6 +70,7 @@ export class GithubCredentials {
     }
 
     return new GithubCredentials({
+      permissions: options.pulumiEscSetup?.permissions,
       setupSteps: [
         ...setupSteps,
         {
@@ -92,6 +94,10 @@ export class GithubCredentials {
    */
   public get setupSteps(): JobStep[] {
     return [...this.options.setupSteps];
+  }
+
+  public get permissions(): JobPermissions | undefined {
+    return this.options.permissions;
   }
 
   /**

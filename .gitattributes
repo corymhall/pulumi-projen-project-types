@@ -31,7 +31,8 @@
 /src/structs/python-options/component-options.ts linguist-generated
 /src/structs/python-options/index.ts linguist-generated
 /src/structs/python-options/pulumi-options.ts linguist-generated
-/src/structs/tag-release-options.ts linguist-generated
+/src/structs/release-options/index.ts linguist-generated
+/src/structs/release-options/tag-release-options.ts linguist-generated
 /src/structs/typescript-options/component-options.ts linguist-generated
 /src/structs/typescript-options/eslint-options.ts linguist-generated
 /src/structs/typescript-options/index.ts linguist-generated

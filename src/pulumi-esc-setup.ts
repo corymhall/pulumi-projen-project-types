@@ -1,8 +1,13 @@
-import { JobStep } from 'projen/lib/github/workflows-model';
+import {
+  JobPermission,
+  JobPermissions,
+  JobStep,
+} from 'projen/lib/github/workflows-model';
 
 interface PulumiEscSetupOptions {
   readonly setupSteps: JobStep[];
   readonly keys?: string[];
+  readonly permissions?: JobPermissions;
 }
 
 export interface PulumiEscActionOptions {
@@ -80,6 +85,9 @@ export class PulumiEscSetup {
   public static fromOidcAuth(options: PulumiAuthOptions) {
     return new PulumiEscSetup({
       keys: options.keys,
+      permissions: {
+        idToken: JobPermission.WRITE,
+      },
       setupSteps: [
         {
           with: {
@@ -100,6 +108,10 @@ export class PulumiEscSetup {
     });
   }
   private constructor(private readonly options: PulumiEscSetupOptions) {}
+
+  public get permissions(): JobPermissions | undefined {
+    return this.options.permissions;
+  }
 
   public get setupSteps() {
     return this.options.setupSteps;

@@ -41,6 +41,11 @@ export function githubStructs(project: TypeScriptProject) {
   })
     .mixin(Struct.fromFqn('projen.github.GithubCredentialsAppOptions'))
     .add(pulumiEscSetup)
+    .update('privateKeySecret', {
+      docs: {
+        default: 'PROJEN_APP_PRIVATE_KEY',
+      },
+    })
     .replace('appIdSecret', {
       name: 'clientIdSecret',
       type: { primitive: PrimitiveType.String },

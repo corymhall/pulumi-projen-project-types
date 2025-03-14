@@ -4774,6 +4774,7 @@ public readonly privateKeySecret: string;
 ```
 
 - *Type:* string
+- *Default:* PROJEN_APP_PRIVATE_KEY
 
 ---
 
@@ -4831,6 +4832,36 @@ public readonly secret: string;
 ```
 
 - *Type:* string
+
+---
+
+### GitTagPublishOptions <a name="GitTagPublishOptions" id="@hallcor/pulumi-projen-project-types.GitTagPublishOptions"></a>
+
+#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.GitTagPublishOptions.Initializer"></a>
+
+```typescript
+import { GitTagPublishOptions } from '@hallcor/pulumi-projen-project-types'
+
+const gitTagPublishOptions: GitTagPublishOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GitTagPublishOptions.property.permissions">permissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | Additional permissions to add to the Git Tag Job. |
+
+---
+
+##### `permissions`<sup>Optional</sup> <a name="permissions" id="@hallcor/pulumi-projen-project-types.GitTagPublishOptions.property.permissions"></a>
+
+```typescript
+public readonly permissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
+
+Additional permissions to add to the Git Tag Job.
 
 ---
 
@@ -6281,6 +6312,7 @@ const tagReleaseOptions: TagReleaseOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.githubRelease">githubRelease</a></code> | <code>boolean</code> | Create a GitHub release for each release. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.gitIdentity">gitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.gitTagPublishOptions">gitTagPublishOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.GitTagPublishOptions">GitTagPublishOptions</a></code> | Additional workflow options for the git tag job. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
@@ -6405,6 +6437,18 @@ public readonly gitIdentity: GitIdentity;
 - *Default:* github-actions user
 
 The git identity to use when pushing the release commit and tag Note: if you use the default github-actions user then the Push/Tag will not trigger any other workflows.
+
+---
+
+##### `gitTagPublishOptions`<sup>Optional</sup> <a name="gitTagPublishOptions" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.gitTagPublishOptions"></a>
+
+```typescript
+public readonly gitTagPublishOptions: GitTagPublishOptions;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.GitTagPublishOptions">GitTagPublishOptions</a>
+
+Additional workflow options for the git tag job.
 
 ---
 
@@ -10916,6 +10960,7 @@ secret can be specified here.
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.property.setupSteps">setupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Setup steps to obtain GitHub credentials. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.property.tokenRef">tokenRef</a></code> | <code>string</code> | The value to use in a workflow when a GitHub token is expected. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentials.property.permissions">permissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | *No description.* |
 
 ---
 
@@ -10943,6 +10988,16 @@ The value to use in a workflow when a GitHub token is expected.
 
 This
 typically looks like "${{ some.path.to.a.value }}".
+
+---
+
+##### `permissions`<sup>Optional</sup> <a name="permissions" id="@hallcor/pulumi-projen-project-types.GithubCredentials.property.permissions"></a>
+
+```typescript
+public readonly permissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
 
 ---
 
@@ -11000,6 +11055,7 @@ secret can be specified here.
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.setupSteps">setupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.keys">keys</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.permissions">permissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | *No description.* |
 
 ---
 
@@ -11020,6 +11076,16 @@ public readonly keys: string[];
 ```
 
 - *Type:* string[]
+
+---
+
+##### `permissions`<sup>Optional</sup> <a name="permissions" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.permissions"></a>
+
+```typescript
+public readonly permissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
 
 ---
 

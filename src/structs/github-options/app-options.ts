@@ -7,6 +7,7 @@ import type { PulumiEscSetup } from '../../';
  */
 export interface GithubCredentialsAppOptions {
   /**
+   * @default PROJEN_APP_PRIVATE_KEY
    * @stability experimental
    */
   readonly privateKeySecret?: string;

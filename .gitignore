@@ -54,11 +54,12 @@ junit.xml
 tsconfig.json
 !/API.md
 !/src/structs/index.ts
+!/src/structs/release-options/index.ts
 !/src/structs/typescript-options/index.ts
 !/src/structs/python-options/index.ts
 !/src/structs/github-options/index.ts
 !/.projenrc.ts
-!/src/structs/tag-release-options.ts
+!/src/structs/release-options/tag-release-options.ts
 !/src/structs/typescript-options/eslint-options.ts
 !/src/structs/typescript-options/prettier-settings.ts
 !/src/structs/typescript-options/prettier-options.ts

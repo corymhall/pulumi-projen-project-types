@@ -5,6 +5,7 @@ import { TypeScriptProject } from './typescript-base';
 
 export class TypeScriptComponent extends TypeScriptProject {
   constructor(options: TypeScriptComponentOptions) {
+    const projenCredentials = options.projenCredentials;
     super({
       ...options,
       release: false,
@@ -20,11 +21,15 @@ export class TypeScriptComponent extends TypeScriptProject {
     });
 
     const versionFile = this.package.file.path;
+    const permissions = projenCredentials?.permissions;
 
     new TagRelease(this, {
       ...options,
       artifactsDirectory: this.artifactsDirectory,
       branch: options.defaultReleaseBranch ?? 'main',
+      gitTagPublishOptions: {
+        permissions,
+      },
       versionFile,
       task: this.packageTask,
       releaseTrigger: options.releaseTrigger,
