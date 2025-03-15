@@ -30,6 +30,42 @@ export enum PulumiTokenType {
   PERSONAL = 'urn:pulumi:token-type:access_token:personal',
 }
 
+export abstract class PulumiToken {
+  /**
+   * Note: organization tokens are only valid for enterprise organizations
+   */
+  public static fromOrgToken(scope?: string): PulumiToken {
+    return {
+      scope,
+      tokenType: PulumiTokenType.ORG,
+    };
+  }
+
+  /**
+   * @param userName the username of the Pulumi user to request the user token. Defaults to the organization name
+   */
+  public static fromPersonalToken(userName?: string): PulumiToken {
+    return {
+      scope: `user:${userName ?? 'USER_NAME'}`,
+      tokenType: PulumiTokenType.PERSONAL,
+    };
+  }
+
+  public static fromTeamToken(teamName: string): PulumiToken {
+    return {
+      scope: `team:${teamName}`,
+      tokenType: PulumiTokenType.TEAM,
+    };
+  }
+
+  /**
+   * The token scope. Scope is only optional for
+   * organization tokens
+   */
+  public abstract scope?: string;
+  public abstract tokenType: PulumiTokenType;
+}
+
 export interface PulumiAuthOptions extends PulumiEscActionOptions {
   /**
    * The Pulumi organization to authenticate with
@@ -39,11 +75,10 @@ export interface PulumiAuthOptions extends PulumiEscActionOptions {
   /**
    * The type of pulumi token to get
    *
-   * Note: organization tokens are only valid for enterprise organizations
    *
-   * @default ORG
+   * @default PulumiToken.fromPersonalToken()
    */
-  readonly requestedTokenType?: PulumiTokenType;
+  readonly requestedToken?: PulumiToken;
 }
 
 export interface PulumiEscPersonalAccessTokenOptions
@@ -89,6 +124,17 @@ export class PulumiEscSetup {
    * action.
    */
   public static fromOidcAuth(options: PulumiAuthOptions) {
+    const token =
+      options.requestedToken ??
+      PulumiToken.fromPersonalToken(options.organization);
+    const scope = token.scope
+      ? token.scope.replace('USER_NAME', options.organization)
+      : undefined;
+    if (token.tokenType !== PulumiTokenType.ORG && !scope) {
+      throw new Error(
+        `PulumiTokenType ${token.tokenType} requires a "scope" to be set`,
+      );
+    }
     return new PulumiEscSetup({
       keys: options.keys,
       permissions: {
@@ -98,9 +144,8 @@ export class PulumiEscSetup {
         {
           with: {
             organization: options.organization,
-            'requested-token-type':
-              options.requestedTokenType ??
-              'urn:pulumi:token-type:access_token:organization',
+            'requested-token-type': token.tokenType,
+            scope: scope,
           },
           uses: 'pulumi/auth-actions@v1',
         },

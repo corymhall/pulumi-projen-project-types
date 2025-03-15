@@ -5356,7 +5356,7 @@ const pulumiAuthOptions: PulumiAuthOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.organization">organization</a></code> | <code>string</code> | The Pulumi organization to authenticate with. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedTokenType">requestedTokenType</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType">PulumiTokenType</a></code> | The type of pulumi token to get. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedToken">requestedToken</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken">PulumiToken</a></code> | The type of pulumi token to get. |
 
 ---
 
@@ -5397,18 +5397,16 @@ The Pulumi organization to authenticate with.
 
 ---
 
-##### `requestedTokenType`<sup>Optional</sup> <a name="requestedTokenType" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedTokenType"></a>
+##### `requestedToken`<sup>Optional</sup> <a name="requestedToken" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedToken"></a>
 
 ```typescript
-public readonly requestedTokenType: PulumiTokenType;
+public readonly requestedToken: PulumiToken;
 ```
 
-- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType">PulumiTokenType</a>
-- *Default:* ORG
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiToken">PulumiToken</a>
+- *Default:* PulumiToken.fromPersonalToken()
 
 The type of pulumi token to get.
-
-Note: organization tokens are only valid for enterprise organizations
 
 ---
 
@@ -11102,6 +11100,115 @@ public readonly permissions: JobPermissions;
 ```
 
 - *Type:* projen.github.workflows.JobPermissions
+
+---
+
+
+### PulumiToken <a name="PulumiToken" id="@hallcor/pulumi-projen-project-types.PulumiToken"></a>
+
+#### Initializers <a name="Initializers" id="@hallcor/pulumi-projen-project-types.PulumiToken.Initializer"></a>
+
+```typescript
+import { PulumiToken } from '@hallcor/pulumi-projen-project-types'
+
+new PulumiToken()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken.fromOrgToken">fromOrgToken</a></code> | Note: organization tokens are only valid for enterprise organizations. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken.fromPersonalToken">fromPersonalToken</a></code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken.fromTeamToken">fromTeamToken</a></code> | *No description.* |
+
+---
+
+##### `fromOrgToken` <a name="fromOrgToken" id="@hallcor/pulumi-projen-project-types.PulumiToken.fromOrgToken"></a>
+
+```typescript
+import { PulumiToken } from '@hallcor/pulumi-projen-project-types'
+
+PulumiToken.fromOrgToken(scope?: string)
+```
+
+Note: organization tokens are only valid for enterprise organizations.
+
+###### `scope`<sup>Optional</sup> <a name="scope" id="@hallcor/pulumi-projen-project-types.PulumiToken.fromOrgToken.parameter.scope"></a>
+
+- *Type:* string
+
+---
+
+##### `fromPersonalToken` <a name="fromPersonalToken" id="@hallcor/pulumi-projen-project-types.PulumiToken.fromPersonalToken"></a>
+
+```typescript
+import { PulumiToken } from '@hallcor/pulumi-projen-project-types'
+
+PulumiToken.fromPersonalToken(userName?: string)
+```
+
+###### `userName`<sup>Optional</sup> <a name="userName" id="@hallcor/pulumi-projen-project-types.PulumiToken.fromPersonalToken.parameter.userName"></a>
+
+- *Type:* string
+
+the username of the Pulumi user to request the user token.
+
+Defaults to the organization name
+
+---
+
+##### `fromTeamToken` <a name="fromTeamToken" id="@hallcor/pulumi-projen-project-types.PulumiToken.fromTeamToken"></a>
+
+```typescript
+import { PulumiToken } from '@hallcor/pulumi-projen-project-types'
+
+PulumiToken.fromTeamToken(teamName: string)
+```
+
+###### `teamName`<sup>Required</sup> <a name="teamName" id="@hallcor/pulumi-projen-project-types.PulumiToken.fromTeamToken.parameter.teamName"></a>
+
+- *Type:* string
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken.property.tokenType">tokenType</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType">PulumiTokenType</a></code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken.property.scope">scope</a></code> | <code>string</code> | The token scope. |
+
+---
+
+##### `tokenType`<sup>Required</sup> <a name="tokenType" id="@hallcor/pulumi-projen-project-types.PulumiToken.property.tokenType"></a>
+
+```typescript
+public readonly tokenType: PulumiTokenType;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiTokenType">PulumiTokenType</a>
+
+---
+
+##### `scope`<sup>Optional</sup> <a name="scope" id="@hallcor/pulumi-projen-project-types.PulumiToken.property.scope"></a>
+
+```typescript
+public readonly scope: string;
+```
+
+- *Type:* string
+
+The token scope.
+
+Scope is only optional for
+organization tokens
 
 ---
 
