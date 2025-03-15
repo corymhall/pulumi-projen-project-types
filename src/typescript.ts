@@ -1,5 +1,4 @@
 import { YamlFile } from 'projen';
-import { setWorkflowPermissions } from './internal/jsii-project';
 import { TagRelease } from './release';
 import { TypeScriptComponentOptions } from './structs';
 import { TypeScriptProject } from './typescript-base';
@@ -20,8 +19,6 @@ export class TypeScriptComponent extends TypeScriptProject {
         runtime: 'nodejs',
       },
     });
-
-    setWorkflowPermissions(this, projenCredentials);
 
     const versionFile = this.package.file.path;
     const permissions = projenCredentials?.permissions;
