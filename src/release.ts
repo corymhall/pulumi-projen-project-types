@@ -4,9 +4,20 @@ import { Project, Task } from 'projen';
 import { GitHub, WorkflowSteps } from 'projen/lib/github';
 import { DEFAULT_GITHUB_ACTIONS_USER } from 'projen/lib/github/constants';
 
-import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
+import {
+  JobPermission,
+  JobPermissions,
+  JobStep,
+} from 'projen/lib/github/workflows-model';
 import { Release as ProjenRelease, ReleaseTrigger } from 'projen/lib/release';
-import { TagReleaseOptions } from './TagReleaseOptions';
+import { TagReleaseOptions } from './structs';
+
+export interface GitTagPublishOptions {
+  /**
+   * Additional permissions to add to the Git Tag Job
+   */
+  readonly permissions?: JobPermissions;
+}
 
 export interface CreateReleaseOptions {
   /**
@@ -222,6 +233,7 @@ export class TagRelease extends ProjenRelease {
       release_git: {
         permissions: {
           contents: JobPermission.WRITE,
+          ...props.gitTagPublishOptions?.permissions,
         },
         if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release == 'true'",
         name: 'Publish Git Tag',

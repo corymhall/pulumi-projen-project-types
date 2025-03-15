@@ -1,9 +1,9 @@
 import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
-import { AutoMerge } from 'projen/lib/github';
+import { AutoMerge, GithubCredentials } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
-import { PythonComponentOptions } from './PythonComponentOptions';
 import { TagRelease } from './release';
+import { PythonComponentOptions } from './structs';
 
 export class PythonComponent extends PythonProject {
   /**
@@ -24,6 +24,14 @@ export class PythonComponent extends PythonProject {
         'hallcor.pulumi-projen-project-types',
       ];
     }
+    const projenCredentials = options.projenCredentials;
+    let githubCredentials: GithubCredentials | undefined;
+    if (options.projenCredentials) {
+      const creds = GithubCredentials.fromPersonalAccessToken();
+      (creds as any).options.setupSteps = options.projenCredentials.setupSteps;
+      (creds as any).options.tokenRef = options.projenCredentials.tokenRef;
+      githubCredentials = creds;
+    }
     super({
       ...initOptions,
       pip: true,
@@ -34,6 +42,7 @@ export class PythonComponent extends PythonProject {
       venvOptions: {
         envdir: 'venv',
       },
+      projenCredentials: githubCredentials,
     });
     const pulumiVersion =
       options.pulumiPythonOptions?.pulumiVersion ?? '>=3.153 <4.0';
@@ -141,6 +150,20 @@ export class PythonComponent extends PythonProject {
       ],
     });
 
+    const buildName = this.buildWorkflow.name;
+    const buildWorkflow = this.github.tryFindWorkflow(buildName);
+    if (!buildWorkflow) {
+      throw new Error(`could not find build workflow ${buildName}`);
+    }
+    const mutationJob = buildWorkflow.getJob('self-mutation');
+    buildWorkflow?.updateJob('self-mutation', {
+      ...mutationJob,
+      permissions: {
+        ...mutationJob.permissions,
+        ...projenCredentials?.permissions,
+      },
+    });
+
     if ((options.autoMerge ?? true) && this.github?.mergify) {
       this.autoMerge = new AutoMerge(this.github, options.autoMergeOptions);
       if (options.githubOptions?.pullRequestLint ?? true) {
@@ -160,6 +183,9 @@ export class PythonComponent extends PythonProject {
       versionFile: versionFilePath,
       releaseTrigger: options.releaseTrigger,
       gitIdentity: options.gitIdentity,
+      gitTagPublishOptions: {
+        permissions: projenCredentials?.permissions,
+      },
     });
   }
 }
