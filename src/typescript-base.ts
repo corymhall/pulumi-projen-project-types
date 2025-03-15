@@ -2,8 +2,8 @@ import { JsonPatch } from 'projen';
 import { GithubCredentials } from 'projen/lib/github';
 import { Transform } from 'projen/lib/javascript';
 import { TypeScriptProject as ProjenTypeScriptProject } from 'projen/lib/typescript';
-import { TypeScriptProjectProps } from './structs';
 import { setWorkflowPermissions } from './internal/jsii-project';
+import { TypeScriptProjectProps } from './structs';
 
 export class TypeScriptProject extends ProjenTypeScriptProject {
   constructor(options: TypeScriptProjectProps) {
