@@ -142,10 +142,13 @@ export class PulumiEscSetup {
       },
       setupSteps: [
         {
+          name: 'Generate Pulumi Access Token',
+          id: 'generate_pulumi_token',
           with: {
             organization: options.organization,
             'requested-token-type': token.tokenType,
             scope: scope,
+            'export-environment-variables': false,
           },
           uses: 'pulumi/auth-actions@v1',
         },
@@ -154,6 +157,10 @@ export class PulumiEscSetup {
           with: {
             environment: options.environment,
             keys: options.keys ? options.keys.join(',') : undefined,
+          },
+          env: {
+            PULUMI_ACCESS_TOKEN:
+              '${{ steps.generate_pulumi_token.outputs.pulumi-access-token }}',
           },
         },
       ],
