@@ -2,10 +2,12 @@ import { JsonPatch } from 'projen';
 import { GithubCredentials } from 'projen/lib/github';
 import { Transform } from 'projen/lib/javascript';
 import { TypeScriptProject as ProjenTypeScriptProject } from 'projen/lib/typescript';
+import { setWorkflowPermissions } from './internal/jsii-project';
 import { TypeScriptProjectProps } from './structs';
 
 export class TypeScriptProject extends ProjenTypeScriptProject {
   constructor(options: TypeScriptProjectProps) {
+    const projenCredentials = options.projenCredentials;
     let githubCredentials: GithubCredentials | undefined;
     if (options.projenCredentials) {
       const creds = GithubCredentials.fromPersonalAccessToken();
@@ -31,6 +33,8 @@ export class TypeScriptProject extends ProjenTypeScriptProject {
       ...options,
       projenCredentials: githubCredentials,
     });
+
+    setWorkflowPermissions(this, projenCredentials);
 
     const jestConfig = this.tryFindObjectFile('jest.config.json');
     jestConfig?.patch(

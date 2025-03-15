@@ -1,4 +1,4 @@
-import { cdk, JsonPatch } from 'projen';
+import { JsonPatch } from 'projen';
 import {
   NodePackageManager,
   NpmAccess,
@@ -6,7 +6,10 @@ import {
   UpgradeDependenciesSchedule,
 } from 'projen/lib/javascript';
 import { addTypes } from './projenrc';
-const project = new cdk.JsiiProject({
+import { GithubCredentials, PulumiEscSetup } from './src';
+import { JsiiProject } from './src/internal/jsii-project';
+
+const project = new JsiiProject({
   author: 'corymhall',
   authorAddress: '43035978+corymhall@users.noreply.github.com',
   defaultReleaseBranch: 'main',
@@ -19,6 +22,12 @@ const project = new cdk.JsiiProject({
   devDeps: ['@mrgrain/jsii-struct-builder', '@swc/jest', '@swc/core'],
   peerDeps: ['constructs', 'projen'],
   prettier: true,
+  projenCredentials: GithubCredentials.fromApp({
+    pulumiEscSetup: PulumiEscSetup.fromOidcAuth({
+      environment: 'github/public',
+      organization: 'corymhall',
+    }),
+  }),
   githubOptions: {
     mergify: true,
     workflows: true,
@@ -37,7 +46,7 @@ const project = new cdk.JsiiProject({
   },
   autoApproveOptions: {
     label: 'auto-approve',
-    allowedUsernames: ['corymhall'],
+    allowedUsernames: ['corymhall', 'hallcor-projen-app[bot]'],
   },
   jestOptions: {
     configFilePath: 'jest.config.json',
