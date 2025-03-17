@@ -23,17 +23,19 @@ export class TypeScriptComponent extends TypeScriptProject {
     const versionFile = this.package.file.path;
     const permissions = projenCredentials?.permissions;
 
-    new TagRelease(this, {
-      ...options,
-      artifactsDirectory: this.artifactsDirectory,
-      branch: options.defaultReleaseBranch ?? 'main',
-      gitTagPublishOptions: {
-        permissions,
-      },
-      versionFile,
-      task: this.packageTask,
-      releaseTrigger: options.releaseTrigger,
-      gitIdentity: options.gitIdentity,
-    });
+    if (options.release ?? true) {
+      new TagRelease(this, {
+        ...options,
+        artifactsDirectory: this.artifactsDirectory,
+        branch: options.defaultReleaseBranch ?? 'main',
+        gitTagPublishOptions: {
+          permissions,
+        },
+        versionFile,
+        task: this.packageTask,
+        releaseTrigger: options.releaseTrigger,
+        gitIdentity: options.gitIdentity,
+      });
+    }
   }
 }

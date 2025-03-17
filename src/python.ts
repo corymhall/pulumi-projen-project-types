@@ -176,16 +176,18 @@ export class PythonComponent extends PythonProject {
       });
     }
 
-    new TagRelease(this, {
-      artifactsDirectory: 'dist',
-      branch: 'main',
-      task: this.packageTask,
-      versionFile: versionFilePath,
-      releaseTrigger: options.releaseTrigger,
-      gitIdentity: options.gitIdentity,
-      gitTagPublishOptions: {
-        permissions: projenCredentials?.permissions,
-      },
-    });
+    if (options.release ?? true) {
+      new TagRelease(this, {
+        artifactsDirectory: 'dist',
+        branch: 'main',
+        task: this.packageTask,
+        versionFile: versionFilePath,
+        releaseTrigger: options.releaseTrigger,
+        gitIdentity: options.gitIdentity,
+        gitTagPublishOptions: {
+          permissions: projenCredentials?.permissions,
+        },
+      });
+    }
   }
 }

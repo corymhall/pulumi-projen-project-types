@@ -62,7 +62,6 @@ export function typescriptStructs(project: TypeScriptProject) {
     .mixin(tsProps)
     .omit(
       'package',
-      'release',
       'releaseToNpm',
       'package',
       'github',
