@@ -42,7 +42,10 @@ const project = new JsiiProject({
     prettier: true,
   },
   depsUpgradeOptions: {
-    workflowOptions: { schedule: UpgradeDependenciesSchedule.WEEKLY },
+    workflowOptions: {
+      labels: ['auto-approve'],
+      schedule: UpgradeDependenciesSchedule.WEEKLY,
+    },
   },
   autoApproveOptions: {
     label: 'auto-approve',
