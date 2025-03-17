@@ -756,6 +756,12 @@ export interface TypeScriptComponentOptions {
    */
   readonly pullRequestTemplateContents?: Array<string>;
   /**
+   * Add release management to this project.
+   * @default - true (false for subprojects)
+   * @stability experimental
+   */
+  readonly release?: boolean;
+  /**
    * Workflow steps to use in order to bootstrap this repo.
    * @default "yarn install --frozen-lockfile && yarn projen"
    * @stability experimental

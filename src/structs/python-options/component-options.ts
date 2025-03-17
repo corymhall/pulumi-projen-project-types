@@ -315,6 +315,11 @@ export interface PythonComponentOptions {
    */
   readonly name: string;
   /**
+   * Add release management to this project
+   * @default true
+   */
+  readonly release?: boolean;
+  /**
    * The git identity to use when pushing the release commit and tag
    * Note: if you use the default github-actions user then the
    * Push/Tag will not trigger any other workflows

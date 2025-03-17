@@ -44,6 +44,15 @@ export function pythonStructs(project: TypeScriptProject) {
       'setupConfig',
       'setupTools',
     )
+    .add({
+      name: 'release',
+      type: { primitive: PrimitiveType.Boolean },
+      optional: true,
+      docs: {
+        summary: 'Add release management to this project',
+        default: 'true',
+      },
+    })
     .add(gitIdentity)
     .update('projenCredentials', {
       type: { fqn: '@hallcor/pulumi-projen-project-types.GithubCredentials' },
