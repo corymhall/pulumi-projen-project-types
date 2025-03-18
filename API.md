@@ -5570,6 +5570,7 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.build.BuildWorkflowCommonOptions</code> | Options for the PR build workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.classifiers">classifiers</a></code> | <code>string[]</code> | A list of PyPI trove classifiers that describe the project. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
@@ -5726,6 +5727,18 @@ Configure options for automatic merging on GitHub.
 
 Has no effect if
 `github.mergify` or `autoMerge` is set to false.
+
+---
+
+##### `buildWorkflowOptions`<sup>Optional</sup> <a name="buildWorkflowOptions" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.buildWorkflowOptions"></a>
+
+```typescript
+public readonly buildWorkflowOptions: BuildWorkflowCommonOptions;
+```
+
+- *Type:* projen.build.BuildWorkflowCommonOptions
+
+Options for the PR build workflow.
 
 ---
 
