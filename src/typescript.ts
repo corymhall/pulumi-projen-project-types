@@ -40,7 +40,7 @@ export class TypeScriptComponent extends TypeScriptProject {
     this.postCompileTask.spawn(
       this.addTask('get-schema', {
         description: 'Validate schema is valid',
-        exec: 'pulumi package get-schema ./',
+        exec: 'pulumi package get-schema ./ > /dev/null',
       }),
     );
 

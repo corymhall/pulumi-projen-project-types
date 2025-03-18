@@ -56,6 +56,13 @@ export class PythonComponent extends PythonProject {
 
     const componentName = options.componentName ?? this.name;
 
+    this.postCompileTask.spawn(
+      this.addTask('get-schema', {
+        description: 'Validate schema is valid',
+        exec: 'pulumi package get-schema ./ > /dev/null',
+      }),
+    );
+
     new SampleDir(this, this.moduleName, {
       files: {
         '__init__.py': '',
