@@ -138,15 +138,23 @@ export class PythonComponent extends PythonProject {
     }
 
     this.buildWorkflow = new BuildWorkflow(this, {
+      ...options.buildWorkflowOptions,
       buildTask: this.buildTask,
       artifactsDirectory: 'dist',
       preBuildSteps: [
+        ...(options.buildWorkflowOptions?.preBuildSteps ?? []),
         {
           name: 'Setup Python',
           uses: 'actions/setup-python@v5',
         },
         { run: 'python -m venv venv' },
         { run: this.github.project.runTaskCommand(installTask) },
+        {
+          uses: 'pulumi/actions@v6',
+          with: {
+            'pulumi-version': 'latest',
+          },
+        },
       ],
     });
 

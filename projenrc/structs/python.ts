@@ -45,6 +45,14 @@ export function pythonStructs(project: TypeScriptProject) {
       'setupTools',
     )
     .add({
+      name: 'buildWorkflowOptions',
+      type: { fqn: 'projen.build.BuildWorkflowCommonOptions' },
+      optional: true,
+      docs: {
+        summary: 'Options for the PR build workflow.',
+      },
+    })
+    .add({
       name: 'release',
       type: { primitive: PrimitiveType.Boolean },
       optional: true,
