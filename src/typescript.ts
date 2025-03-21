@@ -1,5 +1,3 @@
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
 import { SampleDir, YamlFile } from 'projen';
 import { TagRelease } from './release';
 import { TypeScriptComponentOptions } from './structs';
@@ -27,9 +25,6 @@ export class TypeScriptComponent extends TypeScriptProject {
       },
     });
 
-    const prev = this.readPackageJson();
-    this.package.addVersion(prev.version);
-
     this.addDeps('@pulumi/pulumi');
     new YamlFile(this, 'PulumiPlugin.yaml', {
       obj: {
@@ -44,7 +39,6 @@ export class TypeScriptComponent extends TypeScriptProject {
       }),
     );
 
-    const versionFile = this.package.file.path;
     const permissions = projenCredentials?.permissions;
 
     if (options.sampleCode ?? true) {
@@ -120,20 +114,11 @@ export class TypeScriptComponent extends TypeScriptProject {
         gitTagPublishOptions: {
           permissions,
         },
-        versionFile,
+        versionFile: this.package.file.path,
         task: this.packageTask,
         releaseTrigger: options.releaseTrigger,
         gitIdentity: options.gitIdentity,
       });
     }
-  }
-
-  private readPackageJson() {
-    const file = join(this.outdir, 'package.json');
-    if (!existsSync(file)) {
-      return undefined;
-    }
-
-    return JSON.parse(readFileSync(file, 'utf-8'));
   }
 }

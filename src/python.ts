@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge, GithubCredentials } from 'projen/lib/github';
@@ -113,25 +114,18 @@ export class PythonComponent extends PythonProject {
       ),
     });
 
-    const versionFilePath = 'version.json';
+    const artifactsDirectory = 'dist';
+    const versionFilePath = join(artifactsDirectory, 'version.json');
 
     new SampleFile(this, '__main__.py', {
       contents: [
         'from pulumi.provider.experimental import component_provider_host, Metadata',
-        'import os',
-        'import json',
-        '',
-        'dir = os.path.dirname(os.path.abspath(__file__))',
-        `version_file_path = os.path.join(dir, "${versionFilePath}")`,
-        'with open(version_file_path, "r") as f:',
-        '    pyproject = json.load(f)',
-        'version = pyproject["version"]',
         '',
         'if __name__ == "__main__":',
         '    # Call the component provider host. This will discover any ComponentResource',
         '    # subclasses in this package, infer their schema and host a provider that',
         '    # allows constructing these components from a Pulumi program.',
-        `    component_provider_host(Metadata("${componentName}", version))`,
+        `    component_provider_host(Metadata("${componentName}"))`,
       ].join('\n'),
     });
 
@@ -193,7 +187,7 @@ export class PythonComponent extends PythonProject {
 
     if (options.release ?? true) {
       new TagRelease(this, {
-        artifactsDirectory: 'dist',
+        artifactsDirectory,
         branch: 'main',
         task: this.packageTask,
         versionFile: versionFilePath,
