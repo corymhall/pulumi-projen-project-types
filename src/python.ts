@@ -3,7 +3,7 @@ import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge, GithubCredentials } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
-import { TagRelease } from './release';
+import { Release } from 'projen/lib/release';
 import { PythonComponentOptions } from './structs';
 
 export class PythonComponent extends PythonProject {
@@ -104,16 +104,6 @@ export class PythonComponent extends PythonProject {
       },
     });
 
-    new SampleFile(this, 'version.json', {
-      contents: JSON.stringify(
-        {
-          version: '0.0.0',
-        },
-        undefined,
-        2,
-      ),
-    });
-
     const artifactsDirectory = 'dist';
     const versionFilePath = join(artifactsDirectory, 'version.json');
 
@@ -186,16 +176,12 @@ export class PythonComponent extends PythonProject {
     }
 
     if (options.release ?? true) {
-      new TagRelease(this, {
+      new Release(this, {
         artifactsDirectory,
         branch: 'main',
         task: this.packageTask,
         versionFile: versionFilePath,
         releaseTrigger: options.releaseTrigger,
-        gitIdentity: options.gitIdentity,
-        gitTagPublishOptions: {
-          permissions: projenCredentials?.permissions,
-        },
       });
     }
   }

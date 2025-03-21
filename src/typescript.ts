@@ -1,14 +1,11 @@
 import { SampleDir, YamlFile } from 'projen';
-import { TagRelease } from './release';
 import { TypeScriptComponentOptions } from './structs';
 import { TypeScriptProject } from './typescript-base';
 
 export class TypeScriptComponent extends TypeScriptProject {
   constructor(options: TypeScriptComponentOptions) {
-    const projenCredentials = options.projenCredentials;
     super({
       ...options,
-      release: false,
       entrypoint: options.entrypoint ?? 'src/index.ts',
       package: false,
       sampleCode: false,
@@ -38,8 +35,6 @@ export class TypeScriptComponent extends TypeScriptProject {
         exec: 'pulumi package get-schema ./ > /dev/null',
       }),
     );
-
-    const permissions = projenCredentials?.permissions;
 
     if (options.sampleCode ?? true) {
       new SampleDir(this, 'src', {
@@ -103,21 +98,6 @@ export class TypeScriptComponent extends TypeScriptProject {
             '}\n',
           ].join('\n'),
         },
-      });
-    }
-
-    if (options.release ?? true) {
-      new TagRelease(this, {
-        ...options,
-        artifactsDirectory: this.artifactsDirectory,
-        branch: options.defaultReleaseBranch ?? 'main',
-        gitTagPublishOptions: {
-          permissions,
-        },
-        versionFile: this.package.file.path,
-        task: this.packageTask,
-        releaseTrigger: options.releaseTrigger,
-        gitIdentity: options.gitIdentity,
       });
     }
   }
