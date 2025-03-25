@@ -332,6 +332,11 @@ export interface PythonComponentOptions {
   readonly gitIdentity?: github.GitIdentity;
   readonly pulumiPythonOptions?: PulumiPythonOptions;
   /**
+   * The name of the pulumi component
+   * @default the project `name`
+   */
+  readonly componentName?: string;
+  /**
    * The release trigger to use.
    * @default Continuous releases (`ReleaseTrigger.continuous()`)
    * @stability experimental

@@ -64,7 +64,6 @@ tsconfig.json
 !/src/structs/typescript-options/prettier-settings.ts
 !/src/structs/typescript-options/prettier-options.ts
 !/src/structs/typescript-options/project-props.ts
-!/src/structs/typescript-options/pulumi-options.ts
 !/src/structs/typescript-options/component-options.ts
 !/src/structs/python-options/pulumi-options.ts
 !/src/structs/python-options/component-options.ts

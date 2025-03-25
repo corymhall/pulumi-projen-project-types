@@ -22,16 +22,10 @@ export class TypeScriptComponent extends TypeScriptProject {
       },
     });
 
-    if (options.pulumiOptions?.pulumiVersion) {
-      this.addDevDeps(`@pulumi/pulumi@${options.pulumiOptions.pulumiVersion}`);
-    } else {
-      this.addDeps('@pulumi/pulumi');
-    }
+    this.addDeps('@pulumi/pulumi');
     new YamlFile(this, 'PulumiPlugin.yaml', {
       obj: {
         runtime: 'nodejs',
-        name: options.pulumiOptions?.pluginOptions?.name,
-        namespace: options.pulumiOptions?.pluginOptions?.namespace,
       },
     });
 
@@ -41,7 +35,6 @@ export class TypeScriptComponent extends TypeScriptProject {
         exec: 'pulumi package get-schema ./ > /dev/null',
       }),
     );
-    const componentName = options.pulumiOptions?.pluginOptions?.name ?? this.package.packageName;
 
     if (options.sampleCode ?? true) {
       new SampleDir(this, 'src', {
@@ -80,7 +73,7 @@ export class TypeScriptComponent extends TypeScriptProject {
             '    // type has the format of ${package}:index:${className}',
             '    // where package needs to match the `name` in your package.json',
             '    // and className needs to match the name of this class',
-            `    super('${componentName}:index:ExampleComponent', name, args, opts);`,
+            "    super('aws-policies:index:ExampleComponent', name, args, opts);",
             '',
             '    // Component resources go here...',
             '    //',

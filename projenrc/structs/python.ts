@@ -16,8 +16,7 @@ export function pythonStructs(project: TypeScriptProject) {
   const pulumiOptions = new ProjenStruct(project, {
     name: 'PulumiPythonOptions',
     filePath: path.join(root, 'pulumi-options.ts'),
-  })
-  .add({
+  }).add({
     name: 'pulumiVersion',
     type: { primitive: PrimitiveType.String },
     optional: true,
@@ -27,14 +26,6 @@ export function pythonStructs(project: TypeScriptProject) {
         'The pulumi version to use. The version range should be valid semver',
       see: 'https://www.npmjs.com/package/semver',
     },
-  })
-  .add({
-    name: 'pluginOptions',
-    type: { fqn: '@hallcor/pulumi-projen-project-types.PulumiPluginOptions'},
-    optional: true,
-    docs: {
-      summary: 'Option for the PulumiPlugin.yaml file',
-    }
   });
 
   new ProjenStruct(project, {
@@ -75,6 +66,17 @@ export function pythonStructs(project: TypeScriptProject) {
       type: { fqn: '@hallcor/pulumi-projen-project-types.GithubCredentials' },
     })
     .add({ name: 'pulumiPythonOptions', type: pulumiOptions, optional: true })
+    .add({
+      name: 'componentName',
+      type: {
+        primitive: PrimitiveType.String,
+      },
+      optional: true,
+      docs: {
+        default: 'the project `name`',
+        summary: 'The name of the pulumi component',
+      },
+    })
     .add({
       name: 'releaseTrigger',
       type: {

@@ -5511,52 +5511,6 @@ The secret name for the access token.
 
 ---
 
-### PulumiPluginOptions <a name="PulumiPluginOptions" id="@hallcor/pulumi-projen-project-types.PulumiPluginOptions"></a>
-
-PulumiPluginOptions.
-
-#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PulumiPluginOptions.Initializer"></a>
-
-```typescript
-import { PulumiPluginOptions } from '@hallcor/pulumi-projen-project-types'
-
-const pulumiPluginOptions: PulumiPluginOptions = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPluginOptions.property.name">name</a></code> | <code>string</code> | An optional package name to use. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPluginOptions.property.namespace">namespace</a></code> | <code>string</code> | An optional namespace to use. |
-
----
-
-##### `name`<sup>Optional</sup> <a name="name" id="@hallcor/pulumi-projen-project-types.PulumiPluginOptions.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
-An optional package name to use.
-
----
-
-##### `namespace`<sup>Optional</sup> <a name="namespace" id="@hallcor/pulumi-projen-project-types.PulumiPluginOptions.property.namespace"></a>
-
-```typescript
-public readonly namespace: string;
-```
-
-- *Type:* string
-- *Default:* 'pulumi'
-
-An optional namespace to use.
-
----
-
 ### PulumiPythonOptions <a name="PulumiPythonOptions" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions"></a>
 
 PulumiPythonOptions.
@@ -5573,20 +5527,7 @@ const pulumiPythonOptions: PulumiPythonOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pluginOptions">pluginOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPluginOptions">PulumiPluginOptions</a></code> | Option for the PulumiPlugin.yaml file. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pulumiVersion">pulumiVersion</a></code> | <code>string</code> | The pulumi version to use. |
-
----
-
-##### `pluginOptions`<sup>Optional</sup> <a name="pluginOptions" id="@hallcor/pulumi-projen-project-types.PulumiPythonOptions.property.pluginOptions"></a>
-
-```typescript
-public readonly pluginOptions: PulumiPluginOptions;
-```
-
-- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiPluginOptions">PulumiPluginOptions</a>
-
-Option for the PulumiPlugin.yaml file.
 
 ---
 
@@ -5602,54 +5543,6 @@ public readonly pulumiVersion: string;
 The pulumi version to use.
 
 The version range should be valid semver
-
----
-
-### PulumiTypeScriptOptions <a name="PulumiTypeScriptOptions" id="@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions"></a>
-
-PulumiTypeScriptOptions.
-
-#### Initializer <a name="Initializer" id="@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions.Initializer"></a>
-
-```typescript
-import { PulumiTypeScriptOptions } from '@hallcor/pulumi-projen-project-types'
-
-const pulumiTypeScriptOptions: PulumiTypeScriptOptions = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions.property.pluginOptions">pluginOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiPluginOptions">PulumiPluginOptions</a></code> | Option for the PulumiPlugin.yaml file. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions.property.pulumiVersion">pulumiVersion</a></code> | <code>string</code> | The pulumi version to use. |
-
----
-
-##### `pluginOptions`<sup>Optional</sup> <a name="pluginOptions" id="@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions.property.pluginOptions"></a>
-
-```typescript
-public readonly pluginOptions: PulumiPluginOptions;
-```
-
-- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiPluginOptions">PulumiPluginOptions</a>
-
-Option for the PulumiPlugin.yaml file.
-
----
-
-##### `pulumiVersion`<sup>Optional</sup> <a name="pulumiVersion" id="@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions.property.pulumiVersion"></a>
-
-```typescript
-public readonly pulumiVersion: string;
-```
-
-- *Type:* string
-- *Default:* *
-
-The pulumi version to use.
-
-Setting this will mean that projen will manage the Pulumi version going forward
 
 ---
 
@@ -5681,6 +5574,7 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.classifiers">classifiers</a></code> | <code>string[]</code> | A list of PyPI trove classifiers that describe the project. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.componentName">componentName</a></code> | <code>string</code> | The name of the pulumi component. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.deps">deps</a></code> | <code>string[]</code> | List of runtime dependencies for this project. Dependencies use the format: `<module>@<semver>`. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.description">description</a></code> | <code>string</code> | A short description of the package. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.devContainer">devContainer</a></code> | <code>boolean</code> | Add a VSCode development environment (used for GitHub Codespaces). |
@@ -5883,6 +5777,19 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
+
+---
+
+##### `componentName`<sup>Optional</sup> <a name="componentName" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.componentName"></a>
+
+```typescript
+public readonly componentName: string;
+```
+
+- *Type:* string
+- *Default:* the project `name`
+
+The name of the pulumi component.
 
 ---
 
@@ -7009,6 +6916,7 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.componentName">componentName</a></code> | <code>string</code> | The name of the pulumi component. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
@@ -7077,7 +6985,6 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.publishTasks">publishTasks</a></code> | <code>boolean</code> | Define publishing tasks that can be executed manually as well as workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.pulumiOptions">pulumiOptions</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions">PulumiTypeScriptOptions</a></code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.readme">readme</a></code> | <code>projen.SampleReadmeProps</code> | The README setup. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
@@ -7499,6 +7406,19 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
+
+---
+
+##### `componentName`<sup>Optional</sup> <a name="componentName" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.componentName"></a>
+
+```typescript
+public readonly componentName: string;
+```
+
+- *Type:* string
+- *Default:* the `moduleName`
+
+The name of the pulumi component.
 
 ---
 
@@ -8476,16 +8396,6 @@ public readonly pullRequestTemplateContents: string[];
 - *Default:* default content
 
 The contents of the pull request template.
-
----
-
-##### `pulumiOptions`<sup>Optional</sup> <a name="pulumiOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.pulumiOptions"></a>
-
-```typescript
-public readonly pulumiOptions: PulumiTypeScriptOptions;
-```
-
-- *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiTypeScriptOptions">PulumiTypeScriptOptions</a>
 
 ---
 
