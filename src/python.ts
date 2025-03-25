@@ -52,10 +52,12 @@ export class PythonComponent extends PythonProject {
     new YamlFile(this, 'PulumiPlugin.yaml', {
       obj: {
         runtime: 'python',
+        name: options.pulumiPythonOptions?.pluginOptions?.name,
+        namespace: options.pulumiPythonOptions?.pluginOptions?.namespace,
       },
     });
 
-    const componentName = options.componentName ?? this.name;
+    const componentName = options.pulumiPythonOptions?.pluginOptions?.name ?? this.name;
 
     this.postCompileTask.spawn(
       this.addTask('get-schema', {

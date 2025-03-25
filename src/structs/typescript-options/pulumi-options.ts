@@ -2,12 +2,12 @@
 import type { PulumiPluginOptions } from '../../';
 
 /**
- * PulumiPythonOptions
+ * PulumiTypeScriptOptions
  */
-export interface PulumiPythonOptions {
+export interface PulumiTypeScriptOptions {
   /**
-   * The pulumi version to use. The version range should be valid semver
-   * @default >=3.153 <4.0
+   * The pulumi version to use. Setting this will mean that projen will manage the Pulumi version going forward
+   * @default *
    */
   readonly pulumiVersion?: string;
   /**

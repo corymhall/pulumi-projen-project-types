@@ -14,6 +14,7 @@ export function typescriptStructs(project: TypeScriptProject) {
       "export * from './prettier-settings';",
       "export * from './project-props';",
       "export * from './component-options';",
+      "export * from './pulumi-options';",
     ],
   });
   const eslintOptions = new ProjenStruct(project, {
@@ -55,6 +56,29 @@ export function typescriptStructs(project: TypeScriptProject) {
     })
     .update('prettier', { docs: { default: 'true' } });
 
+
+  const pulumiOptions = new ProjenStruct(project, {
+    name: 'PulumiTypeScriptOptions',
+    filePath: path.join(root, 'pulumi-options.ts'),
+  })
+  .add({
+    name: 'pulumiVersion',
+    type: { primitive: PrimitiveType.String },
+    optional: true,
+    docs: {
+      default: '*',
+      summary: 'The pulumi version to use. Setting this will mean that projen will manage the Pulumi version going forward',
+    },
+  })
+  .add({
+    name: 'pluginOptions',
+    type: { fqn: '@hallcor/pulumi-projen-project-types.PulumiPluginOptions'},
+    optional: true,
+    docs: {
+      summary: 'Option for the PulumiPlugin.yaml file',
+    }
+  });
+
   new ProjenStruct(project, {
     name: 'TypeScriptComponentOptions',
     filePath: path.join(root, 'component-options.ts'),
@@ -74,16 +98,6 @@ export function typescriptStructs(project: TypeScriptProject) {
         default: 'src/index.ts',
       },
     })
-    .add(gitIdentity)
-    .add({
-      name: 'componentName',
-      type: {
-        primitive: PrimitiveType.String,
-      },
-      optional: true,
-      docs: {
-        default: 'the `moduleName`',
-        summary: 'The name of the pulumi component',
-      },
-    });
+    .add({ name: 'pulumiOptions', type: pulumiOptions, optional: true })
+    .add(gitIdentity);
 }

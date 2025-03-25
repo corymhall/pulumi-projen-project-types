@@ -39,4 +39,5 @@
 /src/structs/typescript-options/prettier-options.ts linguist-generated
 /src/structs/typescript-options/prettier-settings.ts linguist-generated
 /src/structs/typescript-options/project-props.ts linguist-generated
+/src/structs/typescript-options/pulumi-options.ts linguist-generated
 /tsconfig.dev.json linguist-generated
