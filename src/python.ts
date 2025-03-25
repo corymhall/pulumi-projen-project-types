@@ -1,8 +1,9 @@
+import { join } from 'path';
 import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge, GithubCredentials } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
-import { TagRelease } from './release';
+import { Release } from 'projen/lib/release';
 import { PythonComponentOptions } from './structs';
 
 export class PythonComponent extends PythonProject {
@@ -103,35 +104,18 @@ export class PythonComponent extends PythonProject {
       },
     });
 
-    new SampleFile(this, 'version.json', {
-      contents: JSON.stringify(
-        {
-          version: '0.0.0',
-        },
-        undefined,
-        2,
-      ),
-    });
-
-    const versionFilePath = 'version.json';
+    const artifactsDirectory = 'dist';
+    const versionFilePath = join(artifactsDirectory, 'version.json');
 
     new SampleFile(this, '__main__.py', {
       contents: [
         'from pulumi.provider.experimental import component_provider_host, Metadata',
-        'import os',
-        'import json',
-        '',
-        'dir = os.path.dirname(os.path.abspath(__file__))',
-        `version_file_path = os.path.join(dir, "${versionFilePath}")`,
-        'with open(version_file_path, "r") as f:',
-        '    pyproject = json.load(f)',
-        'version = pyproject["version"]',
         '',
         'if __name__ == "__main__":',
         '    # Call the component provider host. This will discover any ComponentResource',
         '    # subclasses in this package, infer their schema and host a provider that',
         '    # allows constructing these components from a Pulumi program.',
-        `    component_provider_host(Metadata("${componentName}", version))`,
+        `    component_provider_host(Metadata("${componentName}"))`,
       ].join('\n'),
     });
 
@@ -192,16 +176,12 @@ export class PythonComponent extends PythonProject {
     }
 
     if (options.release ?? true) {
-      new TagRelease(this, {
-        artifactsDirectory: 'dist',
+      new Release(this, {
+        artifactsDirectory,
         branch: 'main',
         task: this.packageTask,
         versionFile: versionFilePath,
         releaseTrigger: options.releaseTrigger,
-        gitIdentity: options.gitIdentity,
-        gitTagPublishOptions: {
-          permissions: projenCredentials?.permissions,
-        },
       });
     }
   }

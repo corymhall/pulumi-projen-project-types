@@ -1,16 +1,11 @@
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
 import { SampleDir, YamlFile } from 'projen';
-import { TagRelease } from './release';
 import { TypeScriptComponentOptions } from './structs';
 import { TypeScriptProject } from './typescript-base';
 
 export class TypeScriptComponent extends TypeScriptProject {
   constructor(options: TypeScriptComponentOptions) {
-    const projenCredentials = options.projenCredentials;
     super({
       ...options,
-      release: false,
       entrypoint: options.entrypoint ?? 'src/index.ts',
       package: false,
       sampleCode: false,
@@ -27,9 +22,6 @@ export class TypeScriptComponent extends TypeScriptProject {
       },
     });
 
-    const prev = this.readPackageJson();
-    this.package.addVersion(prev.version);
-
     this.addDeps('@pulumi/pulumi');
     new YamlFile(this, 'PulumiPlugin.yaml', {
       obj: {
@@ -43,9 +35,6 @@ export class TypeScriptComponent extends TypeScriptProject {
         exec: 'pulumi package get-schema ./ > /dev/null',
       }),
     );
-
-    const versionFile = this.package.file.path;
-    const permissions = projenCredentials?.permissions;
 
     if (options.sampleCode ?? true) {
       new SampleDir(this, 'src', {
@@ -111,29 +100,5 @@ export class TypeScriptComponent extends TypeScriptProject {
         },
       });
     }
-
-    if (options.release ?? true) {
-      new TagRelease(this, {
-        ...options,
-        artifactsDirectory: this.artifactsDirectory,
-        branch: options.defaultReleaseBranch ?? 'main',
-        gitTagPublishOptions: {
-          permissions,
-        },
-        versionFile,
-        task: this.packageTask,
-        releaseTrigger: options.releaseTrigger,
-        gitIdentity: options.gitIdentity,
-      });
-    }
-  }
-
-  private readPackageJson() {
-    const file = join(this.outdir, 'package.json');
-    if (!existsSync(file)) {
-      return undefined;
-    }
-
-    return JSON.parse(readFileSync(file, 'utf-8'));
   }
 }

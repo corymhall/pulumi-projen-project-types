@@ -65,7 +65,6 @@ export class ReleaseWorkflow extends Construct {
       run: [
         'gh release create',
         options.releaseTag,
-        // `$(cat ${options.releasetagPath})`,
         '--repo ${{ github.repository }}',
         `--notes-file ${options.changelogPath}`,
         `--title ${options.releaseTag}`,
@@ -151,32 +150,7 @@ export class TagRelease extends ProjenRelease {
       gitPushCommand: this.trigger.gitPushCommand,
     });
 
-    // by default the unbump task resets the version to 0.0.0
-    // but we don't want to do that since we are keeping the version
-    // and that would cause a diff and fail the task
-    // instead just checkout the previous version so diff won't fail
-    const unbumpTask = project.tasks.tryFind('unbump');
-    unbumpTask?.reset(`git checkout ${props.versionFile}`);
-
     project.addGitIgnore(this.artifactsDirectory);
-    project.packageTask.spawn(
-      project.addTask('dist', {
-        steps: [
-          { exec: `mkdir -p ${this.artifactsDirectory}` },
-          { exec: `cp ${props.versionFile} ${this.artifactsDirectory}/` },
-          { exec: `touch ${releaseTagFile}` }, // the check version workflow step requires this file
-        ],
-      }),
-    );
-    if (this.trigger.changelogPath) {
-      this.publishTask.prependExec(
-        `cp ${this.artifactsDirectory}/${props.versionFile} . && git add ${props.versionFile}`,
-      );
-    } else {
-      this.publishTask.prependExec(
-        `VERSION=$(cat ${this.artifactsDirectory}/version.txt); cp ${this.artifactsDirectory}/${props.versionFile} . && git add ${props.versionFile} && git commit -m "chore(release): v$VERSION"`,
-      );
-    }
     const github = GitHub.of(project);
     if (!github) {
       throw new Error('ReleaseWorkflow requires a GitHub Project');
@@ -195,49 +169,14 @@ export class TagRelease extends ProjenRelease {
     };
 
     this.addJobs({
-      check_tag: {
-        permissions: {
-          contents: JobPermission.WRITE,
-        },
-        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
-        name: 'Check Tag',
-        needs: ['release'],
-        runsOn: ['ubuntu-latest'],
-        outputs: {
-          should_release: {
-            outputName: 'should_release',
-            stepId: 'tag-exists',
-          },
-        },
-        steps: [
-          downloadArtifact,
-          restoreArtifact,
-          {
-            id: 'tag-exists',
-            run: [
-              'TAG=$(cat dist/releasetag.txt)',
-              'if [ ! -z "$TAG" ]',
-              'then',
-              'echo "should_release=true" >> $GITHUB_OUTPUT',
-              'else',
-              'echo "should_release=false" >> $GITHUB_OUTPUT',
-              'fi',
-              'cat $GITHUB_OUTPUT',
-            ].join('\n'),
-          },
-        ],
-      },
-    });
-
-    this.addJobs({
       release_git: {
         permissions: {
           contents: JobPermission.WRITE,
           ...props.gitTagPublishOptions?.permissions,
         },
-        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release == 'true'",
+        if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
         name: 'Publish Git Tag',
-        needs: ['release', 'check_tag'],
+        needs: ['release'],
         runsOn: ['ubuntu-latest'],
         steps: [
           ...github.projenCredentials.setupSteps,
@@ -272,8 +211,8 @@ export class TagRelease extends ProjenRelease {
           permissions: {
             contents: JobPermission.WRITE,
           },
-          needs: ['release_git', 'release', 'check_tag'],
-          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha && needs.check_tag.outputs.should_release == 'true'",
+          needs: ['release_git', 'release'],
+          if: "needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha",
           name: 'Publish GitHub Release',
           runsOn: ['ubuntu-latest'],
           steps: [
