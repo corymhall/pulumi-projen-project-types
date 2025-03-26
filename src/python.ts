@@ -166,7 +166,7 @@ export class PythonComponent extends PythonProject {
     if ((options.autoMerge ?? true) && this.github?.mergify) {
       this.autoMerge = new AutoMerge(this.github, options.autoMergeOptions);
       if (options.githubOptions?.pullRequestLint ?? true) {
-        this.autoMerge.addConditions('status-success=pull-request-lint');
+        this.autoMerge.addConditions('status-success=Validate PR title');
       }
       this.autoMerge.addConditionsLater({
         render: () =>
