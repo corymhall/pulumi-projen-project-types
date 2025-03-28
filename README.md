@@ -141,8 +141,6 @@ $ npx projen new --from @hallcor/pulumi-projen-project-types python_component
 from hallcor.pulumi_projen_project_types import PythonComponent
 
 project = PythonComponent(
-    author_email="43035978+corymhall@users.noreply.github.com",
-    author_name="corymhall",
     module_name="pulumi_lambda_builders",
     component_name="lambda-builders",
     name="pulumi-lambda-builders",
@@ -177,7 +175,7 @@ can specify a specific version of `pulumi` to use.
 project = PythonComponent(
     ...,
     pulumi_python_options=PulumiPythonOptions(
-        pulumi_version=">=3.153 <4.0" # this is the default value
+        pulumi_version=">=3.159 <4.0" # this is the default value
     ),
 )
 ```
@@ -189,12 +187,29 @@ For publishing related options see the [publishing section](#publishing)
 ```console
 $ mkdir my-python-component
 $ cd my-python-component
-$ npx projen new --from @hallcor/pulumi-projen-project-types type_script_component
+$ npx projen new --from @hallcor/pulumi-projen-project-types type_script_component --name my-component
 ```
 
 #### Example
 
-- TODO
+
+```ts
+import { TypeScriptComponent } from '@hallcor/pulumi-projen-project-types';
+
+const project = new TypeScriptComponent({
+  defaultReleaseBranch: 'main',
+  devDeps: [
+    '@hallcor/pulumi-projen-project-types',
+  ],
+  name: 'my-component',
+  projenrcTs: true,
+
+  // deps: [],                /* Runtime dependencies of this module. */
+  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
+  // packageName: undefined,  /* The "name" in package.json. */
+});
+project.synth();
+```
 
 #### Configuration Options
 

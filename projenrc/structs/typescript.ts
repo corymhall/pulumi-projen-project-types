@@ -1,5 +1,4 @@
 import * as path from 'path';
-import { PrimitiveType } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { TextFile } from 'projen';
 import { TypeScriptProject } from 'projen/lib/typescript';
@@ -60,30 +59,11 @@ export function typescriptStructs(project: TypeScriptProject) {
     filePath: path.join(root, 'component-options.ts'),
   })
     .mixin(tsProps)
-    .omit(
-      'package',
-      'releaseToNpm',
-      'package',
-      'github',
-      'jsiiReleaseVersion',
-      'npmDistTag',
-      'releaseBranches',
-    )
+    .omit('github', 'jsiiReleaseVersion')
     .update('entrypoint', {
       docs: {
         default: 'src/index.ts',
       },
     })
-    .add(gitIdentity)
-    .add({
-      name: 'componentName',
-      type: {
-        primitive: PrimitiveType.String,
-      },
-      optional: true,
-      docs: {
-        default: 'the `moduleName`',
-        summary: 'The name of the pulumi component',
-      },
-    });
+    .add(gitIdentity);
 }

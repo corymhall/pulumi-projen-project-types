@@ -8,7 +8,6 @@ export class TypeScriptComponent extends TypeScriptProject {
     super({
       ...options,
       entrypoint: options.entrypoint ?? 'src/index.ts',
-      package: false,
       sampleCode: false,
       buildWorkflowOptions: {
         preBuildSteps: [
@@ -53,7 +52,6 @@ export class TypeScriptComponent extends TypeScriptProject {
       new SampleDir(this, 'src', {
         files: {
           'index.ts': [
-            "import * as path from 'path';",
             '// export your components here',
             "export * from './example-component';",
           ].join('\n'),
