@@ -1,10 +1,80 @@
+import { statSync } from 'fs';
 import { join } from 'path';
 import { SampleDir, SampleFile, YamlFile } from 'projen';
 import { BuildWorkflow } from 'projen/lib/build';
 import { AutoMerge, GithubCredentials } from 'projen/lib/github';
 import { PythonProject } from 'projen/lib/python';
 import { Release } from 'projen/lib/release';
+import { toPythonVersionRange } from 'projen/lib/util/semver';
 import { PythonComponentOptions } from './structs';
+
+// devDeps and __news__.args.devDeps will always be the same
+// projen doesn't let you override
+//
+// hack to workaround https://github.com/projen/projen/issues/2475
+function handleDevDeps(options: PythonComponentOptions): any {
+  const initOptions = options as any;
+  if ('__new__' in initOptions) {
+    const newDevDeps: string[] = initOptions.__new__.args.devDeps;
+    const newDeps: string[] = initOptions.__new__.args.deps;
+    if (
+      !newDevDeps ||
+      newDevDeps.length !== 1 ||
+      !newDevDeps[0].match(/(@hallcor\/pulumi-projen-project-types)@?(.*)?/)
+    ) {
+      throw new Error(
+        'Something went wrong, devDeps should have only one entry for @hallcor/pulumi-projen-project-types',
+      );
+    }
+    const matches = newDevDeps[0].match(
+      /(@hallcor\/pulumi-projen-project-types)@?(.*)?/,
+    )!;
+    const version = matches[2];
+    if (version) {
+      if (version.startsWith('file:')) {
+        if (
+          !newDeps ||
+          newDeps.length === 0 ||
+          !newDeps.find((d) => d.includes('hallcor'))
+        ) {
+          throw new Error(
+            'If you are using `projen new` pointing to a local version of @hallcor/pulumi-projen-project-types, ' +
+              'you must add the location of the local .whl file to the `--deps` command line argument.\n' +
+              'For example:\n' +
+              'npx projen new --from @hallcor/pulumi-projen-project-types@file:../path/to/local/project --deps "../path/to/local/project/dist/hallcor_pulumi_projen_project_types-0.0.0-py3-none-any.whl"\n',
+          );
+        }
+        const dep = newDeps.find((d) => d.includes('hallcor'))!;
+        const cwd = process.cwd();
+        try {
+          statSync(join(cwd, dep));
+        } catch (e: any) {
+          if (e.code === 'ENOENT') {
+            throw new Error(
+              `The file provided in '--deps ${newDeps[0]}' does not exist. Please make sure the path is correct.`,
+            );
+          }
+          throw e;
+        }
+        initOptions.devDeps = [dep];
+        initOptions.__new__.args.devDeps = initOptions.devDeps;
+        initOptions.deps = newDeps.filter((d) => d !== dep);
+        initOptions.__new__.args.deps = initOptions.deps;
+        return initOptions;
+      } else {
+        const range = toPythonVersionRange(version);
+        initOptions.devDeps = [`hallcor.pulumi-projen-project-types${range}`];
+        initOptions.__new__.args.devDeps = initOptions.devDeps;
+        return initOptions;
+      }
+    }
+    initOptions.devDeps = [`hallcor.pulumi-projen-project-types`];
+    initOptions.__new__.args.devDeps = initOptions.devDeps;
+    return initOptions;
+  }
+  // otherwise this isn't an `projen new` operation and just return the option values
+  return options;
+}
 
 export class PythonComponent extends PythonProject {
   /**
@@ -18,13 +88,7 @@ export class PythonComponent extends PythonProject {
   public readonly autoMerge?: AutoMerge;
 
   constructor(options: PythonComponentOptions) {
-    // hack to workaround https://github.com/projen/projen/issues/2475
-    const initOptions = options as any;
-    if ('__new__' in initOptions) {
-      initOptions.__new__.args.devDeps = [
-        'hallcor.pulumi-projen-project-types',
-      ];
-    }
+    const initOptions = handleDevDeps(options);
     const projenCredentials = options.projenCredentials;
     let githubCredentials: GithubCredentials | undefined;
     if (options.projenCredentials) {
@@ -46,7 +110,7 @@ export class PythonComponent extends PythonProject {
       projenCredentials: githubCredentials,
     });
     const pulumiVersion =
-      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.153 <4.0';
+      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.159 <4.0';
     this.addDependency(`pulumi@${pulumiVersion}`);
 
     new YamlFile(this, 'PulumiPlugin.yaml', {
@@ -64,58 +128,77 @@ export class PythonComponent extends PythonProject {
       }),
     );
 
-    new SampleDir(this, this.moduleName, {
-      files: {
-        '__init__.py': '',
-        'example_component.py': [
-          'import pulumi',
-          'from typing import Optional, TypedDict',
-          '',
-          '',
-          'class ExampleComponentArgs(TypedDict):',
-          '    requiredArgument: str',
-          '    """A required string argument"""',
+    if (options.sample ?? true) {
+      new SampleDir(this, 'tests', {
+        files: {
+          '__init__.py': '',
+          'example_test.py': [
+            'def test_example():',
+            '    assert True == True',
+          ].join('\n'),
+        },
+      });
 
-          '    optionalArgument: Optional[str]',
-          '    """An optional string argument"""',
-          '',
-          '',
-          'class ExampleComponent(pulumi.ComponentResource):',
-          '    exampleOutput: pulumi.Output[str]',
-          '    """An example output value"""',
-          '',
-          '    def __init__(',
-          '        self,',
-          '        name: str,',
-          '        args: ExampleComponentArgs,',
-          '        opts: Optional[pulumi.ResourceOptions] = None,',
-          '    ) -> None:',
-          `        super().__init__("${componentName}:index:ExampleComponent", name, {}, opts)`,
-          '        # Component code goes here',
-          '        #',
-          '        #',
-          '        self.register_outputs(',
-          '            {',
-          '                "exampleOutput": "",  # output values',
-          '            }',
-          '        )',
-          '',
-        ].join('\n'),
-      },
-    });
+      new SampleDir(this, this.moduleName, {
+        files: {
+          '__init__.py': '',
+          'example_component.py': [
+            'import pulumi',
+            'from typing import Optional, TypedDict',
+            '',
+            '',
+            'class ExampleComponentArgs(TypedDict):',
+            '    requiredArgument: str',
+            '    """A required string argument"""',
+
+            '    optionalArgument: Optional[str]',
+            '    """An optional string argument"""',
+            '',
+            '',
+            'class ExampleComponent(pulumi.ComponentResource):',
+            '    exampleOutput: pulumi.Output[str]',
+            '    """An example output value"""',
+            '',
+            '    def __init__(',
+            '        self,',
+            '        name: str,',
+            '        args: ExampleComponentArgs,',
+            '        opts: Optional[pulumi.ResourceOptions] = None,',
+            '    ) -> None:',
+            `        super().__init__("${componentName}:index:ExampleComponent", name, {}, opts)`,
+            '        # Component code goes here',
+            '        #',
+            '        #',
+            '        self.register_outputs(',
+            '            {',
+            '                "exampleOutput": "",  # output values',
+            '            }',
+            '        )',
+            '',
+          ].join('\n'),
+        },
+      });
+    }
 
     const artifactsDirectory = 'dist';
     const versionFilePath = join(artifactsDirectory, 'version.json');
 
     new SampleFile(this, '__main__.py', {
       contents: [
-        'from pulumi.provider.experimental import component_provider_host, Metadata',
+        'from pulumi.provider.experimental import component_provider_host',
+        `from ${this.moduleName}.example_component import ExampleComponent`,
         '',
         'if __name__ == "__main__":',
         '    # Call the component provider host. This will discover any ComponentResource',
         '    # subclasses in this package, infer their schema and host a provider that',
         '    # allows constructing these components from a Pulumi program.',
-        `    component_provider_host(Metadata("${componentName}"))`,
+        '    component_provider_host(',
+        `        name="${componentName}",`,
+        '        # List your components here that you want to export',
+        '        components=[',
+        '            ExampleComponent,',
+        '        ],',
+        '    )',
       ].join('\n'),
     });
 

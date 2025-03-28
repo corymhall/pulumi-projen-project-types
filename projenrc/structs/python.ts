@@ -21,7 +21,7 @@ export function pythonStructs(project: TypeScriptProject) {
     type: { primitive: PrimitiveType.String },
     optional: true,
     docs: {
-      default: '>=3.153 <4.0',
+      default: '>=3.159 <4.0',
       summary:
         'The pulumi version to use. The version range should be valid semver',
       see: 'https://www.npmjs.com/package/semver',

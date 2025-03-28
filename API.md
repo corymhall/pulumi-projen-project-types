@@ -5538,7 +5538,7 @@ public readonly pulumiVersion: string;
 ```
 
 - *Type:* string
-- *Default:* >=3.153 <4.0
+- *Default:* >=3.159 <4.0
 
 The pulumi version to use.
 
@@ -6916,7 +6916,6 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.componentName">componentName</a></code> | <code>string</code> | The name of the pulumi component. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
@@ -6955,12 +6954,14 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.nextVersionCommand">nextVersionCommand</a></code> | <code>string</code> | A shell command to control the next version to release. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmignoreEnabled">npmignoreEnabled</a></code> | <code>boolean</code> | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmIgnoreOptions">npmIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .npmignore file. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmProvenance">npmProvenance</a></code> | <code>boolean</code> | Should provenance statements be generated when the package is published. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
@@ -6988,9 +6989,11 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.readme">readme</a></code> | <code>projen.SampleReadmeProps</code> | The README setup. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseFailureIssue">releaseFailureIssue</a></code> | <code>boolean</code> | Create a github issue on every failed publishing task. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseFailureIssueLabel">releaseFailureIssueLabel</a></code> | <code>string</code> | The label to apply to issues indicating publish failures. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
@@ -7406,19 +7409,6 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
-
----
-
-##### `componentName`<sup>Optional</sup> <a name="componentName" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.componentName"></a>
-
-```typescript
-public readonly componentName: string;
-```
-
-- *Type:* string
-- *Default:* the `moduleName`
-
-The name of the pulumi component.
 
 ---
 
@@ -7982,6 +7972,22 @@ Access level of the npm package.
 
 ---
 
+##### `npmDistTag`<sup>Optional</sup> <a name="npmDistTag" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmDistTag"></a>
+
+```typescript
+public readonly npmDistTag: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+The npmDistTag to use when publishing from the default branch.
+
+To set the npm dist-tag for release branches, set the `npmDistTag` property
+for each branch.
+
+---
+
 ##### `npmignoreEnabled`<sup>Optional</sup> <a name="npmignoreEnabled" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.npmignoreEnabled"></a>
 
 ```typescript
@@ -8068,6 +8074,19 @@ The root directory of the project. Relative to this directory, all files are syn
 If this project has a parent, this directory is relative to the parent
 directory and it cannot be the same as the parent or any of it's other
 subprojects.
+
+---
+
+##### `package`<sup>Optional</sup> <a name="package" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.package"></a>
+
+```typescript
+public readonly package: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
 
 ---
 
@@ -8438,6 +8457,26 @@ Add release management to this project.
 
 ---
 
+##### `releaseBranches`<sup>Optional</sup> <a name="releaseBranches" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseBranches"></a>
+
+```typescript
+public readonly releaseBranches: {[ key: string ]: BranchOptions};
+```
+
+- *Type:* {[ key: string ]: projen.release.BranchOptions}
+- *Default:* no additional branches are used for release. you can use `addBranch()` to add additional branches.
+
+Defines additional release branches.
+
+A workflow will be created for each
+release branch which will publish releases from commits in this branch.
+Each release branch _must_ be assigned a major version number which is used
+to enforce that versions published from that branch always use that major
+version. If multiple branches are used, the `majorVersion` field must also
+be provided for the default branch.
+
+---
+
 ##### `releaseFailureIssue`<sup>Optional</sup> <a name="releaseFailureIssue" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseFailureIssue"></a>
 
 ```typescript
@@ -8482,6 +8521,19 @@ Note: this prefix is used to detect the latest tagged version
 when bumping, so if you change this on a project with an existing version
 history, you may need to manually tag your latest release
 with the new prefix.
+
+---
+
+##### `releaseToNpm`<sup>Optional</sup> <a name="releaseToNpm" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseToNpm"></a>
+
+```typescript
+public readonly releaseToNpm: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Automatically release to npm when new versions are introduced.
 
 ---
 

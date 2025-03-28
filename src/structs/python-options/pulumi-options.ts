@@ -6,7 +6,7 @@
 export interface PulumiPythonOptions {
   /**
    * The pulumi version to use. The version range should be valid semver
-   * @default >=3.153 <4.0
+   * @default >=3.159 <4.0
    */
   readonly pulumiVersion?: string;
 }

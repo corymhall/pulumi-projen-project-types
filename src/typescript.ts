@@ -3,11 +3,11 @@ import { TypeScriptComponentOptions } from './structs';
 import { TypeScriptProject } from './typescript-base';
 
 export class TypeScriptComponent extends TypeScriptProject {
+  private readonly componentName: string;
   constructor(options: TypeScriptComponentOptions) {
     super({
       ...options,
       entrypoint: options.entrypoint ?? 'src/index.ts',
-      package: false,
       sampleCode: false,
       buildWorkflowOptions: {
         preBuildSteps: [
@@ -36,17 +36,24 @@ export class TypeScriptComponent extends TypeScriptProject {
       }),
     );
 
+    const matches = this.package.packageName.match(/(@.*?\/)?(.+)/);
+    if (!matches) {
+      this.componentName = this.package.packageName;
+    } else {
+      this.componentName = matches[2];
+      // TODO: do something with namespace?
+      // let namespace = undefined;
+      // if (matches[1]) {
+      //   namespace = matches[1].substring(1, matches[1].length - 1);
+      // }
+    }
+
     if (options.sampleCode ?? true) {
       new SampleDir(this, 'src', {
         files: {
           'index.ts': [
-            "import * as path from 'path';",
-            "import { componentProviderHost } from '@pulumi/pulumi/provider/experimental';",
-            '',
-            "componentProviderHost(path.join(__dirname, '../')).catch((err) => {",
-            '  console.error(err);',
-            '  process.exit(1);',
-            '});\n',
+            '// export your components here',
+            "export * from './example-component';",
           ].join('\n'),
           'example-component.ts': [
             "import * as pulumi from '@pulumi/pulumi';",
@@ -73,7 +80,7 @@ export class TypeScriptComponent extends TypeScriptProject {
             '    // type has the format of ${package}:index:${className}',
             '    // where package needs to match the `name` in your package.json',
             '    // and className needs to match the name of this class',
-            "    super('aws-policies:index:ExampleComponent', name, args, opts);",
+            `    super('${this.componentName}:index:ExampleComponent', name, args, opts);`,
             '',
             '    // Component resources go here...',
             '    //',

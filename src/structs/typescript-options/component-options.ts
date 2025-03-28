@@ -488,6 +488,14 @@ export interface TypeScriptComponentOptions {
    */
   readonly nextVersionCommand?: string;
   /**
+   * The npmDistTag to use when publishing from the default branch.
+   * To set the npm dist-tag for release branches, set the `npmDistTag` property
+   * for each branch.
+   * @default "latest"
+   * @stability experimental
+   */
+  readonly npmDistTag?: string;
+  /**
    * Steps to execute after build as part of the release workflow.
    * @default []
    * @stability experimental
@@ -519,6 +527,19 @@ export interface TypeScriptComponentOptions {
    * @stability experimental
    */
   readonly releasableCommits?: ReleasableCommits;
+  /**
+   * Defines additional release branches.
+   * A workflow will be created for each
+   * release branch which will publish releases from commits in this branch.
+   * Each release branch _must_ be assigned a major version number which is used
+   * to enforce that versions published from that branch always use that major
+   * version. If multiple branches are used, the `majorVersion` field must also
+   * be provided for the default branch.
+   * @default - no additional branches are used for release. you can use
+`addBranch()` to add additional branches.
+   * @stability experimental
+   */
+  readonly releaseBranches?: Record<string, release.BranchOptions>;
   /**
    * Create a github issue on every failed publishing task.
    * @default false
@@ -708,6 +729,12 @@ export interface TypeScriptComponentOptions {
    */
   readonly npmIgnoreOptions?: IgnoreFileOptions;
   /**
+   * Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
+   * @default true
+   * @stability experimental
+   */
+  readonly package?: boolean;
+  /**
    * Setup prettier.
    * @default true
    * @stability experimental
@@ -761,6 +788,12 @@ export interface TypeScriptComponentOptions {
    * @stability experimental
    */
   readonly release?: boolean;
+  /**
+   * Automatically release to npm when new versions are introduced.
+   * @default false
+   * @stability experimental
+   */
+  readonly releaseToNpm?: boolean;
   /**
    * Workflow steps to use in order to bootstrap this repo.
    * @default "yarn install --frozen-lockfile && yarn projen"
@@ -906,9 +939,4 @@ export interface TypeScriptComponentOptions {
    * @default github-actions user
    */
   readonly gitIdentity?: github.GitIdentity;
-  /**
-   * The name of the pulumi component
-   * @default the `moduleName`
-   */
-  readonly componentName?: string;
 }
