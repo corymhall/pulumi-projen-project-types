@@ -46,7 +46,7 @@ export class PythonComponent extends PythonProject {
       projenCredentials: githubCredentials,
     });
     const pulumiVersion =
-      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.153 <4.0';
+      options.pulumiPythonOptions?.pulumiVersion ?? '>=3.159 <4.0';
     this.addDependency(`pulumi@${pulumiVersion}`);
 
     new YamlFile(this, 'PulumiPlugin.yaml', {
@@ -109,13 +109,20 @@ export class PythonComponent extends PythonProject {
 
     new SampleFile(this, '__main__.py', {
       contents: [
-        'from pulumi.provider.experimental import component_provider_host, Metadata',
+        'from pulumi.provider.experimental import component_provider_host',
+        `from ${this.moduleName}.example_component import ExampleComponent`,
         '',
         'if __name__ == "__main__":',
         '    # Call the component provider host. This will discover any ComponentResource',
         '    # subclasses in this package, infer their schema and host a provider that',
         '    # allows constructing these components from a Pulumi program.',
-        `    component_provider_host(Metadata("${componentName}"))`,
+        '    component_provider_host(',
+        `        name="${componentName}",`,
+        '        # List your components here that you want to export',
+        '        components=[',
+        '            ExampleComponent,',
+        '        ],',
+        '    )',
       ].join('\n'),
     });
 

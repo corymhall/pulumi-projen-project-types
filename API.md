@@ -5538,7 +5538,7 @@ public readonly pulumiVersion: string;
 ```
 
 - *Type:* string
-- *Default:* >=3.153 <4.0
+- *Default:* >=3.159 <4.0
 
 The pulumi version to use.
 
