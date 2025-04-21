@@ -35,8 +35,8 @@
     "organization": false
   },
   "devDependencies": {
-    "@mrgrain/jsii-struct-builder": "^0.7.51",
-    "@swc/core": "^1.11.20",
+    "@mrgrain/jsii-struct-builder": "^0.7.52",
+    "@swc/core": "^1.11.21",
     "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.1",
