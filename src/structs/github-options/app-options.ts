@@ -7,6 +7,15 @@ import type { PulumiEscSetup } from '../../';
  */
 export interface GithubCredentialsAppOptions {
   /**
+   * List of repositories to grant access to.
+   * @default - if owner is set and repositories is empty, access will be scoped to all repositories in the provided repository owner's installation.
+If owner and repositories are empty, access will be scoped to only the current repository.
+   * @stability experimental
+   */
+  readonly repositories?: Array<string>;
+  /**
+   * The secret containing the GitHub App private key.
+   * Escaped newlines (\\n) will be automatically replaced with actual newlines.
    * @default PROJEN_APP_PRIVATE_KEY
    * @stability experimental
    */
@@ -17,6 +26,12 @@ export interface GithubCredentialsAppOptions {
    * @stability experimental
    */
   readonly permissions?: github.workflows.AppPermissions;
+  /**
+   * The owner of the GitHub App installation.
+   * @default - if empty, defaults to the current repository owner
+   * @stability experimental
+   */
+  readonly owner?: string;
   /**
    * Optionally include setup steps to inject environment variables from Pulumi ESC
    * @default do not include pulumi esc setup

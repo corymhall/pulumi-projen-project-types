@@ -4735,9 +4735,11 @@ const githubCredentialsAppOptions: GithubCredentialsAppOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.clientIdSecret">clientIdSecret</a></code> | <code>string</code> | The name of the secret that contains the app client id. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.owner">owner</a></code> | <code>string</code> | The owner of the GitHub App installation. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.permissions">permissions</a></code> | <code>projen.github.workflows.AppPermissions</code> | The permissions granted to the token. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.privateKeySecret">privateKeySecret</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.privateKeySecret">privateKeySecret</a></code> | <code>string</code> | The secret containing the GitHub App private key. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps to inject environment variables from Pulumi ESC. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.repositories">repositories</a></code> | <code>string[]</code> | List of repositories to grant access to. |
 
 ---
 
@@ -4751,6 +4753,19 @@ public readonly clientIdSecret: string;
 - *Default:* PROJEN_APP_CLIENT_ID
 
 The name of the secret that contains the app client id.
+
+---
+
+##### `owner`<sup>Optional</sup> <a name="owner" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.owner"></a>
+
+```typescript
+public readonly owner: string;
+```
+
+- *Type:* string
+- *Default:* if empty, defaults to the current repository owner
+
+The owner of the GitHub App installation.
 
 ---
 
@@ -4776,6 +4791,10 @@ public readonly privateKeySecret: string;
 - *Type:* string
 - *Default:* PROJEN_APP_PRIVATE_KEY
 
+The secret containing the GitHub App private key.
+
+Escaped newlines (\\n) will be automatically replaced with actual newlines.
+
 ---
 
 ##### `pulumiEscSetup`<sup>Optional</sup> <a name="pulumiEscSetup" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.pulumiEscSetup"></a>
@@ -4788,6 +4807,19 @@ public readonly pulumiEscSetup: PulumiEscSetup;
 - *Default:* do not include pulumi esc setup
 
 Optionally include setup steps to inject environment variables from Pulumi ESC.
+
+---
+
+##### `repositories`<sup>Optional</sup> <a name="repositories" id="@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.repositories"></a>
+
+```typescript
+public readonly repositories: string[];
+```
+
+- *Type:* string[]
+- *Default:* if owner is set and repositories is empty, access will be scoped to all repositories in the provided repository owner's installation. If owner and repositories are empty, access will be scoped to only the current repository.
+
+List of repositories to grant access to.
 
 ---
 
@@ -6558,6 +6590,7 @@ environment:
 - Working directory: the project directory.
 - `$VERSION`: the current version. Looks like `1.2.3`.
 - `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+- `$SUGGESTED_BUMP`: the suggested bump action based on commits. One of `major|minor|patch|none`.
 
 The command should print one of the following to `stdout`:
 
@@ -7946,6 +7979,7 @@ environment:
 - Working directory: the project directory.
 - `$VERSION`: the current version. Looks like `1.2.3`.
 - `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+- `$SUGGESTED_BUMP`: the suggested bump action based on commits. One of `major|minor|patch|none`.
 
 The command should print one of the following to `stdout`:
 
@@ -10019,6 +10053,7 @@ environment:
 - Working directory: the project directory.
 - `$VERSION`: the current version. Looks like `1.2.3`.
 - `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+- `$SUGGESTED_BUMP`: the suggested bump action based on commits. One of `major|minor|patch|none`.
 
 The command should print one of the following to `stdout`:
 
