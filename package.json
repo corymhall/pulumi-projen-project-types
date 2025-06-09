@@ -35,11 +35,11 @@
     "organization": false
   },
   "devDependencies": {
-    "@mrgrain/jsii-struct-builder": "^0.7.59",
-    "@swc/core": "^1.11.29",
+    "@mrgrain/jsii-struct-builder": "^0.7.60",
+    "@swc/core": "^1.11.31",
     "@swc/jest": "^0.2.38",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.29",
+    "@types/node": "^22.15.30",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "commit-and-tag-version": "^12",
