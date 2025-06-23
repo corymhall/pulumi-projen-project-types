@@ -312,6 +312,18 @@ export interface TypeScriptProjectProps {
    */
   readonly buildWorkflow?: boolean;
   /**
+   * Biome options.
+   * @default - default options
+   * @stability experimental
+   */
+  readonly biomeOptions?: javascript.BiomeOptions;
+  /**
+   * Setup Biome.
+   * @default false
+   * @stability experimental
+   */
+  readonly biome?: boolean;
+  /**
    * Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
    * Throw if set to true but `autoApproveOptions` are not defined.
    * @default - true
