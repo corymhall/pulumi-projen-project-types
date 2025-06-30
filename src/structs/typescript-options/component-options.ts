@@ -864,7 +864,7 @@ export interface TypeScriptComponentOptions {
   readonly entrypointTypes?: string;
   /**
    * Setup eslint.
-   * @default true
+   * @default - true, unless biome is enabled
    * @stability experimental
    */
   readonly eslint?: boolean;

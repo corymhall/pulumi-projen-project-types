@@ -85,7 +85,7 @@ export interface TypeScriptProjectProps {
   readonly eslintOptions?: EslintOptions;
   /**
    * Setup eslint.
-   * @default true
+   * @default - true, unless biome is enabled
    * @stability experimental
    */
   readonly eslint?: boolean;
