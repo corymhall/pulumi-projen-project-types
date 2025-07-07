@@ -36,10 +36,10 @@
   },
   "devDependencies": {
     "@mrgrain/jsii-struct-builder": "^0.7.63",
-    "@swc/core": "^1.12.7",
+    "@swc/core": "^1.12.9",
     "@swc/jest": "^0.2.38",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.34",
+    "@types/node": "^22.16.0",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "commit-and-tag-version": "^12",
