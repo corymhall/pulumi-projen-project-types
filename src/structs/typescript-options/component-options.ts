@@ -542,6 +542,17 @@ export interface TypeScriptComponentOptions {
    */
   readonly releaseBranches?: Record<string, release.BranchOptions>;
   /**
+   * The GitHub Actions environment used for the release.
+   * This can be used to add an explicit approval step to the release
+   * or limit who can initiate a release through environment protection rules.
+   *
+   * When multiple artifacts are released, the environment can be overwritten
+   * on a per artifact basis.
+   * @default - no environment used, unless set at the artifact level
+   * @stability experimental
+   */
+  readonly releaseEnvironment?: string;
+  /**
    * Create a github issue on every failed publishing task.
    * @default false
    * @stability experimental
