@@ -369,6 +369,12 @@ export interface TypeScriptComponentOptions {
    */
   readonly npmTokenSecret?: string;
   /**
+   * Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+   * @default - false
+   * @stability experimental
+   */
+  readonly npmTrustedPublishing?: boolean;
+  /**
    * The Node Package Manager used to execute scripts.
    * @default NodePackageManager.YARN_CLASSIC
    * @stability experimental
