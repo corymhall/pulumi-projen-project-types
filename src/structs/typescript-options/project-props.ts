@@ -382,6 +382,12 @@ export interface TypeScriptProjectProps {
    */
   readonly releaseWorkflowName?: string;
   /**
+   * Build environment variables for release workflows.
+   * @default {}
+   * @stability experimental
+   */
+  readonly releaseWorkflowEnv?: Record<string, string>;
+  /**
    * The release trigger to use.
    * @default - Continuous releases (`ReleaseTrigger.continuous()`)
    * @stability experimental
