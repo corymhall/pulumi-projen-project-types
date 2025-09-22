@@ -6426,6 +6426,7 @@ const tagReleaseOptions: TagReleaseOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseSchedule">releaseSchedule</a></code> | <code>string</code> | CRON schedule to trigger new releases. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowEnv">releaseWorkflowEnv</a></code> | <code>{[ key: string ]: string}</code> | Build environment variables for release workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
@@ -6840,6 +6841,19 @@ The release trigger to use.
 
 ---
 
+##### `releaseWorkflowEnv`<sup>Optional</sup> <a name="releaseWorkflowEnv" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowEnv"></a>
+
+```typescript
+public readonly releaseWorkflowEnv: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* {}
+
+Build environment variables for release workflows.
+
+---
+
 ##### `releaseWorkflowName`<sup>Optional</sup> <a name="releaseWorkflowName" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowName"></a>
 
 ```typescript
@@ -7074,6 +7088,7 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowEnv">releaseWorkflowEnv</a></code> | <code>{[ key: string ]: string}</code> | Build environment variables for release workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
@@ -8688,6 +8703,19 @@ The release trigger to use.
 
 ---
 
+##### `releaseWorkflowEnv`<sup>Optional</sup> <a name="releaseWorkflowEnv" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowEnv"></a>
+
+```typescript
+public readonly releaseWorkflowEnv: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* {}
+
+Build environment variables for release workflows.
+
+---
+
 ##### `releaseWorkflowName`<sup>Optional</sup> <a name="releaseWorkflowName" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.releaseWorkflowName"></a>
 
 ```typescript
@@ -9195,6 +9223,7 @@ const typeScriptProjectProps: TypeScriptProjectProps = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowEnv">releaseWorkflowEnv</a></code> | <code>{[ key: string ]: string}</code> | Build environment variables for release workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
@@ -10821,6 +10850,19 @@ public readonly releaseTrigger: ReleaseTrigger;
 - *Default:* Continuous releases (`ReleaseTrigger.continuous()`)
 
 The release trigger to use.
+
+---
+
+##### `releaseWorkflowEnv`<sup>Optional</sup> <a name="releaseWorkflowEnv" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.releaseWorkflowEnv"></a>
+
+```typescript
+public readonly releaseWorkflowEnv: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* {}
+
+Build environment variables for release workflows.
 
 ---
 
