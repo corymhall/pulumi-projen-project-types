@@ -588,6 +588,12 @@ export interface TypeScriptComponentOptions {
    */
   readonly releaseTrigger?: release.ReleaseTrigger;
   /**
+   * Build environment variables for release workflows.
+   * @default {}
+   * @stability experimental
+   */
+  readonly releaseWorkflowEnv?: Record<string, string>;
+  /**
    * The name of the default release workflow.
    * @default "release"
    * @stability experimental
