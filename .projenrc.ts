@@ -54,10 +54,13 @@ const project = new JsiiProject({
   jestOptions: {
     configFilePath: 'jest.config.json',
   },
+  npmTrustedPublishing: true,
   npmAccess: NpmAccess.PUBLIC,
   publishToPypi: {
     distName: 'hallcor.pulumi-projen-project-types',
     module: 'hallcor.pulumi_projen_project_types',
+    trustedPublishing: true,
+    attestations: true,
   },
 
   // deps: [],                /* Runtime dependencies of this module. */
