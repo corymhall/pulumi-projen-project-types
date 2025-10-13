@@ -838,7 +838,7 @@ export interface TypeScriptComponentOptions {
   readonly workflowBootstrapSteps?: Array<github.workflows.JobStep>;
   /**
    * The git identity to use in workflows.
-   * @default - GitHub Actions
+   * @default - default GitHub Actions user
    * @stability experimental
    */
   readonly workflowGitIdentity?: github.GitIdentity;

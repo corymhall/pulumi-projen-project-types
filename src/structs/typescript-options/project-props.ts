@@ -134,7 +134,7 @@ export interface TypeScriptProjectProps {
   readonly workflowNodeVersion?: string;
   /**
    * The git identity to use in workflows.
-   * @default - GitHub Actions
+   * @default - default GitHub Actions user
    * @stability experimental
    */
   readonly workflowGitIdentity?: github.GitIdentity;
