@@ -58,6 +58,7 @@ jobs:
           PULUMI_ACCESS_TOKEN: ${{ steps.generate_pulumi_token.outputs.pulumi-access-token }}
         with:
           environment: github/public
+          export-environment-variables: false
       - name: Generate token
         id: generate_token
         uses: actions/create-github-app-token@v1
