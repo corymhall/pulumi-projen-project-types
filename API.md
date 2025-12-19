@@ -457,7 +457,7 @@ When given a project, this it the project itself.
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.gitpod">gitpod</a></code> | <code>projen.Gitpod</code> | Access for Gitpod. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.vscode">vscode</a></code> | <code>projen.vscode.VsCode</code> | Access all VSCode components. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.depsManager">depsManager</a></code> | <code>projen.python.IPythonDeps</code> | API for managing dependencies. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.envManager">envManager</a></code> | <code>projen.python.IPythonEnv</code> | API for mangaging the Python runtime environment. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.envManager">envManager</a></code> | <code>projen.python.IPythonEnv</code> | API for managing the Python runtime environment. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.moduleName">moduleName</a></code> | <code>string</code> | Python module name (the project name, with any hyphens or periods replaced with underscores). |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.sampleTestdir">sampleTestdir</a></code> | <code>string</code> | Directory where sample tests are located. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponent.property.version">version</a></code> | <code>string</code> | Version of the package for distribution (should follow semver). |
@@ -863,7 +863,7 @@ public readonly envManager: IPythonEnv;
 
 - *Type:* projen.python.IPythonEnv
 
-API for mangaging the Python runtime environment.
+API for managing the Python runtime environment.
 
 ---
 
@@ -5668,6 +5668,8 @@ const pythonComponentOptions: PythonComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.setuptools">setuptools</a></code> | <code>boolean</code> | Use setuptools with a setup.py script for packaging and publishing. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.uv">uv</a></code> | <code>boolean</code> | Use uv to manage your project dependencies, virtual environment, and (optional) packaging/publishing. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.uvOptions">uvOptions</a></code> | <code>projen.python.UvOptions</code> | Additional options to set for uv if using uv. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
 
 ---
@@ -6369,6 +6371,31 @@ To disable set `stale` to `false`.
 
 ---
 
+##### `uv`<sup>Optional</sup> <a name="uv" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.uv"></a>
+
+```typescript
+public readonly uv: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use uv to manage your project dependencies, virtual environment, and (optional) packaging/publishing.
+
+---
+
+##### `uvOptions`<sup>Optional</sup> <a name="uvOptions" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.uvOptions"></a>
+
+```typescript
+public readonly uvOptions: UvOptions;
+```
+
+- *Type:* projen.python.UvOptions
+
+Additional options to set for uv if using uv.
+
+---
+
 ##### `vscode`<sup>Optional</sup> <a name="vscode" id="@hallcor/pulumi-projen-project-types.PythonComponentOptions.property.vscode"></a>
 
 ```typescript
@@ -6402,7 +6429,6 @@ const tagReleaseOptions: TagReleaseOptions = { ... }
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.branch">branch</a></code> | <code>string</code> | The default branch name to release from. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.task">task</a></code> | <code>projen.Task</code> | The task to execute in order to create the release artifacts. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionFile">versionFile</a></code> | <code>string</code> | A name of a .json file to set the `version` field in after a bump. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.githubRelease">githubRelease</a></code> | <code>boolean</code> | Create a GitHub release for each release. |
@@ -6429,6 +6455,8 @@ const tagReleaseOptions: TagReleaseOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowEnv">releaseWorkflowEnv</a></code> | <code>{[ key: string ]: string}</code> | Build environment variables for release workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.task">task</a></code> | <code>projen.Task</code> | The task to execute in order to create the release artifacts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.tasks">tasks</a></code> | <code>projen.Task[]</code> | The tasks to execute in order to create the release artifacts. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | Node version to setup in GitHub workflows if any node-based CLI utilities are needed. |
@@ -6465,22 +6493,6 @@ Use `majorVersion` to restrict this branch to only publish releases with a
 specific major version.
 
 You can add additional branches using `addBranch()`.
-
----
-
-##### `task`<sup>Required</sup> <a name="task" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.task"></a>
-
-```typescript
-public readonly task: Task;
-```
-
-- *Type:* projen.Task
-
-The task to execute in order to create the release artifacts.
-
-Artifacts are
-expected to reside under `artifactsDirectory` (defaults to `dist/`) once
-build is complete.
 
 ---
 
@@ -6879,6 +6891,40 @@ A set of workflow steps to execute in order to setup the workflow container.
 
 ---
 
+##### ~~`task`~~<sup>Optional</sup> <a name="task" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.task"></a>
+
+- *Deprecated:* Use `tasks` instead
+
+```typescript
+public readonly task: Task;
+```
+
+- *Type:* projen.Task
+
+The task to execute in order to create the release artifacts.
+
+Artifacts are
+expected to reside under `artifactsDirectory` (defaults to `dist/`) once
+build is complete.
+
+---
+
+##### `tasks`<sup>Optional</sup> <a name="tasks" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.tasks"></a>
+
+```typescript
+public readonly tasks: Task[];
+```
+
+- *Type:* projen.Task[]
+
+The tasks to execute in order to create the release artifacts.
+
+Artifacts are
+expected to reside under `artifactsDirectory` (defaults to `dist/`) once
+build is complete.
+
+---
+
 ##### `versionrcOptions`<sup>Optional</sup> <a name="versionrcOptions" id="@hallcor/pulumi-projen-project-types.TagReleaseOptions.property.versionrcOptions"></a>
 
 ```typescript
@@ -6981,6 +7027,8 @@ const typeScriptComponentOptions: TypeScriptComponentOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.name">name</a></code> | <code>string</code> | This is the name of your project. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | Allow the project to include `peerDependencies` and `bundledDependencies`. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.auditDeps">auditDeps</a></code> | <code>boolean</code> | Run security audit on dependencies. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.auditDepsOptions">auditDepsOptions</a></code> | <code>projen.javascript.AuditOptions</code> | Security audit options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
@@ -7172,6 +7220,36 @@ public readonly artifactsDirectory: string;
 - *Default:* "dist"
 
 A directory which will contain build artifacts.
+
+---
+
+##### `auditDeps`<sup>Optional</sup> <a name="auditDeps" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.auditDeps"></a>
+
+```typescript
+public readonly auditDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Run security audit on dependencies.
+
+When enabled, creates an "audit" task that checks for known security vulnerabilities
+in dependencies. By default, runs during every build and checks for "high" severity
+vulnerabilities or above in all dependencies (including dev dependencies).
+
+---
+
+##### `auditDepsOptions`<sup>Optional</sup> <a name="auditDepsOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptComponentOptions.property.auditDepsOptions"></a>
+
+```typescript
+public readonly auditDepsOptions: AuditOptions;
+```
+
+- *Type:* projen.javascript.AuditOptions
+- *Default:* default options
+
+Security audit options.
 
 ---
 
@@ -9115,6 +9193,8 @@ const typeScriptProjectProps: TypeScriptProjectProps = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.name">name</a></code> | <code>string</code> | This is the name of your project. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | Allow the project to include `peerDependencies` and `bundledDependencies`. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.auditDeps">auditDeps</a></code> | <code>boolean</code> | Run security audit on dependencies. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.auditDepsOptions">auditDepsOptions</a></code> | <code>projen.javascript.AuditOptions</code> | Security audit options. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
@@ -9307,6 +9387,36 @@ public readonly artifactsDirectory: string;
 - *Default:* "dist"
 
 A directory which will contain build artifacts.
+
+---
+
+##### `auditDeps`<sup>Optional</sup> <a name="auditDeps" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.auditDeps"></a>
+
+```typescript
+public readonly auditDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Run security audit on dependencies.
+
+When enabled, creates an "audit" task that checks for known security vulnerabilities
+in dependencies. By default, runs during every build and checks for "high" severity
+vulnerabilities or above in all dependencies (including dev dependencies).
+
+---
+
+##### `auditDepsOptions`<sup>Optional</sup> <a name="auditDepsOptions" id="@hallcor/pulumi-projen-project-types.TypeScriptProjectProps.property.auditDepsOptions"></a>
+
+```typescript
+public readonly auditDepsOptions: AuditOptions;
+```
+
+- *Type:* projen.javascript.AuditOptions
+- *Default:* default options
+
+Security audit options.
 
 ---
 
