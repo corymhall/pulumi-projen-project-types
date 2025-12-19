@@ -5408,6 +5408,8 @@ const pulumiAuthOptions: PulumiAuthOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.cloudUrl">cloudUrl</a></code> | <code>string</code> | The Pulumi Cloud URL to target. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.exportEnvironmentVariables">exportEnvironmentVariables</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a></code> | Whether to export environment variables from ESC. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.organization">organization</a></code> | <code>string</code> | The Pulumi organization to authenticate with. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedToken">requestedToken</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken">PulumiToken</a></code> | The type of pulumi token to get. |
@@ -5426,7 +5428,38 @@ The ESC environment to open.
 
 ---
 
-##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys"></a>
+##### `cloudUrl`<sup>Optional</sup> <a name="cloudUrl" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.cloudUrl"></a>
+
+```typescript
+public readonly cloudUrl: string;
+```
+
+- *Type:* string
+- *Default:* Use the default Pulumi Cloud URL
+
+The Pulumi Cloud URL to target.
+
+---
+
+##### `exportEnvironmentVariables`<sup>Optional</sup> <a name="exportEnvironmentVariables" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.exportEnvironmentVariables"></a>
+
+```typescript
+public readonly exportEnvironmentVariables: ExportEnvironmentVariables;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a>
+- *Default:* ExportEnvironmentVariables.disabled()
+
+Whether to export environment variables from ESC.
+
+Can also be an array of mapping strings to explicitly control which variables
+are exported (joined with newlines for the action input).
+
+---
+
+##### ~~`keys`~~<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys"></a>
+
+- *Deprecated:* use `exportEnvironmentVariables` instead
 
 ```typescript
 public readonly keys: string[];
@@ -5479,6 +5512,8 @@ const pulumiEscActionOptions: PulumiEscActionOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.cloudUrl">cloudUrl</a></code> | <code>string</code> | The Pulumi Cloud URL to target. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.exportEnvironmentVariables">exportEnvironmentVariables</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a></code> | Whether to export environment variables from ESC. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
 
 ---
@@ -5495,7 +5530,38 @@ The ESC environment to open.
 
 ---
 
-##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.keys"></a>
+##### `cloudUrl`<sup>Optional</sup> <a name="cloudUrl" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.cloudUrl"></a>
+
+```typescript
+public readonly cloudUrl: string;
+```
+
+- *Type:* string
+- *Default:* Use the default Pulumi Cloud URL
+
+The Pulumi Cloud URL to target.
+
+---
+
+##### `exportEnvironmentVariables`<sup>Optional</sup> <a name="exportEnvironmentVariables" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.exportEnvironmentVariables"></a>
+
+```typescript
+public readonly exportEnvironmentVariables: ExportEnvironmentVariables;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a>
+- *Default:* ExportEnvironmentVariables.disabled()
+
+Whether to export environment variables from ESC.
+
+Can also be an array of mapping strings to explicitly control which variables
+are exported (joined with newlines for the action input).
+
+---
+
+##### ~~`keys`~~<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscActionOptions.property.keys"></a>
+
+- *Deprecated:* use `exportEnvironmentVariables` instead
 
 ```typescript
 public readonly keys: string[];
@@ -5523,6 +5589,8 @@ const pulumiEscPersonalAccessTokenOptions: PulumiEscPersonalAccessTokenOptions =
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.environment">environment</a></code> | <code>string</code> | The ESC environment to open. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.cloudUrl">cloudUrl</a></code> | <code>string</code> | The Pulumi Cloud URL to target. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.exportEnvironmentVariables">exportEnvironmentVariables</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a></code> | Whether to export environment variables from ESC. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.secret">secret</a></code> | <code>string</code> | The secret name for the access token. |
 
@@ -5540,7 +5608,38 @@ The ESC environment to open.
 
 ---
 
-##### `keys`<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.keys"></a>
+##### `cloudUrl`<sup>Optional</sup> <a name="cloudUrl" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.cloudUrl"></a>
+
+```typescript
+public readonly cloudUrl: string;
+```
+
+- *Type:* string
+- *Default:* Use the default Pulumi Cloud URL
+
+The Pulumi Cloud URL to target.
+
+---
+
+##### `exportEnvironmentVariables`<sup>Optional</sup> <a name="exportEnvironmentVariables" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.exportEnvironmentVariables"></a>
+
+```typescript
+public readonly exportEnvironmentVariables: ExportEnvironmentVariables;
+```
+
+- *Type:* <a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a>
+- *Default:* ExportEnvironmentVariables.disabled()
+
+Whether to export environment variables from ESC.
+
+Can also be an array of mapping strings to explicitly control which variables
+are exported (joined with newlines for the action input).
+
+---
+
+##### ~~`keys`~~<sup>Optional</sup> <a name="keys" id="@hallcor/pulumi-projen-project-types.PulumiEscPersonalAccessTokenOptions.property.keys"></a>
+
+- *Deprecated:* use `exportEnvironmentVariables` instead
 
 ```typescript
 public readonly keys: string[];
@@ -11356,6 +11455,53 @@ Options for Yarn Berry.
 ---
 
 ## Classes <a name="Classes" id="Classes"></a>
+
+### ExportEnvironmentVariables <a name="ExportEnvironmentVariables" id="@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables"></a>
+
+Configuration for exporting environment variables from ESC.
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables.disabled">disabled</a></code> | Do not export environment variables. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables.fromMapping">fromMapping</a></code> | Provide explicit mappings to export. |
+
+---
+
+##### `disabled` <a name="disabled" id="@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables.disabled"></a>
+
+```typescript
+import { ExportEnvironmentVariables } from '@hallcor/pulumi-projen-project-types'
+
+ExportEnvironmentVariables.disabled()
+```
+
+Do not export environment variables.
+
+This is the default.
+
+##### `fromMapping` <a name="fromMapping" id="@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables.fromMapping"></a>
+
+```typescript
+import { ExportEnvironmentVariables } from '@hallcor/pulumi-projen-project-types'
+
+ExportEnvironmentVariables.fromMapping(mapping: string[])
+```
+
+Provide explicit mappings to export.
+
+Each entry should follow the ESC action mapping format, for example
+`GITHUB_TOKEN=PULUMI_BOT_TOKEN` or `AWS_ACCESS_KEY_ID`.
+
+###### `mapping`<sup>Required</sup> <a name="mapping" id="@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables.fromMapping.parameter.mapping"></a>
+
+- *Type:* string[]
+
+---
+
+
 
 ### GithubCredentials <a name="GithubCredentials" id="@hallcor/pulumi-projen-project-types.GithubCredentials"></a>
 

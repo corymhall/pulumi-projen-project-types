@@ -10,6 +10,47 @@ interface PulumiEscSetupOptions {
   readonly permissions?: JobPermissions;
 }
 
+/**
+ * Configuration for exporting environment variables from ESC.
+ */
+export class ExportEnvironmentVariables {
+  private constructor(private readonly value: boolean | string[]) {}
+
+  /**
+   * Do not export environment variables. This is the default.
+   */
+  public static disabled(): ExportEnvironmentVariables {
+    return new ExportEnvironmentVariables(false);
+  }
+
+  /**
+   * Provide explicit mappings to export.
+   *
+   * Each entry should follow the ESC action mapping format, for example
+   * `GITHUB_TOKEN=PULUMI_BOT_TOKEN` or `AWS_ACCESS_KEY_ID`.
+   */
+  public static fromMapping(mapping: string[]): ExportEnvironmentVariables {
+    return new ExportEnvironmentVariables(mapping);
+  }
+
+  /**
+   * @internal
+   */
+  public _render(): boolean | string {
+    if (Array.isArray(this.value)) {
+      return this.value.join('\n');
+    }
+    return this.value;
+  }
+
+  /**
+   * @internal
+   */
+  public _usesMapping(): boolean {
+    return Array.isArray(this.value);
+  }
+}
+
 export interface PulumiEscActionOptions {
   /**
    * The ESC environment to open
@@ -20,8 +61,26 @@ export interface PulumiEscActionOptions {
    * list of keys to inject into the current action/workflow environment.
    *
    * @default all keys from the environment will be injected
+   * @deprecated use `exportEnvironmentVariables` instead
    */
   readonly keys?: string[];
+
+  /**
+   * Whether to export environment variables from ESC.
+   *
+   * Can also be an array of mapping strings to explicitly control which variables
+   * are exported (joined with newlines for the action input).
+   *
+   * @default ExportEnvironmentVariables.disabled()
+   */
+  readonly exportEnvironmentVariables?: ExportEnvironmentVariables;
+
+  /**
+   * The Pulumi Cloud URL to target.
+   *
+   * @default - Use the default Pulumi Cloud URL
+   */
+  readonly cloudUrl?: string;
 }
 
 export enum PulumiTokenType {
@@ -102,6 +161,25 @@ export class PulumiEscSetup {
     options: PulumiEscPersonalAccessTokenOptions,
   ) {
     const secret = options.secret ?? 'PULUMI_ACCESS_TOKEN';
+    if (options.keys && options.exportEnvironmentVariables) {
+      throw new Error(
+        'Do not provide both "keys" and "exportEnvironmentVariables". Specify only one.',
+      );
+    }
+    const exportEnvironmentVariables =
+      options.exportEnvironmentVariables ?? ExportEnvironmentVariables.disabled();
+
+    let keys: string | undefined;
+    let exportEnvironmentVariablesInput: boolean | string =
+      exportEnvironmentVariables._render();
+
+    if (options.keys) {
+      keys = options.keys.join(',');
+      exportEnvironmentVariablesInput = true;
+    } else if (exportEnvironmentVariables._usesMapping()) {
+      keys = undefined;
+    }
+
     return new PulumiEscSetup({
       keys: options.keys,
       setupSteps: [
@@ -109,7 +187,9 @@ export class PulumiEscSetup {
           uses: 'pulumi/esc-action@v1',
           with: {
             environment: options.environment,
-            keys: options.keys ? options.keys.join(',') : undefined,
+            keys,
+            'export-environment-variables': exportEnvironmentVariablesInput,
+            'cloud-url': options.cloudUrl,
           },
           env: {
             PULUMI_ACCESS_TOKEN: `\${{ secrets.${secret} }}`,
@@ -135,6 +215,25 @@ export class PulumiEscSetup {
         `PulumiTokenType ${token.tokenType} requires a "scope" to be set`,
       );
     }
+    if (options.keys && options.exportEnvironmentVariables) {
+      throw new Error(
+        'Do not provide both "keys" and "exportEnvironmentVariables". Specify only one.',
+      );
+    }
+    const exportEnvironmentVariables =
+      options.exportEnvironmentVariables ?? ExportEnvironmentVariables.disabled();
+
+    let keys: string | undefined;
+    let exportEnvironmentVariablesInput: boolean | string =
+      exportEnvironmentVariables._render();
+
+    if (options.keys) {
+      keys = options.keys.join(',');
+      exportEnvironmentVariablesInput = true;
+    } else if (exportEnvironmentVariables._usesMapping()) {
+      keys = undefined;
+    }
+
     return new PulumiEscSetup({
       keys: options.keys,
       permissions: {
@@ -156,7 +255,9 @@ export class PulumiEscSetup {
           uses: 'pulumi/esc-action@v1',
           with: {
             environment: options.environment,
-            keys: options.keys ? options.keys.join(',') : undefined,
+            keys,
+            'export-environment-variables': exportEnvironmentVariablesInput,
+            'cloud-url': options.cloudUrl,
           },
           env: {
             PULUMI_ACCESS_TOKEN:
