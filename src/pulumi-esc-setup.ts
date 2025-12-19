@@ -154,7 +154,16 @@ export interface PulumiEscPersonalAccessTokenOptions
   readonly secret?: string;
 }
 
+/**
+ * Utilities for configuring Pulumi ESC inside GitHub workflows.
+ *
+ * The underlying ESC action exposes outputs for each secret in the ESC
+ * environment (including any remapped names when `exportEnvironmentVariables`
+ * is configured). A stable step id is used so downstream steps can reference
+ * those outputs consistently.
+ */
 export class PulumiEscSetup {
+  private static readonly ESC_ACTION_STEP_ID = 'esc';
   /**
    * Provides ESC access using a personal access token.
    *
@@ -190,6 +199,7 @@ export class PulumiEscSetup {
       keys: options.keys,
       setupSteps: [
         {
+          id: PulumiEscSetup.ESC_ACTION_STEP_ID,
           uses: 'pulumi/esc-action@v1',
           with: {
             environment: options.environment,
@@ -259,6 +269,7 @@ export class PulumiEscSetup {
 
     const setupSteps: JobStep[] = [
       {
+        id: PulumiEscSetup.ESC_ACTION_STEP_ID,
         uses: 'pulumi/esc-action@v1',
         with: escActionInputs,
       },
@@ -284,5 +295,26 @@ export class PulumiEscSetup {
 
   public get keys(): string[] | undefined {
     return this.options.keys;
+  }
+
+  /**
+   * The step id assigned to the ESC action. Use this to build references to the
+   * action outputs.
+   */
+  public get escActionStepId(): string {
+    return PulumiEscSetup.ESC_ACTION_STEP_ID;
+  }
+
+  /**
+   * Returns a GitHub Actions expression for a Pulumi ESC output value.
+   *
+   * Outputs are exposed for every secret in the ESC environment (including any
+   * remapped names defined via `exportEnvironmentVariables`). Use the output
+   * key exactly as it appears in the ESC action output object.
+   *
+   * @param key The ESC output key to reference.
+   */
+  public output(key: string): string {
+    return `\${{ steps.${this.escActionStepId}.outputs.${key} }}`;
   }
 }

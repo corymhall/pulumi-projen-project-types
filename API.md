@@ -11623,6 +11623,40 @@ public readonly permissions: JobPermissions;
 
 ### PulumiEscSetup <a name="PulumiEscSetup" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup"></a>
 
+Utilities for configuring Pulumi ESC inside GitHub workflows.
+
+The underlying ESC action exposes outputs for each secret in the ESC
+environment (including any remapped names when `exportEnvironmentVariables`
+is configured). A stable step id is used so downstream steps can reference
+those outputs consistently.
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.output">output</a></code> | Returns a GitHub Actions expression for a Pulumi ESC output value. |
+
+---
+
+##### `output` <a name="output" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.output"></a>
+
+```typescript
+public output(key: string): string
+```
+
+Returns a GitHub Actions expression for a Pulumi ESC output value.
+
+Outputs are exposed for every secret in the ESC environment (including any
+remapped names defined via `exportEnvironmentVariables`). Use the output
+key exactly as it appears in the ESC action output object.
+
+###### `key`<sup>Required</sup> <a name="key" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.output.parameter.key"></a>
+
+- *Type:* string
+
+The ESC output key to reference.
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -11672,9 +11706,25 @@ secret can be specified here.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.escActionStepId">escActionStepId</a></code> | <code>string</code> | The step id assigned to the ESC action. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.setupSteps">setupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.keys">keys</a></code> | <code>string[]</code> | *No description.* |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.permissions">permissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | *No description.* |
+
+---
+
+##### `escActionStepId`<sup>Required</sup> <a name="escActionStepId" id="@hallcor/pulumi-projen-project-types.PulumiEscSetup.property.escActionStepId"></a>
+
+```typescript
+public readonly escActionStepId: string;
+```
+
+- *Type:* string
+
+The step id assigned to the ESC action.
+
+Use this to build references to the
+action outputs.
 
 ---
 
