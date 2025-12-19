@@ -5412,6 +5412,7 @@ const pulumiAuthOptions: PulumiAuthOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.exportEnvironmentVariables">exportEnvironmentVariables</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables">ExportEnvironmentVariables</a></code> | Whether to export environment variables from ESC. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.keys">keys</a></code> | <code>string[]</code> | list of keys to inject into the current action/workflow environment. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.organization">organization</a></code> | <code>string</code> | The Pulumi organization to authenticate with. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.oidcTokenExpiration">oidcTokenExpiration</a></code> | <code>number</code> | The requested expiration time (in seconds) for the generated token when using ESC OIDC authentication. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.requestedToken">requestedToken</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiToken">PulumiToken</a></code> | The type of pulumi token to get. |
 
 ---
@@ -5481,6 +5482,18 @@ public readonly organization: string;
 - *Type:* string
 
 The Pulumi organization to authenticate with.
+
+---
+
+##### `oidcTokenExpiration`<sup>Optional</sup> <a name="oidcTokenExpiration" id="@hallcor/pulumi-projen-project-types.PulumiAuthOptions.property.oidcTokenExpiration"></a>
+
+```typescript
+public readonly oidcTokenExpiration: number;
+```
+
+- *Type:* number
+
+The requested expiration time (in seconds) for the generated token when using ESC OIDC authentication.
 
 ---
 

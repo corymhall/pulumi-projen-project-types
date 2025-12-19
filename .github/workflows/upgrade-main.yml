@@ -45,20 +45,14 @@ jobs:
       id-token: write
     if: ${{ needs.upgrade.outputs.patch_created }}
     steps:
-      - name: Generate Pulumi Access Token
-        id: generate_pulumi_token
-        uses: pulumi/auth-actions@v1
-        with:
-          organization: corymhall
-          requested-token-type: urn:pulumi:token-type:access_token:personal
-          scope: user:corymhall
-          export-environment-variables: false
       - uses: pulumi/esc-action@v1
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ steps.generate_pulumi_token.outputs.pulumi-access-token }}
         with:
           environment: github/public
           export-environment-variables: false
+          oidc-auth: true
+          oidc-organization: corymhall
+          oidc-requested-token-type: urn:pulumi:token-type:access_token:personal
+          oidc-scope: user:corymhall
       - name: Generate token
         id: generate_token
         uses: actions/create-github-app-token@v1
