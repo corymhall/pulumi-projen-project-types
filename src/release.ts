@@ -116,8 +116,12 @@ export class TagRelease extends ProjenRelease {
   public readonly trigger: ReleaseTrigger;
   public readonly publishTask: Task;
   constructor(scope: Construct, props: TagReleaseOptions) {
+    if (!props.task) {
+      throw new Error('TagRelease requires a release task');
+    }
     super(scope, {
       ...props,
+      task: props.task,
       githubRelease: false,
     });
 

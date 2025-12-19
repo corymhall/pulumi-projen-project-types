@@ -7,6 +7,13 @@ import type { GithubCredentials, PulumiPythonOptions } from '../../';
  */
 export interface PythonComponentOptions {
   /**
+   * Use uv to manage your project dependencies, virtual environment, and (optional) packaging/publishing.
+   * @default false
+   * @stability experimental
+   * @featured true
+   */
+  readonly uv?: boolean;
+  /**
    * Use setuptools with a setup.py script for packaging and publishing.
    * @default - true, unless poetry is true, then false
    * @stability experimental
@@ -114,6 +121,11 @@ export interface PythonComponentOptions {
    * @stability experimental
    */
   readonly pythonExec?: string;
+  /**
+   * Additional options to set for uv if using uv.
+   * @stability experimental
+   */
+  readonly uvOptions?: python.UvOptions;
   /**
    * Package name.
    * @stability experimental

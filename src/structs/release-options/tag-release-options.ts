@@ -21,6 +21,23 @@ export interface TagReleaseOptions {
    */
   readonly workflowNodeVersion?: string;
   /**
+   * The tasks to execute in order to create the release artifacts.
+   * Artifacts are
+   * expected to reside under `artifactsDirectory` (defaults to `dist/`) once
+   * build is complete.
+   * @stability experimental
+   */
+  readonly tasks?: Array<Task>;
+  /**
+   * The task to execute in order to create the release artifacts.
+   * Artifacts are
+   * expected to reside under `artifactsDirectory` (defaults to `dist/`) once
+   * build is complete.
+   * @deprecated Use `tasks` instead
+   * @stability deprecated
+   */
+  readonly task?: Task;
+  /**
    * Create a GitHub release for each release.
    * @default true
    * @stability experimental
@@ -31,14 +48,6 @@ export interface TagReleaseOptions {
    * @stability experimental
    */
   readonly versionFile: string;
-  /**
-   * The task to execute in order to create the release artifacts.
-   * Artifacts are
-   * expected to reside under `artifactsDirectory` (defaults to `dist/`) once
-   * build is complete.
-   * @stability experimental
-   */
-  readonly task: Task;
   /**
    * The default branch name to release from.
    * Use `majorVersion` to restrict this branch to only publish releases with a
