@@ -138,6 +138,12 @@ export interface PulumiAuthOptions extends PulumiEscActionOptions {
    * @default PulumiToken.fromPersonalToken()
    */
   readonly requestedToken?: PulumiToken;
+
+  /**
+   * The requested expiration time (in seconds) for the generated token when
+   * using ESC OIDC authentication.
+   */
+  readonly oidcTokenExpiration?: number;
 }
 
 export interface PulumiEscPersonalAccessTokenOptions
@@ -234,37 +240,36 @@ export class PulumiEscSetup {
       keys = undefined;
     }
 
+    const escActionInputs: Record<string, any> = {
+      environment: options.environment,
+      keys,
+      'export-environment-variables': exportEnvironmentVariablesInput,
+      'cloud-url': options.cloudUrl,
+    };
+
+    escActionInputs['oidc-auth'] = true;
+    escActionInputs['oidc-organization'] = options.organization;
+    escActionInputs['oidc-requested-token-type'] = token.tokenType;
+    if (scope) {
+      escActionInputs['oidc-scope'] = scope;
+    }
+    if (options.oidcTokenExpiration !== undefined) {
+      escActionInputs['oidc-token-expiration'] = options.oidcTokenExpiration;
+    }
+
+    const setupSteps: JobStep[] = [
+      {
+        uses: 'pulumi/esc-action@v1',
+        with: escActionInputs,
+      },
+    ];
+
     return new PulumiEscSetup({
       keys: options.keys,
       permissions: {
         idToken: JobPermission.WRITE,
       },
-      setupSteps: [
-        {
-          name: 'Generate Pulumi Access Token',
-          id: 'generate_pulumi_token',
-          with: {
-            organization: options.organization,
-            'requested-token-type': token.tokenType,
-            scope: scope,
-            'export-environment-variables': false,
-          },
-          uses: 'pulumi/auth-actions@v1',
-        },
-        {
-          uses: 'pulumi/esc-action@v1',
-          with: {
-            environment: options.environment,
-            keys,
-            'export-environment-variables': exportEnvironmentVariablesInput,
-            'cloud-url': options.cloudUrl,
-          },
-          env: {
-            PULUMI_ACCESS_TOKEN:
-              '${{ steps.generate_pulumi_token.outputs.pulumi-access-token }}',
-          },
-        },
-      ],
+      setupSteps,
     });
   }
   private constructor(private readonly options: PulumiEscSetupOptions) {}
