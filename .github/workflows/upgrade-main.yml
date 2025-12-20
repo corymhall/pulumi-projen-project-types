@@ -45,7 +45,8 @@ jobs:
       id-token: write
     if: ${{ needs.upgrade.outputs.patch_created }}
     steps:
-      - uses: pulumi/esc-action@v1
+      - id: esc
+        uses: pulumi/esc-action@v1
         with:
           environment: github/public
           export-environment-variables: false
