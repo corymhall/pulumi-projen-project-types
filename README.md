@@ -283,3 +283,77 @@ new TypeScriptComponent({
 });
 ```
 
+## Pulumi ESC setup for GitHub Actions
+
+Use the `PulumiEscSetup` helper to add the [`pulumi/esc-action`](https://github.com/pulumi/esc-action) to generated workflows and control which secrets are exported. The helper keeps the step id stable (`esc`) so you can safely reference the action outputs from later steps.
+
+### Option-to-input mapping
+
+- `exportEnvironmentVariables` → `export-environment-variables`
+- `version` → `version`
+- `cloudUrl` → `cloud-url`
+- `keys` (deprecated) → `keys` and automatically sets `export-environment-variables` to `true` for backward compatibility
+
+### Examples
+
+**Export specific mappings with passthrough**
+
+```ts
+import { ExportEnvironmentVariables, PulumiEscSetup } from '@hallcor/pulumi-projen-project-types';
+
+const esc = PulumiEscSetup.fromPersonalAccessToken({
+  environment: 'acme/catalog/prod',
+  exportEnvironmentVariables: ExportEnvironmentVariables.fromMapping([
+    'AWS_ACCESS_KEY_ID',             // direct mapping
+    'CD_TOKEN=DEPLOY_TOKEN',         // remap the ESC secret DEPLOY_TOKEN to CD_TOKEN
+    '*',                             // passthrough any remaining secrets
+  ]),
+});
+
+project.github?.addWorkflow('deploy').addJobs({
+  deploy: {
+    runsOn: ['ubuntu-latest'],
+    steps: [
+      { uses: 'actions/checkout@v4' },
+      ...esc.setupSteps,
+      { run: `echo "Deploy token is ${esc.output('CD_TOKEN')}"` },
+    ],
+  },
+});
+```
+
+**Pin ESC CLI version and use a custom Pulumi Cloud URL**
+
+```ts
+const esc = PulumiEscSetup.fromPersonalAccessToken({
+  environment: 'acme/catalog/prod',
+  version: '0.10.0',
+  cloudUrl: 'https://api.enterprise.pulumi.com',
+});
+```
+
+**Native OIDC authentication**
+
+```ts
+import { JobPermission } from 'projen/lib/github/workflows-model';
+
+const esc = PulumiEscSetup.fromOidcAuth({
+  environment: 'acme/catalog/prod',
+  organization: 'acme',
+});
+
+project.github?.addWorkflow('ci').addJobs({
+  build: {
+    permissions: { idToken: JobPermission.WRITE, contents: JobPermission.READ },
+    runsOn: ['ubuntu-latest'],
+    steps: [
+      { uses: 'actions/checkout@v4' },
+      ...esc.setupSteps,
+      { run: 'echo "Pulumi token is available via esc outputs"' },
+    ],
+  },
+});
+```
+
+> [!NOTE]
+> ESC step outputs are available as `${{ steps.esc.outputs.<KEY> }}` or via `PulumiEscSetup.output('<KEY>')` when the helper is used. Existing workflows that still rely on the deprecated `keys` option continue to work, though new workflows should prefer `exportEnvironmentVariables` for fine-grained control.
