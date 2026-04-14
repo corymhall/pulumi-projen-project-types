@@ -52,7 +52,8 @@ export class GithubCredentials {
       options.privateKeySecret ?? 'PROJEN_APP_PRIVATE_KEY';
 
     const setupSteps: JobStep[] = [];
-    const prefix = options.pulumiEscSetup ? 'env' : 'secrets';
+    let clientIdRef = `\${{ secrets.${clientIdSecret} }}`;
+    let privateKeyRef = `\${{ secrets.${privateKeySecret} }}`;
     if (options.pulumiEscSetup) {
       if (options.pulumiEscSetup.keys) {
         if (!options.pulumiEscSetup.keys.includes(clientIdSecret)) {
@@ -67,6 +68,8 @@ export class GithubCredentials {
         }
       }
       setupSteps.push(...options.pulumiEscSetup.setupSteps);
+      clientIdRef = options.pulumiEscSetup.output(clientIdSecret);
+      privateKeyRef = options.pulumiEscSetup.output(privateKeySecret);
     }
 
     return new GithubCredentials({
@@ -78,8 +81,8 @@ export class GithubCredentials {
           id: 'generate_token',
           uses: 'actions/create-github-app-token@v1',
           with: {
-            'app-id': `\${{ ${prefix}.${clientIdSecret} }}`, // can be client-id
-            'private-key': `\${{ ${prefix}.${privateKeySecret} }}`,
+            'app-id': clientIdRef, // can be client-id
+            'private-key': privateKeyRef,
           },
         },
       ],

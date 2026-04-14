@@ -4760,7 +4760,7 @@ const githubCredentialsAppOptions: GithubCredentialsAppOptions = { ... }
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.owner">owner</a></code> | <code>string</code> | The owner of the GitHub App installation. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.permissions">permissions</a></code> | <code>projen.github.workflows.AppPermissions</code> | The permissions granted to the token. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.privateKeySecret">privateKeySecret</a></code> | <code>string</code> | The secret containing the GitHub App private key. |
-| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps to inject environment variables from Pulumi ESC. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps and resolve app credentials from Pulumi ESC outputs. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsAppOptions.property.repositories">repositories</a></code> | <code>string[]</code> | List of repositories to grant access to. |
 
 ---
@@ -4775,6 +4775,8 @@ public readonly clientIdSecret: string;
 - *Default:* PROJEN_APP_CLIENT_ID
 
 The name of the secret that contains the app client id.
+
+When `pulumiEscSetup` is provided, this value is used as the ESC output key.
 
 ---
 
@@ -4816,6 +4818,7 @@ public readonly privateKeySecret: string;
 The secret containing the GitHub App private key.
 
 Escaped newlines (\\n) will be automatically replaced with actual newlines.
+When `pulumiEscSetup` is provided, this value is used as the ESC output key.
 
 ---
 
@@ -4828,7 +4831,7 @@ public readonly pulumiEscSetup: PulumiEscSetup;
 - *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a>
 - *Default:* do not include pulumi esc setup
 
-Optionally include setup steps to inject environment variables from Pulumi ESC.
+Optionally include setup steps and resolve app credentials from Pulumi ESC outputs.
 
 ---
 
@@ -5454,7 +5457,7 @@ public readonly exportEnvironmentVariables: ExportEnvironmentVariables;
 Whether to export environment variables from ESC.
 
 Can also be an array of mapping strings to explicitly control which variables
-are exported (joined with newlines for the action input).
+are exported (joined with commas for the action input).
 
 ---
 
@@ -5568,7 +5571,7 @@ public readonly exportEnvironmentVariables: ExportEnvironmentVariables;
 Whether to export environment variables from ESC.
 
 Can also be an array of mapping strings to explicitly control which variables
-are exported (joined with newlines for the action input).
+are exported (joined with commas for the action input).
 
 ---
 
@@ -5646,7 +5649,7 @@ public readonly exportEnvironmentVariables: ExportEnvironmentVariables;
 Whether to export environment variables from ESC.
 
 Can also be an array of mapping strings to explicitly control which variables
-are exported (joined with newlines for the action input).
+are exported (joined with commas for the action input).
 
 ---
 
@@ -11506,7 +11509,8 @@ ExportEnvironmentVariables.fromMapping(mapping: string[])
 Provide explicit mappings to export.
 
 Each entry should follow the ESC action mapping format, for example
-`GITHUB_TOKEN=PULUMI_BOT_TOKEN` or `AWS_ACCESS_KEY_ID`.
+`GITHUB_TOKEN=PULUMI_BOT_TOKEN` or `AWS_ACCESS_KEY_ID`. The values are
+rendered as a comma-delimited string for the ESC action input.
 
 ###### `mapping`<sup>Required</sup> <a name="mapping" id="@hallcor/pulumi-projen-project-types.ExportEnvironmentVariables.fromMapping.parameter.mapping"></a>
 

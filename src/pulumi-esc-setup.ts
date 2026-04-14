@@ -27,7 +27,8 @@ export class ExportEnvironmentVariables {
    * Provide explicit mappings to export.
    *
    * Each entry should follow the ESC action mapping format, for example
-   * `GITHUB_TOKEN=PULUMI_BOT_TOKEN` or `AWS_ACCESS_KEY_ID`.
+   * `GITHUB_TOKEN=PULUMI_BOT_TOKEN` or `AWS_ACCESS_KEY_ID`. The values are
+   * rendered as a comma-delimited string for the ESC action input.
    */
   public static fromMapping(mapping: string[]): ExportEnvironmentVariables {
     return new ExportEnvironmentVariables(mapping);
@@ -38,7 +39,7 @@ export class ExportEnvironmentVariables {
    */
   public _render(): boolean | string {
     if (Array.isArray(this.value)) {
-      return this.value.join('\n');
+      return this.value.join(',');
     }
     return this.value;
   }
@@ -69,7 +70,7 @@ export interface PulumiEscActionOptions {
    * Whether to export environment variables from ESC.
    *
    * Can also be an array of mapping strings to explicitly control which variables
-   * are exported (joined with newlines for the action input).
+   * are exported (joined with commas for the action input).
    *
    * @default ExportEnvironmentVariables.disabled()
    */
