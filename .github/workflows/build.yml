@@ -64,7 +64,7 @@ jobs:
         uses: pulumi/esc-action@v1
         with:
           environment: github/public
-          export-environment-variables: false
+          export-environment-variables: PROJEN_APP_CLIENT_ID,PROJEN_APP_PRIVATE_KEY
           oidc-auth: true
           oidc-organization: corymhall
           oidc-requested-token-type: urn:pulumi:token-type:access_token:personal
@@ -73,8 +73,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ env.PROJEN_APP_CLIENT_ID }}
-          private-key: ${{ env.PROJEN_APP_PRIVATE_KEY }}
+          app-id: ${{ steps.esc.outputs.PROJEN_APP_CLIENT_ID }}
+          private-key: ${{ steps.esc.outputs.PROJEN_APP_PRIVATE_KEY }}
       - name: Checkout
         uses: actions/checkout@v5
         with:

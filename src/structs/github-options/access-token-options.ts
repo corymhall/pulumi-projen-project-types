@@ -10,7 +10,7 @@ export interface GithubCredentialsPersonalAccessTokenOptions {
    */
   readonly secret?: string;
   /**
-   * Optionally include setup steps to inject environment variables from Pulumi ESC
+   * Optionally include setup steps and resolve app credentials from Pulumi ESC outputs
    * @default do not include pulumi esc setup
    */
   readonly pulumiEscSetup?: PulumiEscSetup;

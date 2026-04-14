@@ -31,7 +31,7 @@ export function githubStructs(project: TypeScriptProject) {
     optional: true,
     docs: {
       summary:
-        'Optionally include setup steps to inject environment variables from Pulumi ESC',
+        'Optionally include setup steps and resolve app credentials from Pulumi ESC outputs',
       default: 'do not include pulumi esc setup',
     },
   };
@@ -43,6 +43,9 @@ export function githubStructs(project: TypeScriptProject) {
     .add(pulumiEscSetup)
     .update('privateKeySecret', {
       docs: {
+        summary:
+          'The secret containing the GitHub App private key.\n' +
+          'When `pulumiEscSetup` is provided, this value is used as the ESC output key.',
         default: 'PROJEN_APP_PRIVATE_KEY',
       },
     })
@@ -52,7 +55,9 @@ export function githubStructs(project: TypeScriptProject) {
       optional: true,
       docs: {
         default: 'PROJEN_APP_CLIENT_ID',
-        summary: 'The name of the secret that contains the app client id',
+        summary:
+          'The name of the secret that contains the app client id.\n' +
+          'When `pulumiEscSetup` is provided, this value is used as the ESC output key.',
       },
     });
 

@@ -278,14 +278,36 @@ new TypeScriptComponent({
   ...,
   projenCredentials: GithubCredentials.fromApp({
     privateKeySecret: 'MY_GITHUB_APP_PRIVATE_KEY',
-    appIdSecret: 'MY_GITHUB_APP_ID',
+    clientIdSecret: 'MY_GITHUB_APP_ID',
   }),
 });
 ```
 
+**From a GitHub app via Pulumi ESC**
+```ts
+new TypeScriptComponent({
+  ...,
+  projenCredentials: GithubCredentials.fromApp({
+    clientIdSecret: 'MY_GITHUB_APP_ID',
+    privateKeySecret: 'MY_GITHUB_APP_PRIVATE_KEY',
+    pulumiEscSetup: PulumiEscSetup.fromOidcAuth({
+      environment: 'imports/github-secrets',
+      organization: 'pulumi',
+      requestedToken: PulumiToken.fromOrgToken(),
+    }),
+  }),
+});
+```
+
+When `pulumiEscSetup` is supplied to `GithubCredentials.fromApp(...)`, the generated
+GitHub App token step reads `app-id` and `private-key` from ESC step outputs using
+the `clientIdSecret` and `privateKeySecret` names as output keys.
+
 ## Pulumi ESC setup for GitHub Actions
 
 Use the `PulumiEscSetup` helper to add the [`pulumi/esc-action`](https://github.com/pulumi/esc-action) to generated workflows and control which secrets are exported. The helper keeps the step id stable (`esc`) so you can safely reference the action outputs from later steps.
+
+Mapped `exportEnvironmentVariables` values are passed to the ESC action as a comma-delimited string.
 
 ### Option-to-input mapping
 
