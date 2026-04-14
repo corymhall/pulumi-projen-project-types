@@ -301,6 +301,10 @@ new TypeScriptComponent({
 });
 ```
 
+This flow still configures `exportEnvironmentVariables` on the ESC action so the
+mapped keys are emitted, but `GithubCredentials.fromApp(...)` consumes the ESC
+step outputs rather than `${{ env.* }}` references.
+
 When `pulumiEscSetup` is supplied to `GithubCredentials.fromApp(...)`, the generated
 GitHub App token step reads `app-id` and `private-key` from ESC step outputs using
 the `clientIdSecret` and `privateKeySecret` names as output keys.
