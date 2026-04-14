@@ -288,22 +288,16 @@ new TypeScriptComponent({
 new TypeScriptComponent({
   ...,
   projenCredentials: GithubCredentials.fromApp({
+    clientIdSecret: 'PULUMI_PROVIDER_AUTOMATION_APP_ID',
+    privateKeySecret: 'PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY',
     pulumiEscSetup: PulumiEscSetup.fromOidcAuth({
       environment: 'imports/github-secrets',
       organization: 'pulumi',
       requestedToken: PulumiToken.fromOrgToken(),
-      exportEnvironmentVariables: ExportEnvironmentVariables.fromMapping([
-        'PROJEN_APP_CLIENT_ID=PULUMI_PROVIDER_AUTOMATION_APP_ID',
-        'PROJEN_APP_PRIVATE_KEY=PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY',
-      ]),
     }),
   }),
 });
 ```
-
-This flow still configures `exportEnvironmentVariables` on the ESC action so the
-mapped keys are emitted, but `GithubCredentials.fromApp(...)` consumes the ESC
-step outputs rather than `${{ env.* }}` references.
 
 When `pulumiEscSetup` is supplied to `GithubCredentials.fromApp(...)`, the generated
 GitHub App token step reads `app-id` and `private-key` from ESC step outputs using
