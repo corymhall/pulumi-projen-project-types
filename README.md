@@ -288,8 +288,8 @@ new TypeScriptComponent({
 new TypeScriptComponent({
   ...,
   projenCredentials: GithubCredentials.fromApp({
-    clientIdSecret: 'PULUMI_PROVIDER_AUTOMATION_APP_ID',
-    privateKeySecret: 'PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY',
+    clientIdSecret: 'MY_GITHUB_APP_ID',
+    privateKeySecret: 'MY_GITHUB_APP_PRIVATE_KEY',
     pulumiEscSetup: PulumiEscSetup.fromOidcAuth({
       environment: 'imports/github-secrets',
       organization: 'pulumi',
