@@ -4817,8 +4817,8 @@ public readonly privateKeySecret: string;
 
 The secret containing the GitHub App private key.
 
-Escaped newlines (\\n) will be automatically replaced with actual newlines.
 When `pulumiEscSetup` is provided, this value is used as the ESC output key.
+Escaped newlines (\\n) will be automatically replaced with actual newlines.
 
 ---
 
@@ -4864,7 +4864,7 @@ const githubCredentialsPersonalAccessTokenOptions: GithubCredentialsPersonalAcce
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps to inject environment variables from Pulumi ESC. |
+| <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.pulumiEscSetup">pulumiEscSetup</a></code> | <code><a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a></code> | Optionally include setup steps and resolve app credentials from Pulumi ESC outputs. |
 | <code><a href="#@hallcor/pulumi-projen-project-types.GithubCredentialsPersonalAccessTokenOptions.property.secret">secret</a></code> | <code>string</code> | *No description.* |
 
 ---
@@ -4878,7 +4878,7 @@ public readonly pulumiEscSetup: PulumiEscSetup;
 - *Type:* <a href="#@hallcor/pulumi-projen-project-types.PulumiEscSetup">PulumiEscSetup</a>
 - *Default:* do not include pulumi esc setup
 
-Optionally include setup steps to inject environment variables from Pulumi ESC.
+Optionally include setup steps and resolve app credentials from Pulumi ESC outputs.
 
 ---
 

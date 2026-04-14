@@ -6,7 +6,11 @@ import {
   UpgradeDependenciesSchedule,
 } from 'projen/lib/javascript';
 import { addTypes } from './projenrc';
-import { GithubCredentials, PulumiEscSetup } from './src';
+import {
+  ExportEnvironmentVariables,
+  GithubCredentials,
+  PulumiEscSetup,
+} from './src';
 import { JsiiProject } from './src/internal/jsii-project';
 
 const project = new JsiiProject({
@@ -34,6 +38,10 @@ const project = new JsiiProject({
     pulumiEscSetup: PulumiEscSetup.fromOidcAuth({
       environment: 'github/public',
       organization: 'corymhall',
+      exportEnvironmentVariables: ExportEnvironmentVariables.fromMapping([
+        'PROJEN_APP_CLIENT_ID',
+        'PROJEN_APP_PRIVATE_KEY',
+      ]),
     }),
   }),
   githubOptions: {

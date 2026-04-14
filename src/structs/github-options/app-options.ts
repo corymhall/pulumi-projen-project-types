@@ -15,8 +15,8 @@ If owner and repositories are empty, access will be scoped to only the current r
   readonly repositories?: Array<string>;
   /**
    * The secret containing the GitHub App private key.
+When `pulumiEscSetup` is provided, this value is used as the ESC output key.
    * Escaped newlines (\\n) will be automatically replaced with actual newlines.
-   * When `pulumiEscSetup` is provided, this value is used as the ESC output key.
    * @default PROJEN_APP_PRIVATE_KEY
    * @stability experimental
    */
@@ -40,7 +40,7 @@ If owner and repositories are empty, access will be scoped to only the current r
   readonly pulumiEscSetup?: PulumiEscSetup;
   /**
    * The name of the secret that contains the app client id.
-   * When `pulumiEscSetup` is provided, this value is used as the ESC output key.
+When `pulumiEscSetup` is provided, this value is used as the ESC output key.
    * @default PROJEN_APP_CLIENT_ID
    */
   readonly clientIdSecret?: string;
