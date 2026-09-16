@@ -65,11 +65,11 @@
   },
   "peerDependencies": {
     "constructs": "^10.8.1",
-    "projen": "^0.103.23"
+    "projen": "^0.98.29"
   },
   "dependencies": {
     "constructs": "^10.8.1",
-    "projen": "^0.103.23"
+    "projen": "^0.98.29"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",

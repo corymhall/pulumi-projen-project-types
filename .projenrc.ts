@@ -100,4 +100,8 @@ jestConfig?.patch(
     '^.+\\.(t|j)sx?$': new Transform('@swc/jest'),
   }),
 );
+project.tasks
+  .tryFind('compile')
+  ?.reset('jsii --silence-warnings=reserved-word --generate-tsconfig .jsii.tsc.json');
+project.addGitIgnore('.jsii.tsc.json');
 project.synth();

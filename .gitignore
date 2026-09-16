@@ -58,6 +58,7 @@ tsconfig.json
 !/src/structs/typescript-options/index.ts
 !/src/structs/python-options/index.ts
 !/src/structs/github-options/index.ts
+.jsii.tsc.json
 !/.projenrc.ts
 !/src/structs/release-options/tag-release-options.ts
 !/src/structs/typescript-options/eslint-options.ts
